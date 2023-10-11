@@ -47,8 +47,6 @@ const Home: NextPage = () => {
           <span className='opacity-50 text-2xl'>Your Easy To Use Solana Wallet Cleaner</span>
         </motion.div>
 
-        {loading && <Spin />}
-
         <MainComponent loading={loading} setLoading={setLoading} showConfetti={showConfetti} setShowConfetti={setShowConfetti} />
 
 
