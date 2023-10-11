@@ -11,6 +11,8 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
     "@metaplex-foundation/mpl-toolbox": "^0.9.1",
     "@metaplex-foundation/umi": "^0.8.9",
     "@metaplex-foundation/umi-bundle-defaults": "^0.8.9",
