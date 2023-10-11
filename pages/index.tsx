@@ -35,6 +35,8 @@ const Home: NextPage = () => {
       </Head>
       <div className='w-full flex h-screen flex-col items-center justify-center gp-2 relative'>
 
+        {showConfetti && <Confetti />}
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -46,7 +48,7 @@ const Home: NextPage = () => {
         </motion.div>
 
         {loading && <Spin />}
-        {showConfetti && <Confetti />}
+
         <MainComponent loading={loading} setLoading={setLoading} showConfetti={showConfetti} setShowConfetti={setShowConfetti} />
 
 
