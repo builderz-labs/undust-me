@@ -191,7 +191,7 @@ function MainComponent({
                                         }}
                                     >
                                         {' '}
-                                        {loading && <Spin />} Search for SOL
+                                        {loading && <Spin />} UnDust Me!
                                     </motion.button>
                                 </>
                             ) : (

@@ -44,7 +44,7 @@ const Home: NextPage = () => {
           className=''
         >
           <h1 className='text-undust-green'>UnDust.me</h1>
-          <span className='opacity-50 text-2xl'>Your Easy To Use Solana Wallet Cleaner</span>
+          <span className='opacity-50 text-2xl'>The easiest way to tidy up your wallet & earn SOL</span>
         </motion.div>
 
         <MainComponent loading={loading} setLoading={setLoading} showConfetti={showConfetti} setShowConfetti={setShowConfetti} />
