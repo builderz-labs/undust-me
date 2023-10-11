@@ -15,20 +15,24 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import { walletAdapterIdentity } from '@metaplex-foundation/umi-signer-wallet-adapters';
 import base58 from 'bs58';
 import { Spin } from 'antd';
+import MyMultiButton2 from './MyMultiButton2';
 
 function MainComponent({
     loading,
     setLoading,
     showConfetti,
     setShowConfetti,
+    activeIndex,
+    setActiveIndex,
 }: {
     loading: boolean;
     setLoading: any;
     showConfetti: boolean;
     setShowConfetti: any;
+    activeIndex: number;
+    setActiveIndex: any;
 }) {
     const wallet = useWallet();
-    const [activeIndex, setActiveIndex] = useState(0);
     const [emptyAccounts, setEmptyAccounts] = useState(0);
     const [rentBack, setRentBack] = useState(0);
     type AccountType = {
@@ -66,42 +70,44 @@ function MainComponent({
         return { emptyAccounts: emptyTokenAccounts, rentBack };
     }
 
-    // async function closeEmptyAccounts(emptyAccounts: any[], wallet: any, connection: Connection) {
-    //     setLoading(true)
-    //     if (!wallet || !wallet.publicKey || typeof wallet.signTransaction !== 'function') {
-    //         throw new Error('Invalid wallet object');
-    //     }
-    //     const publicKey = new PublicKey(wallet.publicKey);
-    //     for (let account of emptyAccounts) {
-    //         try {
-    //             const accountPublicKey = new PublicKey(account.pubkey);
-    //             await closeAccount(connection, wallet, accountPublicKey, publicKey, publicKey);
-    //             console.log("Closed account", accountPublicKey.toBase58())
-    //         } catch (error) {
-    //             console.error(`Failed to close account ${account.pubkey}:`, error);
-    //             toast.error(`Failed to close account ${account.pubkey}`)
-    //         }
-    //     }
-    //     setShowConfetti(true);
-    //     setLoading(false)
-    //     setActiveIndex(2);
-    //     setTimeout(() => setShowConfetti(false), 3000);
-    // }
-
     function calculateDustScore(emptyAccounts: number): [number, string] {
         let score = 0;
         let message = '';
 
         if (emptyAccounts === 0) {
-            score = 0;
-            message = "It's pretty clean around here. Your parents would be proud.";
-        } else if (emptyAccounts <= 3) {
+            score = 10;
+            message = "It's pretty clean around here. Your parents would be proud!";
+        } else if (emptyAccounts <= 10) {
+            score = 9;
+            message = 'Not bad, but some spring cleaning is needed. Time to tidy up!';
+        } else if (emptyAccounts <= 20) {
+            score = 8;
+            message = 'Not bad, but some spring cleaning is needed. Time to tidy up!';
+        } else if (emptyAccounts <= 30) {
+            score = 7;
+            message = 'Not bad, but some spring cleaning is needed. Time to tidy up!';
+        } else if (emptyAccounts <= 40) {
+            score = 6;
+            message = 'Not bad, but some spring cleaning is needed. Time to tidy up!';
+        } else if (emptyAccounts <= 50) {
+            score = 5;
+            message = 'Not bad, but some spring cleaning is needed. Time to tidy up!';
+        } else if (emptyAccounts <= 60) {
+            score = 4;
+            message = 'Not bad, but some spring cleaning is needed. Time to tidy up!';
+        } else if (emptyAccounts <= 70) {
             score = 3;
             message = 'Not bad, but some spring cleaning is needed. Time to tidy up!';
-        } else {
-            score = 8;
+        } else if (emptyAccounts <= 80) {
+            score = 2;
+            message = 'Not bad, but some spring cleaning is needed. Time to tidy up!';
+        } else if (emptyAccounts <= 90) {
+            score = 1;
+            message = 'Not bad, but some spring cleaning is needed. Time to tidy up!';
+        } else if (emptyAccounts >= 100) {
+            score = 0;
             message =
-                'Damn, your account is looking dusty ASF. Let‘s help you clean that up.';
+                'Damn son, your account is looking dusty ASF! Let‘s help you clean that mess up...';
         }
 
         return [score, message];
@@ -147,118 +153,213 @@ function MainComponent({
         setTimeout(() => setShowConfetti(false), 3000);
     };
 
+    const [rotate, setRotate] = useState(false);
+
+    const rotateStyle = {
+        transform: rotate ? 'rotate(360deg)' : 'rotate(0deg)',
+        transition: 'transform 2s',
+    };
+
     return (
-        <div className=''>
-            <div className='w-full px-4'>
-                {activeIndex === 0 ? (
-                    <>
+        <>
+            {/* {activeIndex === 0 && <img src="/machine-12.webp" alt="machine" className='w-[250px] h-[250px] md:w-[50px] md:h-[850px] object-cover mx-auto -mt-24 -mb-8' />} */}
+            <div className={`relative z-10  ${activeIndex === 1 ? ' mt-10' : ''}`}>
+
+                <div className='w-full px-4'>
+                    {activeIndex === 0 ? (
+                        <>
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 2, delay: 1 }}
+                                className=' border-undust-green border-opacity-20 rounded-lg  max-w-2xl w-full flex flex-col items-center justify-center gap-8  p-12 my-10  '
+                            >
+                                {wallet.connected ? (
+                                    <>
+                                        <motion.div
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{ duration: 2, delay: 1 }}
+                                            exit={{ opacity: 0, transition: { duration: 2 } }}
+                                            className='flex flex-col items-center justify-center gap-4 text-center bg-black bg-opacity-60 backdrop-blur-xl p-4 py-8 rounded-lg shadow-lg'
+                                        >
+                                            <span className='text-xl max-w-lg mx-auto text-undust-green font-bold underline '>
+                                                Before you give us a spin!
+                                            </span>
+                                            <motion.ol className='text-center flex flex-col items-center justify-center gap-4 text-white opacity-80'>
+                                                <motion.li
+                                                    className='opacity-30 list-disc list-inside'
+                                                    initial={{ opacity: 0 }}
+                                                    animate={{ opacity: 1 }}
+                                                    transition={{ duration: 1, delay: 1 }}
+                                                >
+                                                    Undust.me safely scans your wallet for open, empty
+                                                    token accounts
+                                                </motion.li>
+                                                <motion.li
+                                                    className='opacity-30 list-disc list-inside'
+                                                    initial={{ opacity: 0 }}
+                                                    animate={{ opacity: 1 }}
+                                                    transition={{ duration: 1, delay: 2 }}
+                                                >
+                                                    Identifies SOL stored for rent in the accounts
+                                                </motion.li>
+                                                <motion.li
+                                                    className='opacity-30 list-disc list-inside'
+                                                    initial={{ opacity: 0 }}
+                                                    animate={{ opacity: 1 }}
+                                                    transition={{ duration: 1, delay: 3 }}
+                                                >
+                                                    Closes accounts, returning stored SOL to your wallet
+                                                </motion.li>
+                                            </motion.ol>
+                                        </motion.div>
+                                        <motion.button
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{ duration: 2, delay: 4 }}
+                                            exit={{ opacity: 0, transition: { duration: 3 } }}
+                                            className='myFreshButton text-sm break-keep  flex items-center gap-4 justify-center font-bold text-white hover:border hover:border-undust-green  py-[18px] px-[36px] rounded-[120px]  w-full'
+                                            onClick={() => {
+                                                fetchTokenAccounts(wallet);
+                                            }}
+                                        >
+                                            {' '}
+                                            {loading && <Spin />} UnDust Me!
+                                        </motion.button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <div
+                                            className='mt-28'
+                                            style={rotateStyle}
+                                            onClick={() => setRotate(!rotate)}
+                                        >
+                                            {' '}
+                                            <MyMultiButton2 />
+                                        </div>
+                                    </>
+                                )}
+                            </motion.div>
+                        </>
+                    ) : activeIndex === 1 ? (
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 2, delay: 1 }}
-                            className=' border-undust-green border-opacity-20 rounded-lg  max-w-2xl w-full flex flex-col items-center justify-center gap-8 p-12 backdrop-blur-xl my-10'
+                            className='border border-undust-green border-opacity-20 rounded-lg min-h-[250px] max-w-2xl w-full flex flex-col items-center justify-center gap-8 p-12 bg-black bg-opacity-40 backdrop-blur-xl my-10 mt-0'
                         >
-                            {wallet.connected ? (
-                                <>
-                                    <motion.div
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        transition={{ duration: 2, delay: 1 }}
-                                        exit={{ opacity: 0, transition: { duration: 2 } }}
-                                        className='flex flex-col items-center justify-center gap-4 text-center'
-                                    >
-                                        <span className='text-lg font-bold max-w-lg mx-auto'>
-                                            Before you give us a spin!
-                                        </span>
-                                        <ol className='text-start flex flex-col items-center justify-start gap-4'>
-                                            <li className='opacity-30'>
-                                                Scans wallet for open, empty token accounts
-                                            </li>
-                                            <li className='opacity-60'>
-                                                Identifies SOL stored for rent in these accounts
-                                            </li>
-                                            <li>Closes accounts, returning stored SOL</li>
-                                        </ol>
-                                    </motion.div>
-                                    <motion.button
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        transition={{ duration: 2, delay: 3 }}
-                                        exit={{ opacity: 0, transition: { duration: 2 } }}
-                                        className='myFreshButton text-sm break-keep  flex items-center gap-4 justify-center font-bold text-white hover:border hover:border-undust-green  py-[18px] px-[36px] rounded-[120px]  w-full'
-                                        onClick={() => {
-                                            fetchTokenAccounts(wallet);
-                                        }}
-                                    >
-                                        {' '}
-                                        {loading && <Spin />} UnDust Me!
-                                    </motion.button>
-                                </>
-                            ) : (
-                                <>
-                                    <span className='text-lg font-bold max-w-md mx-auto'>
-                                        Connect Your Wallet to start searching for empty token
-                                        accounts in your wallet.
+                            <div className='flex flex-col items-center justify-center gap-4 '>
+                                <div className='w-full flex flex-col items-center justify-between gap-4'>
+                                    <span className='text-undust-green text-3xl md:text-5xl'>
+                                        {rentBack.toLocaleString()} <span>SOL</span>{' '}
                                     </span>
-                                    <MyMultiButton />
-                                </>
-                            )}
+                                    <span className='text-undust-green text-sm -mt-4'>
+                                        ({emptyAccounts} accounts)
+                                    </span>
+                                    <span>Dust Score: {dustScore}/10</span>
+                                    <span>{dustMessage}</span>
+                                </div>
+                                <div className='w-full flex flex-row items-center justify-center gap-2'>
+                                    <button
+                                        onClick={() => {
+                                            setActiveIndex(0);
+                                        }}
+                                        className='mt-8 myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white p-4 rounded-[120px]  w-16'
+                                    >
+                                        <svg
+                                            xmlns='http://www.w3.org/2000/svg'
+                                            fill='none'
+                                            viewBox='0 0 24 24'
+                                            strokeWidth={1.5}
+                                            stroke='currentColor'
+                                            className='w-6 h-6'
+                                        >
+                                            <path
+                                                strokeLinecap='round'
+                                                strokeLinejoin='round'
+                                                d='M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3'
+                                            />
+                                        </svg>
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            if (emptyAccounts > 0) {
+                                                closeEmptyAccounts();
+                                            } else {
+                                                const tweetText =
+                                                    'I just cleaned my wallet with UnDust.me and recovered ' +
+                                                    rentBack.toLocaleString() +
+                                                    ' SOL! My Dust Score is ' + dustScore + '/10';
+                                                const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                                                    tweetText
+                                                )}`;
+                                                window.open(url, '_blank');
+                                            }
+                                        }}
+                                        disabled={loading}
+                                        className='mt-8 myFreshButton text-sm break-keep font-bold flex items-center justify-center disabled:!bg-opacity-40 disabled:cursor-not-allowed hover:border hover:border-undust-green text-white  py-[18px] px-[36px] rounded-[120px]  w-full'
+                                    >
+                                        {loading && <Spin />}{' '}
+                                        {emptyAccounts === 0
+                                            ? 'Share on Twitter!'
+                                            : 'Close Empty Accounts'}
+                                    </button>
+                                </div>
+                            </div>
                         </motion.div>
-                    </>
-                ) : activeIndex === 1 ? (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 2, delay: 1 }}
-                        className='border border-undust-green border-opacity-20 rounded-lg min-h-[250px] max-w-2xl w-full flex flex-col items-center justify-center gap-8 p-12 backdrop-blur-xl my-10'
-                    >
-                        <div className='flex flex-col items-center justify-center gap-4 '>
-                            <div className='w-full flex flex-col items-center justify-between gap-4'>
+                    ) : (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 2, delay: 1 }}
+                            className='border border-undust-green border-opacity-20 rounded-lg  max-w-2xl w-full flex flex-col items-center justify-center gap-8 p-12 backdrop-blur-xl my-10'
+                        >
+                            <div className='flex flex-col items-center justify-center gap-2'>
+                                {/* Add your content for step 2 here */}
                                 <span className='text-undust-green text-3xl md:text-5xl'>
                                     {rentBack.toLocaleString()} <span>SOL</span>{' '}
                                 </span>
-                                <span className='text-undust-green text-sm -mt-4'>
-                                    ({emptyAccounts} accounts)
-                                </span>
-                                <span>Dust Score: {dustScore}/10</span>
-                                <span>{dustMessage}</span>
+                                <span>Congrats, your wallet is now Dust Free!</span>
+                                <div className='flex flex-row items-center justify-center gap-2'>
+                                    <button className='mt-8 myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white  py-[18px] px-[36px] rounded-[120px]  w-full'>
+                                        <svg
+                                            xmlns='http://www.w3.org/2000/svg'
+                                            fill='none'
+                                            viewBox='0 0 24 24'
+                                            strokeWidth={1.5}
+                                            stroke='currentColor'
+                                            className='w-6 h-6'
+                                        >
+                                            <path
+                                                strokeLinecap='round'
+                                                strokeLinejoin='round'
+                                                d='M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3'
+                                            />
+                                        </svg>
+                                    </button>
+                                    <button
+                                        className='mt-8 myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white  py-[18px] px-[36px] rounded-[120px]  w-full'
+                                        onClick={() => {
+                                            const tweetText =
+                                                'I just cleaned my wallet with UnDust.me and recovered ' +
+                                                rentBack.toLocaleString() +
+                                                ' SOL! My Dust Score is ' + dustScore + '/10';
+                                            const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                                                tweetText
+                                            )}`;
+                                            window.open(url, '_blank');
+                                        }}
+                                    >
+                                        Share on Twitter!
+                                    </button>
+                                </div>
                             </div>
-
-                            <button
-                                onClick={() => {
-                                    closeEmptyAccounts();
-                                }}
-                                disabled={loading || emptyAccounts === 0}
-                                className='mt-8 myFreshButton text-sm break-keep font-bold flex items-center justify-center disabled:!bg-opacity-40 disabled:cursor-not-allowed text-white  py-[18px] px-[36px] rounded-[120px]  w-full'
-                            >
-                                {loading && <Spin />}{' '}
-                                {emptyAccounts === 0
-                                    ? 'No Empty Accounts Found'
-                                    : 'Close Empty Accounts'}
-                            </button>
-                        </div>
-                    </motion.div>
-                ) : (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 2, delay: 1 }}
-                        className='border border-undust-green border-opacity-20 rounded-lg  max-w-2xl w-full flex flex-col items-center justify-center gap-8 p-12 backdrop-blur-xl my-10'
-                    >
-                        <div className='flex flex-col items-center justify-center gap-2'>
-                            {/* Add your content for step 2 here */}
-                            <span className='text-undust-green text-3xl md:text-5xl'>
-                                {rentBack.toLocaleString()} <span>SOL</span>{' '}
-                            </span>
-                            <span>Congrats, your wallet is now Dust Free!</span>
-                            <button className='mt-8 myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white  py-[18px] px-[36px] rounded-[120px]  w-full'>
-                                Share on Twitter!
-                            </button>
-                        </div>
-                    </motion.div>
-                )}
+                        </motion.div>
+                    )}
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 
