@@ -9,12 +9,13 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ToastContainer } from 'react-toastify';
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { useState } from 'react';
+import Footer from '../components/Footer';
 
 require("@solana/wallet-adapter-react-ui/styles.css");
 
 function MyApp({ Component, pageProps }: AppProps) {
   // Get OS-level preference for dark mode
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true);
 
   return (
     <ContextProvider>
@@ -35,6 +36,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           pauseOnHover
           theme="dark"
         />
+        <Footer />
       </WalletModalProvider>
     </ContextProvider>
 

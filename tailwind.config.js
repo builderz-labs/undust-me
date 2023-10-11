@@ -12,6 +12,7 @@ module.exports = {
       colors: {
             "builderz-green": "#14f195",
         "builderz-blue": "#00ffd5",
+        "undust-green": "#00FFD1"
       },
       animation: {
 

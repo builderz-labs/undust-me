@@ -7,10 +7,12 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import InfoIcon from '@mui/icons-material/Info';
 
 import { IconButton, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from '@mui/icons-material/Home';
+import { Logo } from './Logo';
 
 type Anchor = "top" | "left" | "bottom" | "right";
 
@@ -41,7 +43,6 @@ export default function SwipeableTemporaryDrawer() {
     <Box
       sx={{
         width: anchor === "top" || anchor === "bottom" ? "auto" : 250,
-
       }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
@@ -53,18 +54,18 @@ export default function SwipeableTemporaryDrawer() {
           noWrap
           component="div"
           sx={{ display: { xs: 'none', sm: 'block' } }}
-          className="my-5 text-start pl-5"
+          className="my-5 text-start pl-5 text-white"
         >
           Builderz
         </Typography>
       </div>
       <Divider />
       <List>
-        {["Home"].map((text, index) => (
+        {["Home", "About", "FAQ"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton href="/">
               <ListItemIcon>
-                {index % 2 === 0 ? <HomeIcon /> : <HomeIcon />}
+                {index % 2 === 0 ? <HomeIcon /> : (index % 3 === 0 ? <HomeIcon /> : <InfoIcon />)}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
@@ -87,24 +88,25 @@ export default function SwipeableTemporaryDrawer() {
             aria-label="open drawer"
             sx={{ mr: 2 }}
             onClick={toggleDrawer(anchor, true)}
-            className='inline lg:hidden'
+            className='inline lg:hidden text-white'
           >
             <MenuIcon />
           </IconButton>
           <SwipeableDrawer
-
             anchor={anchor}
             open={state[anchor]}
             onClose={toggleDrawer(anchor, false)}
             onOpen={toggleDrawer(anchor, true)}
-
           >
+            <div className="p-4">
+              <Logo />
+            </div>
             {list(anchor)}
             <div className="flex flex-col gap-0.5 justify-center items-end mt-auto  mx-2">
               <div
                 className={`max-w-md mx-auto sm:pl-6 lg:pl-0 grid grid-cols-2 items-start  self-start gap-1 text-start py-4 `}
               >
-                <div className="rounded-lg border border-[#1E2232]  dark:border-[#bcbdc1] mt-auto px-3 py-2 text-black dark:text-gray-400">
+                <div className="rounded-lg border border-[#1E2232]  dark:border-[#bcbdc1] mt-auto px-3 py-2 text-white dark:text-gray-400">
                   <a
                     href="https://github.com/Cynova-Group/builderz-solana-dapp-scaffold"
                     className="flex justify-center items-center  gap-2 text-xs"
@@ -122,7 +124,7 @@ export default function SwipeableTemporaryDrawer() {
                   </a>
                 </div>
 
-                <div className="rounded-lg border border-[#1E2232]  dark:border-[#bcbdc1] mt-auto px-3 py-2 text-black dark:text-gray-400">
+                <div className="rounded-lg border border-[#1E2232]  dark:border-[#bcbdc1] mt-auto px-3 py-2 text-white dark:text-gray-400">
                   <a
                     href="https://twitter.com/builderz__"
                     className="flex justify-center items-center gap-2 text-xs"

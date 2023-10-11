@@ -1,5 +1,6 @@
 /* Importing Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;900&display=swap');
 
 /* Include Tailwind CSS */
 @tailwind base;
@@ -51,14 +52,18 @@ select {
   border: 1px solid black !important;
 }
 
+.myFreshButton {
+    @apply bg-undust-green text-black hover:text-white hover:bg-black !important;
+}
+
 /* Body styles */
 body {
+  @apply !bg-black !text-white;
   font-family: 'Inter', sans-serif;
   display: flex;
   margin: 0;
   text-align: center;
   /* Fluid Fonts */
-  @apply bg-white dark:bg-black;
   font-size: calc(16px + (16 - 16) * ((100vw - 320px) / (1280 - 320)));
   font-style: normal;
   font-weight: 400;
@@ -68,15 +73,17 @@ body {
 
 /* Heading styles */
 h1 {
-  font-size: calc(30px + (36 - 30) * ((100vw - 320px) / (1280 - 320)));
+  font-size: calc(30px + (96 - 30) * ((100vw - 320px) / (1280 - 320)));
+  font-family: 'Poppins', sans-serif;
   font-style: normal;
   font-weight: 900;
   letter-spacing: 125%;
-  line-height: calc(36px + (40 - 36) * ((100vw - 320px) / (1280 - 320)));
+  line-height: calc(36px + (110 - 36) * ((100vw - 320px) / (1280 - 320)));
 }
 h2 {
   font-size: calc(20px + (24 - 20) * ((100vw - 320px) / (1280 - 320)));
   font-style: normal;
+  font-family: 'Poppins', sans-serif;
   font-weight: 800;
   letter-spacing: 125%;
   line-height: calc(34px + (38 - 34) * ((100vw - 320px) / (1280 - 320)));
@@ -84,6 +91,7 @@ h2 {
 h3 {
   font-size: calc(18px + (20 - 18) * ((100vw - 320px) / (1280 - 320)));
   font-style: normal;
+  font-family: 'Poppins', sans-serif;
   font-weight: 700;
   letter-spacing: 125%;
   line-height: calc(28px + (32 - 28) * ((100vw - 320px) / (1280 - 320)));
@@ -253,4 +261,37 @@ body::-webkit-scrollbar-thumb {
 
 .css-i4bv87-MuiSvgIcon-root {
   @apply text-black dark:text-white !important;
+}
+
+
+.bgBlurReq {
+  opacity: 0.2;
+background: var(--Main, #00FFD1);
+filter: blur(200px);
+width: 35.5625rem;
+height: 35.5625rem;
+flex-shrink: 0;
+}
+/* Custom Wallet Button */
+.active-link {
+  color: #00FFD1;
+  border-bottom-color: #00FFD1;
+}
+
+
+.containerStroke {
+  border-radius: 0.75rem;
+border: 1px solid rgba(235, 235, 235, 0);
+background: rgba(2, 8, 18, 0.40);
+}
+
+.MuiPaper-root {
+  @apply !bg-black  !text-white;
+}
+
+.css-ancrnh-MuiButtonBase-root-MuiIconButton-root {
+  @apply !text-white;
+}
+.css-i4bv87-MuiSvgIcon-root {
+  @apply !text-white;
 }

@@ -1,43 +1,46 @@
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Drawer from "./Drawer";
+
 import { Logo } from "./Logo";
 import React from "react";
 import ThemeSwitcherComponent from "./ThemeSwitcher";
 import Toolbar from "@mui/material/Toolbar";
 import MyMultiButton from './MyMultiButton';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { motion } from 'framer-motion';
+import Drawer from './Drawer';
 
 export default function PrimarySearchAppBar({ setTheme, setIsDark, isDark }: any) {
-  return (
-    <Box sx={{ flexGrow: 1 }} className="w-full max-w-7xl mx-auto">
-      <div className="w-full p-2">
 
-        <Toolbar>
-          <Box
-            sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}
-          >
-            <Drawer />
-            <Logo isDark={isDark} />
-          </Box>
-          <Box sx={{ flexGrow: 1 }}>
-            <div className='hidden lg:flex items-center justify-end px-10 '>
-              <Link href="/" className="text-[#000000] dark:text-white text-[18px] font-bold">Home</Link>
-            </div>
-          </Box>
-          <Box
-            sx={{
-              display: { md: "flex" },
-              flexDirection: "row",
-            }}
-          >
-            <div className="flex items-center gap-2">
-              <ThemeSwitcherComponent isDark={isDark} setIsDark={setIsDark} />
-              <MyMultiButton />
-            </div>
-          </Box>
-        </Toolbar>
-      </div>
-    </Box>
+  const router = useRouter();
+
+  const isActive = (route: string) => router.pathname === route;
+
+
+  return (
+    <motion.header
+      initial={{ opacity: 0, y: -100 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+      className='absolute top-0 left-0 w-full flex flex-col items-center justify-center gap-2'>
+      <nav className='w-full flex flex-row items-center justify-between gap-2 container mx-auto my-10 px-4'>
+        <div className='pb-4 flex flex-row items-center justify-center gap-2'>
+          <Logo /></div>
+        <div className='hidden md:flex flex-row items-center justify-center gap-16'>
+          <Link href='/' className={`border-b border-b-transparent pb-4 hover:border-b-undust-green transition-all duration-300 ease-in-out hover:text-undust-green ${isActive('/') ? 'active-link' : ''}`}>
+            Home
+          </Link>
+          <Link href='/about' className={`border-b border-b-transparent pb-4 hover:border-b-undust-green transition-all duration-300 ease-in-out hover:text-undust-green ${isActive('/about') ? 'active-link' : ''}`}>
+            About
+          </Link>
+          <Link href='/faq' className={`border-b border-b-transparent pb-4 hover:border-b-undust-green transition-all duration-300 ease-in-out hover:text-undust-green ${isActive('/faq') ? 'active-link' : ''}`}>
+            FAQ
+          </Link>
+        </div>
+        <div className='pb-4 flex flex-row items-center justify-center gap-2'>
+          <MyMultiButton />
+          <div className='flex md:hidden -mrl2'><Drawer /></div>
+        </div>
+      </nav>
+    </motion.header>
   );
 }
