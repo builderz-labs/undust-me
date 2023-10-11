@@ -240,6 +240,7 @@ function MainComponent({
                                         </div>
                                     </>
                                 )}
+
                             </motion.div>
                         </>
                     ) : activeIndex === 1 ? (
