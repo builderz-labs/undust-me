@@ -42,10 +42,10 @@ const About: NextPage = () => {
                     <span className='opacity-50 text-2xl '>The easiest way to tidy up your wallet & earn SOL</span>
                 </motion.div>
 
-                <div className='border-undust-green border-opacity-20 rounded-lg max-w-2xl w-full flex flex-col items-center justify-center gap-8  p-12 my-10 relative z-50 bg-black bg-opacity-60 backdrop-blur-md'>
+                <div className=' rounded-lg max-w-2xl w-full flex flex-col items-center justify-start text-left gap-8  p-12 my-10 relative z-50 bg-black bg-opacity-30 border border-undust-green border-opacity-10 backdrop-blur-md'>
                     Once upon a time, in a bustling city, lived Samuel Barnes, a meticulous accountant. One rainy day, he passed a run-down building. Inspired, Samuel turned it into a laundromat, “Undust.me” It became known for its cleanliness and welcoming atmosphere.
 
-                    But there was a hidden twist. Unbeknownst to everyone, Sam's laundromat was not on Earth, but on Solana, the fastest blockchain in the universe. Instead of washing clothes, it cleaned wallets, erasing the stains of outdated tokens. It even returned SOL to customers who paid a visit. Samuel had unknowingly ventured into the world of crypto and found a unique niche.
+                    But there was a hidden twist. Unbeknownst to everyone, Sam&apos;s laundromat was not on Earth, but on Solana, the fastest blockchain in the universe. Instead of washing clothes, it cleaned wallets, erasing the stains of outdated tokens. It even returned SOL to customers who paid a visit. Samuel had unknowingly ventured into the world of crypto and found a unique niche.
 
                     People flocked to “Undust.me to give their wallets a fresh start, and Samuel had found a new passion, combining his love for cleanliness with the exciting world of decentralisation, The unassuming laundromat owner had become a crypto-custodian, and his story became a legend in the world of digital assets.
                 </div>

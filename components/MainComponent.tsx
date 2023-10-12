@@ -208,7 +208,7 @@ function MainComponent({
                             <motion.div
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
-                                transition={{ duration: 2, delay: 1 }}
+                                transition={{ duration: 2, delay: 2.5 }}
                                 className=' border-undust-green border-opacity-20 rounded-lg  max-w-2xl w-full flex flex-col items-center justify-center gap-8 p-2 md:p-12 my-2 md:my-10  '
                             >
                                 {wallet.connected ? (
@@ -216,7 +216,7 @@ function MainComponent({
                                         <motion.div
                                             initial={{ opacity: 0 }}
                                             animate={{ opacity: 1 }}
-                                            transition={{ duration: 2, delay: 1 }}
+                                            transition={{ duration: 2, delay: 2.5 }}
                                             exit={{ opacity: 0, transition: { duration: 2 } }}
                                             className='flex flex-col items-center justify-center gap-4 w-full text-center bg-black bg-opacity-60 backdrop-blur-xl p-4 py-4 md:py-8 -mt-4 md:-mt-10 rounded-lg shadow-lg '
                                         >
@@ -268,14 +268,17 @@ function MainComponent({
                                     </>
                                 ) : (
                                     <>
-                                        <div
+                                        <motion.div
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{ duration: 2, delay: 3.5 }}
                                             className='mt-14 md:mt-28'
                                             style={rotateStyle}
                                             onClick={() => setRotate(!rotate)}
                                         >
                                             {' '}
                                             <MyMultiButton2 />
-                                        </div>
+                                        </motion.div>
                                     </>
                                 )}
 

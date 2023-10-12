@@ -51,7 +51,7 @@ const Home: NextPage = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 2 }}
+          transition={{ duration: 2, delay: 2.5 }}
           className={`relative z-20 mt-28  md:mt-18 `}
         >
           <h1 className='text-undust-green'>Undust.me</h1>
