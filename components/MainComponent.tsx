@@ -77,38 +77,38 @@ function MainComponent({
 
         if (emptyAccounts === 0) {
             score = 10;
-            message = "It's pretty clean around here. Your parents would be proud!";
+            message = "Congrats, your wallet is as clean as a whistle. Looking sharp!";
         } else if (emptyAccounts <= 10) {
             score = 9;
-            message = 'Not bad, but some spring cleaning is needed. Time to tidy up!';
+            message = 'Almost perfect, just a quick clean and you’re good to go.';
         } else if (emptyAccounts <= 20) {
             score = 8;
-            message = 'Not bad, but some spring cleaning is needed. Time to tidy up!';
+            message = 'Damn, you’re good! Your wallet is looking fresh. ';
         } else if (emptyAccounts <= 30) {
             score = 7;
-            message = 'Not bad, but some spring cleaning is needed. Time to tidy up!';
+            message = 'Damn, you’re good! Your wallet is looking fresh.';
         } else if (emptyAccounts <= 40) {
             score = 6;
-            message = 'Not bad, but some spring cleaning is needed. Time to tidy up!';
+            message = 'Your wallet has seen better days; time to clean up.';
         } else if (emptyAccounts <= 50) {
             score = 5;
-            message = 'Not bad, but some spring cleaning is needed. Time to tidy up!';
+            message = 'Your wallet is a bit dusty. Time to get the hoover out.';
         } else if (emptyAccounts <= 60) {
             score = 4;
-            message = 'Not bad, but some spring cleaning is needed. Time to tidy up!';
+            message = 'Not bad, but it’s time for a quick scrub. Let’s get started.';
         } else if (emptyAccounts <= 70) {
             score = 3;
-            message = 'Not bad, but some spring cleaning is needed. Time to tidy up!';
+            message = 'This place hasn’t been cleaned in years! Time to change that.';
         } else if (emptyAccounts <= 80) {
             score = 2;
-            message = 'Not bad, but some spring cleaning is needed. Time to tidy up!';
+            message = 'Woah! It‘s looking a bit messy around here. Let’s fix that for you.';
         } else if (emptyAccounts <= 90) {
             score = 1;
-            message = 'Not bad, but some spring cleaning is needed. Time to tidy up!';
+            message = 'You’ve really let your wallet go. UnDust.me is here to save you.';
         } else if (emptyAccounts >= 100) {
             score = 0;
             message =
-                'Damn son, your account is looking dusty ASF! Let‘s help you clean that mess up...';
+                'You’ve really let your wallet go. UnDust.me is here to save you.';
         }
 
         return [score, message];
@@ -146,7 +146,18 @@ function MainComponent({
         await umi.identity.signAllTransactions(txs);
 
         const res = await Promise.all(txs.map((tx) => umi.rpc.sendTransaction(tx)));
-        // console.log(res.map((sig) => base58.encode(sig)));
+
+        // Add this code after the previous line
+        fetch('http://localhost:3000/leaderboard', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                walletId: wallet.publicKey,
+                closedAccounts: emptyAccounts,
+            }),
+        });
 
         setShowConfetti(true);
         toast.success("Success! Your wallet is now dust free!")
@@ -161,6 +172,30 @@ function MainComponent({
         transform: rotate ? 'rotate(360deg)' : 'rotate(0deg)',
         transition: 'transform 2s',
     };
+
+    async function swapSOLtoMSOL(amount: number) {
+        const response = await fetch('https://api.jup.ag/swap', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                fromToken: 'SOL',
+                toToken: 'mSOL',
+                amount,
+                slippage: 0.5,
+                walletAddress: wallet.publicKey && wallet.publicKey.toBase58(),
+            }),
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            toast.success('Swap successful!');
+        } else {
+            toast.error('Swap failed: ' + data.error);
+        }
+    }
 
     return (
         <>
@@ -185,8 +220,8 @@ function MainComponent({
                                             exit={{ opacity: 0, transition: { duration: 2 } }}
                                             className='flex flex-col items-center justify-center gap-4 w-full text-center bg-black bg-opacity-60 backdrop-blur-xl p-4 py-4 md:py-8 -mt-4 md:-mt-10 rounded-lg shadow-lg '
                                         >
-                                            <span className='text-xl max-w-lg mx-auto text-undust-green font-bold underline '>
-                                                Before you give us a spin!
+                                            <span className='text-xl max-w-lg mx-auto text-undust-green font-bold'>
+                                                Before you give us a spin:
                                             </span>
                                             <motion.ol className='text-left flex flex-col items-start justify-center gap-4 text-white opacity-80'>
                                                 <motion.li
@@ -221,6 +256,7 @@ function MainComponent({
                                             animate={{ opacity: 1 }}
                                             transition={{ duration: 2, delay: 4 }}
                                             exit={{ opacity: 0, transition: { duration: 3 } }}
+                                            data-tip="Spin it!"
                                             className='myFreshButton text-sm break-keep  flex items-center gap-4 justify-center font-bold text-white hover:border hover:border-undust-green  py-[18px] px-[36px] rounded-[120px]  w-full'
                                             onClick={() => {
                                                 fetchTokenAccounts(wallet);
@@ -273,7 +309,8 @@ function MainComponent({
                                     onClick={() => {
                                         setActiveIndex(0);
                                     }}
-                                    className='mt-8 myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white p-4 rounded-[120px]  w-16'
+                                    data-tip="Go back to the start"
+                                    className='mt-8 tooltip myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white p-4 rounded-[120px]  w-16'
                                 >
                                     <svg
                                         xmlns='http://www.w3.org/2000/svg'
@@ -292,18 +329,16 @@ function MainComponent({
                                 </button>
                                 <button
                                     onClick={() => {
-                                        if (emptyAccounts > 0) {
-                                            closeEmptyAccounts();
+                                        let tweetText = '';
+                                        if (emptyAccounts === 0) {
+                                            tweetText = 'I just scored a perfect 10/10 on my wallet. How clean is your wallet? Find out and earn SOL by using Undust.me https://undust.me/ ';
                                         } else {
-                                            const tweetText =
-                                                'I just cleaned my wallet with UnDust.me and recovered ' +
+                                            tweetText = 'I just cleaned my wallet with UnDust.me and recovered ' +
                                                 rentBack.toLocaleString() +
-                                                ' SOL! My Dust Score is ' + dustScore + '/10';
-                                            const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-                                                tweetText
-                                            )}`;
-                                            window.open(url, '_blank');
+                                                ' SOL! My score is ' + dustScore + '/10. Can you beat me? https://undust.me/';
                                         }
+                                        const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
+                                        window.open(url, '_blank');
                                     }}
                                     disabled={loading}
                                     className='mt-8 myFreshButton text-sm break-keep font-bold flex items-center justify-center disabled:!bg-opacity-40 disabled:cursor-not-allowed hover:border hover:border-undust-green text-white  py-[18px] px-[36px] rounded-[120px]  w-full'
@@ -333,7 +368,8 @@ function MainComponent({
                                         onClick={() => {
                                             setActiveIndex(0);
                                         }}
-                                        className='mt-8 myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white p-4 rounded-[120px]  w-16'
+                                        data-tip="Go back to the start"
+                                        className='mt-8 tooltip myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white p-4 rounded-[120px]  w-16'
                                     >
                                         <svg
                                             xmlns='http://www.w3.org/2000/svg'
@@ -353,17 +389,29 @@ function MainComponent({
                                     <button
                                         className='mt-8 myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white  py-[18px] px-[36px] rounded-[120px]  w-full'
                                         onClick={() => {
-                                            const tweetText =
-                                                'I just cleaned my wallet with UnDust.me and recovered ' +
-                                                rentBack.toLocaleString() +
-                                                ' SOL! My Dust Score is ' + dustScore + '/10';
-                                            const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-                                                tweetText
-                                            )}`;
+                                            let tweetText = '';
+                                            if (emptyAccounts === 0) {
+                                                tweetText = 'I just scored a perfect 10/10 on my wallet. How clean is your wallet? Find out and earn SOL by using Undust.me https://undust.me/';
+                                            } else {
+                                                tweetText = 'I just cleaned my wallet with UnDust.me and recovered ' +
+                                                    rentBack.toLocaleString() +
+                                                    ' SOL! My score is ' + dustScore + '/10. Can you beat me? https://undust.me/';
+                                            }
+                                            const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
                                             window.open(url, '_blank');
                                         }}
                                     >
                                         Share on Twitter!
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            swapSOLtoMSOL(rentBack);
+                                        }}
+                                        className='mt-8 myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white p-4 rounded-[120px]  w-16'
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M6.115 5.19l.319 1.913A6 6 0 008.11 10.36L9.75 12l-.387.775c-.217.433-.132.956.21 1.298l1.348 1.348c.21.21.329.497.329.795v1.089c0 .426.24.815.622 1.006l.153.076c.433.217.956.132 1.298-.21l.723-.723a8.7 8.7 0 002.288-4.042 1.087 1.087 0 00-.358-1.099l-1.33-1.108c-.251-.21-.582-.299-.905-.245l-1.17.195a1.125 1.125 0 01-.98-.314l-.295-.295a1.125 1.125 0 010-1.591l.13-.132a1.125 1.125 0 011.3-.21l.603.302a.809.809 0 001.086-1.086L14.25 7.5l1.256-.837a4.5 4.5 0 001.528-1.732l.146-.292M6.115 5.19A9 9 0 1017.18 4.64M6.115 5.19A8.965 8.965 0 0112 3c1.929 0 3.716.607 5.18 1.64" />
+                                        </svg>
                                     </button>
                                 </div>
                             </div>

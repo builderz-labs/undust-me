@@ -1,6 +1,6 @@
 /* Importing Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;900&family=Poppins:wght@500;900&display=swap');
 
 /* Include Tailwind CSS */
 @tailwind base;
@@ -78,7 +78,7 @@ body {
 /* Heading styles */
 h1 {
   font-size: calc(42px + (96 - 42) * ((100vw - 320px) / (1280 - 320)));
-  font-family: 'Poppins', sans-serif;
+font-family: 'Outfit', sans-serif;
   font-style: normal;
   font-weight: 900;
   letter-spacing: 125%;
@@ -87,7 +87,7 @@ h1 {
 h2 {
   font-size: calc(20px + (24 - 20) * ((100vw - 320px) / (1280 - 320)));
   font-style: normal;
-  font-family: 'Poppins', sans-serif;
+font-family: 'Outfit', sans-serif;
   font-weight: 800;
   letter-spacing: 125%;
   line-height: calc(34px + (38 - 34) * ((100vw - 320px) / (1280 - 320)));
@@ -95,7 +95,7 @@ h2 {
 h3 {
   font-size: calc(18px + (20 - 18) * ((100vw - 320px) / (1280 - 320)));
   font-style: normal;
-  font-family: 'Poppins', sans-serif;
+font-family: 'Outfit', sans-serif;
   font-weight: 700;
   letter-spacing: 125%;
   line-height: calc(28px + (32 - 28) * ((100vw - 320px) / (1280 - 320)));

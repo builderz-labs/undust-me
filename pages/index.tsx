@@ -32,9 +32,18 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Builderz Solana dApp Scaffold</title>
+        <title>UnDust.me - Your Easy To Use Solana Wallet Cleaner</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta property="og:image" content="/metaimage.png" />
+        <meta property="og:title" content="UnDust.me - Your Easy To Use Solana Wallet Cleaner" />
+        <meta property="og:description" content="The easiest way to tidy up your wallet & earn SOL" />
+        <meta property="og:url" content="https://undust.me" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@builderz__" />
+        <meta name="twitter:creator" content="@builderz__" />
+        <meta name="twitter:title" content="UnDust.me - Your Easy To Use Solana Wallet Cleaner" />
       </Head>
+
       <div className={`w-full flex h-screen flex-col items-center justify-center gap-6 relative overflow-hidden`}>
 
         {showConfetti && <Confetti />}
@@ -43,10 +52,10 @@ const Home: NextPage = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2 }}
-          className={`relative z-20 mt-28  md:mt-10 `}
+          className={`relative z-20 mt-28  md:mt-18 `}
         >
           <h1 className='text-undust-green'>Undust.me</h1>
-          <span className='opacity-50 text-sm md:text-2xl px-4 md:px-0'>The easiest way to tidy up your wallet & earn SOL</span>
+          <span className='opacity-80 text-sm md:text-2xl px-4 md:px-0'>The easiest way to tidy up your wallet & earn SOL</span>
         </motion.div>
 
         <MainComponent loading={loading} setLoading={setLoading} showConfetti={showConfetti} setShowConfetti={setShowConfetti} activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
@@ -54,7 +63,7 @@ const Home: NextPage = () => {
 
         <div className='bgBlurReq z-0 pointer-events-none absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2' />
         {<div className="h-[280px]"></div>}
-        {<motion.img src="/machine-12.webp" alt="machine" className='w-[350px] h-[350px] object-cover md:w-[630px] md:h-[630px] absolute z-0 translate-y-5' />}
+        {<motion.img src="/machine-12.webp" alt="machine" className='w-[350px] h-[350px] object-cover md:w-[630px] md:h-[630px] absolute z-0 translate-y-16' />}
         <div id="circle" className='text-undust-green blur-sm absolute ' style={{ position: 'absolute', zIndex: 1, width: '50px', height: '50px', borderRadius: '50%', pointerEvents: 'none', transition: '0.2s' }}></div>
       </div>
     </>
