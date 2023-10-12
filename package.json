@@ -34,6 +34,7 @@
     "cors": "^2.8.5",
     "cross-fetch": "^4.0.0",
     "daisyui": "^2.42.0",
+    "express": "^4.18.2",
     "framer-motion": "^10.16.4",
     "mongoose": "^7.6.1",
     "next": "^13",
