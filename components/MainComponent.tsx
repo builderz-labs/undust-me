@@ -16,6 +16,7 @@ import { walletAdapterIdentity } from '@metaplex-foundation/umi-signer-wallet-ad
 import base58 from 'bs58';
 import { Spin } from 'antd';
 import MyMultiButton2 from './MyMultiButton2';
+import { toast } from 'sonner';
 
 function MainComponent({
     loading,
@@ -138,16 +139,17 @@ function MainComponent({
         }
 
         const splitBuilders = tx.unsafeSplitByTransactionSize(umi);
-        console.log(splitBuilders);
+        // console.log(splitBuilders);
         const txs = await Promise.all(
             splitBuilders.map((builder) => builder.buildWithLatestBlockhash(umi))
         );
         await umi.identity.signAllTransactions(txs);
 
         const res = await Promise.all(txs.map((tx) => umi.rpc.sendTransaction(tx)));
-        console.log(res.map((sig) => base58.encode(sig)));
+        // console.log(res.map((sig) => base58.encode(sig)));
 
         setShowConfetti(true);
+        toast.success("Success! Your wallet is now dust free!")
         setLoading(false);
         setActiveIndex(2);
         setTimeout(() => setShowConfetti(false), 3000);
@@ -163,7 +165,7 @@ function MainComponent({
     return (
         <>
             {/* {activeIndex === 0 && <img src="/machine-12.webp" alt="machine" className='w-[250px] h-[250px] md:w-[50px] md:h-[850px] object-cover mx-auto -mt-24 -mb-8' />} */}
-            <div className={`relative z-10  ${activeIndex === 1 ? ' mt-10' : ''}`}>
+            <div className={`relative z-10  ${activeIndex === 1 ? 'mt-0 md:mt-10' : ''}`}>
 
                 <div className='w-full px-4'>
                     {activeIndex === 0 ? (
@@ -172,7 +174,7 @@ function MainComponent({
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ duration: 2, delay: 1 }}
-                                className=' border-undust-green border-opacity-20 rounded-lg  max-w-2xl w-full flex flex-col items-center justify-center gap-8  p-12 my-10  '
+                                className=' border-undust-green border-opacity-20 rounded-lg  max-w-2xl w-full flex flex-col items-center justify-center gap-8 p-2 md:p-12 my-2 md:my-10  '
                             >
                                 {wallet.connected ? (
                                     <>
@@ -181,12 +183,12 @@ function MainComponent({
                                             animate={{ opacity: 1 }}
                                             transition={{ duration: 2, delay: 1 }}
                                             exit={{ opacity: 0, transition: { duration: 2 } }}
-                                            className='flex flex-col items-center justify-center gap-4 text-center bg-black bg-opacity-60 backdrop-blur-xl p-4 py-8 rounded-lg shadow-lg'
+                                            className='flex flex-col items-center justify-center gap-4 w-full text-center bg-black bg-opacity-60 backdrop-blur-xl p-4 py-4 md:py-8 -mt-4 md:-mt-10 rounded-lg shadow-lg '
                                         >
                                             <span className='text-xl max-w-lg mx-auto text-undust-green font-bold underline '>
                                                 Before you give us a spin!
                                             </span>
-                                            <motion.ol className='text-center flex flex-col items-center justify-center gap-4 text-white opacity-80'>
+                                            <motion.ol className='text-left flex flex-col items-start justify-center gap-4 text-white opacity-80'>
                                                 <motion.li
                                                     className='opacity-30 list-disc list-inside'
                                                     initial={{ opacity: 0 }}
@@ -231,7 +233,7 @@ function MainComponent({
                                 ) : (
                                     <>
                                         <div
-                                            className='mt-28'
+                                            className='mt-14 md:mt-28'
                                             style={rotateStyle}
                                             onClick={() => setRotate(!rotate)}
                                         >
@@ -244,71 +246,75 @@ function MainComponent({
                             </motion.div>
                         </>
                     ) : activeIndex === 1 ? (
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 2, delay: 1 }}
-                            className='border border-undust-green border-opacity-20 rounded-lg min-h-[250px] max-w-2xl w-full flex flex-col items-center justify-center gap-8 p-12 bg-black bg-opacity-40 backdrop-blur-xl my-10 mt-0'
-                        >
-                            <div className='flex flex-col items-center justify-center gap-4 '>
-                                <div className='w-full flex flex-col items-center justify-between gap-4'>
-                                    <span className='text-undust-green text-3xl md:text-5xl'>
-                                        {rentBack.toLocaleString()} <span>SOL</span>{' '}
-                                    </span>
-                                    <span className='text-undust-green text-sm -mt-4'>
-                                        ({emptyAccounts} accounts)
-                                    </span>
-                                    <span>Dust Score: {dustScore}/10</span>
-                                    <span>{dustMessage}</span>
+                        <>
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 2, delay: 1 }}
+                                className='border border-undust-green border-opacity-20 rounded-lg min-h-[250px] max-w-2xl w-full flex flex-col items-center justify-center gap-8 p-6 md:p-12 mt-6 md:mt-0 bg-black bg-opacity-60 backdrop-blur-xl '
+                            >
+                                <div className='flex flex-col items-center justify-center gap-4 '>
+                                    <div className='w-full flex flex-col items-center justify-between gap-4'>
+                                        <span className='text-undust-green text-3xl md:text-5xl font-bold'>
+                                            {rentBack.toLocaleString()} <span>SOL</span>{' '}
+                                        </span>
+                                        <span className='-mt-4 uppercase text-sm'>
+                                            ({emptyAccounts} accounts)
+                                        </span>
+                                        <span className='text-undust-green text-lg'>{dustMessage}</span>
+                                        <span className='uppercase text-xs'>Dust Score: {dustScore}/10</span>
+                                    </div>
+
                                 </div>
-                                <div className='w-full flex flex-row items-center justify-center gap-2'>
-                                    <button
-                                        onClick={() => {
-                                            setActiveIndex(0);
-                                        }}
-                                        className='mt-8 myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white p-4 rounded-[120px]  w-16'
+
+                            </motion.div>
+                            <div className='w-full flex flex-row items-center justify-center gap-2'>
+                                <button
+                                    onClick={() => {
+                                        setActiveIndex(0);
+                                    }}
+                                    className='mt-8 myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white p-4 rounded-[120px]  w-16'
+                                >
+                                    <svg
+                                        xmlns='http://www.w3.org/2000/svg'
+                                        fill='none'
+                                        viewBox='0 0 24 24'
+                                        strokeWidth={1.5}
+                                        stroke='currentColor'
+                                        className='w-6 h-6'
                                     >
-                                        <svg
-                                            xmlns='http://www.w3.org/2000/svg'
-                                            fill='none'
-                                            viewBox='0 0 24 24'
-                                            strokeWidth={1.5}
-                                            stroke='currentColor'
-                                            className='w-6 h-6'
-                                        >
-                                            <path
-                                                strokeLinecap='round'
-                                                strokeLinejoin='round'
-                                                d='M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3'
-                                            />
-                                        </svg>
-                                    </button>
-                                    <button
-                                        onClick={() => {
-                                            if (emptyAccounts > 0) {
-                                                closeEmptyAccounts();
-                                            } else {
-                                                const tweetText =
-                                                    'I just cleaned my wallet with UnDust.me and recovered ' +
-                                                    rentBack.toLocaleString() +
-                                                    ' SOL! My Dust Score is ' + dustScore + '/10';
-                                                const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-                                                    tweetText
-                                                )}`;
-                                                window.open(url, '_blank');
-                                            }
-                                        }}
-                                        disabled={loading}
-                                        className='mt-8 myFreshButton text-sm break-keep font-bold flex items-center justify-center disabled:!bg-opacity-40 disabled:cursor-not-allowed hover:border hover:border-undust-green text-white  py-[18px] px-[36px] rounded-[120px]  w-full'
-                                    >
-                                        {loading && <Spin />}{' '}
-                                        {emptyAccounts === 0
-                                            ? 'Share on Twitter!'
-                                            : 'Close Empty Accounts'}
-                                    </button>
-                                </div>
+                                        <path
+                                            strokeLinecap='round'
+                                            strokeLinejoin='round'
+                                            d='M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3'
+                                        />
+                                    </svg>
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        if (emptyAccounts > 0) {
+                                            closeEmptyAccounts();
+                                        } else {
+                                            const tweetText =
+                                                'I just cleaned my wallet with UnDust.me and recovered ' +
+                                                rentBack.toLocaleString() +
+                                                ' SOL! My Dust Score is ' + dustScore + '/10';
+                                            const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                                                tweetText
+                                            )}`;
+                                            window.open(url, '_blank');
+                                        }
+                                    }}
+                                    disabled={loading}
+                                    className='mt-8 myFreshButton text-sm break-keep font-bold flex items-center justify-center disabled:!bg-opacity-40 disabled:cursor-not-allowed hover:border hover:border-undust-green text-white  py-[18px] px-[36px] rounded-[120px]  w-full'
+                                >
+                                    {loading && <Spin />}{' '}
+                                    {emptyAccounts === 0
+                                        ? 'Share on Twitter!'
+                                        : 'Close Empty Accounts'}
+                                </button>
                             </div>
-                        </motion.div>
+                        </>
                     ) : (
                         <motion.div
                             initial={{ opacity: 0 }}
@@ -323,7 +329,12 @@ function MainComponent({
                                 </span>
                                 <span>Congrats, your wallet is now Dust Free!</span>
                                 <div className='flex flex-row items-center justify-center gap-2'>
-                                    <button className='mt-8 myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white  py-[18px] px-[36px] rounded-[120px]  w-full'>
+                                    <button
+                                        onClick={() => {
+                                            setActiveIndex(0);
+                                        }}
+                                        className='mt-8 myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white p-4 rounded-[120px]  w-16'
+                                    >
                                         <svg
                                             xmlns='http://www.w3.org/2000/svg'
                                             fill='none'

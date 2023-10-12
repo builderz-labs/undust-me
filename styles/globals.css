@@ -77,7 +77,7 @@ body {
 
 /* Heading styles */
 h1 {
-  font-size: calc(30px + (96 - 30) * ((100vw - 320px) / (1280 - 320)));
+  font-size: calc(42px + (96 - 42) * ((100vw - 320px) / (1280 - 320)));
   font-family: 'Poppins', sans-serif;
   font-style: normal;
   font-weight: 900;

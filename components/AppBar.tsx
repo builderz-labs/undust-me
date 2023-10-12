@@ -22,10 +22,10 @@ export default function PrimarySearchAppBar({ setTheme, setIsDark, isDark }: any
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
       className='absolute top-0 left-0 w-full flex flex-col items-center justify-center gap-2 z-50'>
-      <nav className='w-full flex flex-row items-center justify-between gap-2 container mx-auto my-10 px-4'>
+      <nav className='w-full flex flex-row items-center justify-between gap-2 container mx-auto my-6 md:my-10 px-2 md:px-4'>
         <Link
           href='/'
-          className='pb-4 flex flex-row items-center justify-center gap-2 text-undust-green text-xl font-bold'>
+          className='pl-4 md:pl-0 pb-4 flex flex-row items-center justify-center gap-2 text-undust-green text-xl font-bold'>
           {/* <Logo /> */}
           Undust.me
         </Link>
@@ -40,7 +40,7 @@ export default function PrimarySearchAppBar({ setTheme, setIsDark, isDark }: any
             FAQ
           </Link>
         </div>
-        <div className='pb-4 flex flex-row items-center justify-center gap-2'>
+        <div className='pb-4 flex flex-row items-center justify-center gap-2 -pr-2 md:pr-0'>
           <MyMultiButton />
           <div className='flex md:hidden -mrl2'><Drawer /></div>
         </div>
