@@ -20,24 +20,35 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-app.post('/leaderboard', async (req: { body: { walletId: any; closedAccounts: any; }; }, res: { json: (arg0: any) => void; }) => {
-  const { walletId, closedAccounts } = req.body;
+app.post(
+  '/leaderboard',
+  async (
+    req: { body: { walletId: any; closedAccounts: any } },
+    res: { json: (arg0: any) => void }
+  ) => {
+    const { walletId, closedAccounts } = req.body;
 
-  let user = await User.findOne({ walletId });
-  if (!user) {
-    user = new User({ walletId, closedAccounts });
-  } else {
-    user.closedAccounts += closedAccounts;
+    let user = await User.findOne({ walletId });
+    if (!user) {
+      user = new User({ walletId, closedAccounts });
+    } else {
+      user.closedAccounts += closedAccounts;
+    }
+
+    await user.save();
+
+    res.json(user);
   }
+);
 
-  await user.save();
-
-  res.json(user);
-});
-
-app.get('/leaderboard', async (req: any, res: { json: (arg0: any) => void; }) => {
-  const users = await User.find().sort({ closedAccounts: -1 }).limit(10);
-  res.json(users);
-});
+app.get(
+  '/leaderboard',
+  async (req: any, res: { json: (arg0: any) => void }) => {
+    const users = await User.find().sort({ closedAccounts: -1 }).limit(10);
+    res.json(users);
+  }
+);
 
 app.listen(3000, () => console.log('Server running on port 3000'));
+
+export {};

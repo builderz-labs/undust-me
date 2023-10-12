@@ -174,7 +174,7 @@ function MainComponent({
     };
 
     async function swapSOLtoMSOL(amount: number) {
-        const response = await fetch('https://api.jup.ag/swap', {
+        const response = await fetch('https://station.jup.ag/swap', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -329,16 +329,20 @@ function MainComponent({
                                 </button>
                                 <button
                                     onClick={() => {
-                                        let tweetText = '';
                                         if (emptyAccounts === 0) {
-                                            tweetText = 'I just scored a perfect 10/10 on my wallet. How clean is your wallet? Find out and earn SOL by using Undust.me https://undust.me/ ';
+                                            let tweetText = '';
+                                            if (emptyAccounts === 0) {
+                                                tweetText = 'I just scored a perfect 10/10 on my wallet. How clean is your wallet? Find out and earn SOL by using Undust.me https://undust.me/ ';
+                                            } else {
+                                                tweetText = 'I just cleaned my wallet with UnDust.me and recovered ' +
+                                                    rentBack.toLocaleString() +
+                                                    ' SOL! My score is ' + dustScore + '/10. Can you beat me? https://undust.me/';
+                                            }
+                                            const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
+                                            window.open(url, '_blank');
                                         } else {
-                                            tweetText = 'I just cleaned my wallet with UnDust.me and recovered ' +
-                                                rentBack.toLocaleString() +
-                                                ' SOL! My score is ' + dustScore + '/10. Can you beat me? https://undust.me/';
+                                            closeEmptyAccounts();
                                         }
-                                        const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
-                                        window.open(url, '_blank');
                                     }}
                                     disabled={loading}
                                     className='mt-8 myFreshButton text-sm break-keep font-bold flex items-center justify-center disabled:!bg-opacity-40 disabled:cursor-not-allowed hover:border hover:border-undust-green text-white  py-[18px] px-[36px] rounded-[120px]  w-full'
