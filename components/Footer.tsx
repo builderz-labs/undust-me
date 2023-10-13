@@ -36,13 +36,13 @@ export default function PrimarySearchAppBar({ setTheme, setIsDark, isDark }: any
                     </Link>
                 </div>
 
-                <div className='pb-4 text-[10px] opacity-80 flex items-center justify-center flex-row gap-4'>
+                <div className='pb-4 text-md opacity-80 flex items-center justify-center flex-row gap-4'>
                     <span>   powered by   </span>
                     <Link href="https://builderz.dev" target='_blank' passHref>
                         <Image
                             src={BrandW}
                             alt=""
-                            className="w-12 h-6 cursor-pointer"
+                            className="w-20 h-6 cursor-pointer"
                         />
                     </Link>
                 </div>

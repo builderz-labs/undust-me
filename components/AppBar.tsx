@@ -25,7 +25,7 @@ export default function PrimarySearchAppBar({ setTheme, setIsDark, isDark }: any
       <nav className='w-full flex flex-row items-center justify-between gap-2 container mx-auto my-6 md:my-10 px-2 md:px-4'>
         <Link
           href='/'
-          className='pl-4 md:pl-0 pb-4 flex flex-row items-center justify-center gap-2 text-undust-green text-xl font-bold'>
+          className='pl-4 md:pl-0 pb-4 flex flex-row items-center justify-center gap-2 text-undust-green text-md md:text-3xl font-bold'>
           {/* <Logo /> */}
           Undust.me
         </Link>

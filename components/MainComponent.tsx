@@ -200,7 +200,7 @@ function MainComponent({
     return (
         <>
             {/* {activeIndex === 0 && <img src="/machine-12.webp" alt="machine" className='w-[250px] h-[250px] md:w-[50px] md:h-[850px] object-cover mx-auto -mt-24 -mb-8' />} */}
-            <div className={`relative z-10  ${activeIndex === 1 ? 'mt-0 md:mt-10' : ''}`}>
+            <div className={`relative z-10 w-full ${activeIndex === 1 ? 'mt-0 md:mt-10' : ''}`}>
 
                 <div className='w-full px-4'>
                     {activeIndex === 0 ? (
@@ -209,7 +209,7 @@ function MainComponent({
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ duration: 2, delay: 2.5 }}
-                                className=' border-undust-green border-opacity-20 rounded-lg  max-w-2xl w-full flex flex-col items-center justify-center gap-8 p-2 md:p-12 my-2 md:my-10  '
+                                className=' border-undust-green border-opacity-20 rounded-lg  max-w-2xl mx-auto w-full flex flex-col items-center justify-center gap-8 p-2 md:p-12 my-2 md:my-10  '
                             >
                                 {wallet.connected ? (
                                     <>
@@ -272,7 +272,7 @@ function MainComponent({
                                             initial={{ opacity: 0 }}
                                             animate={{ opacity: 1 }}
                                             transition={{ duration: 2, delay: 3.5 }}
-                                            className='mt-14 md:mt-28'
+                                            className='mt-14 md:mt-28 w-full flex items-center justify-center'
                                             style={rotateStyle}
                                             onClick={() => setRotate(!rotate)}
                                         >
@@ -290,7 +290,7 @@ function MainComponent({
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ duration: 2, delay: 1 }}
-                                className='border border-undust-green border-opacity-20 rounded-lg min-h-[250px] max-w-2xl w-full flex flex-col items-center justify-center gap-8 p-6 md:p-12 mt-6 md:mt-0 bg-black bg-opacity-60 backdrop-blur-xl '
+                                className='border border-undust-green border-opacity-20 rounded-lg min-h-[250px] max-w-2xl mx-auto w-full flex flex-col items-center justify-center gap-8 p-6 md:p-12 mt-6 md:mt-0 bg-black bg-opacity-60 backdrop-blur-xl '
                             >
                                 <div className='flex flex-col items-center justify-center gap-4 '>
                                     <div className='w-full flex flex-col items-center justify-between gap-4'>
@@ -307,7 +307,7 @@ function MainComponent({
                                 </div>
 
                             </motion.div>
-                            <div className='w-full flex flex-row items-center justify-center gap-2'>
+                            <div className='w-full flex flex-row items-center justify-center gap-2 max-w-md mx-auto'>
                                 <button
                                     onClick={() => {
                                         setActiveIndex(0);
