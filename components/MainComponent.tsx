@@ -301,7 +301,7 @@ function MainComponent({
                                             ({emptyAccounts} accounts)
                                         </span>
                                         <span className='text-undust-green text-lg'>{dustMessage}</span>
-                                        <span className='uppercase text-xs'>Dust Score: {dustScore}/10</span>
+                                        <span className='uppercase text-lg'>Dust Score: {dustScore}/10</span>
                                     </div>
 
                                 </div>

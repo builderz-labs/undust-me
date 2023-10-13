@@ -34,7 +34,7 @@ const Home: NextPage = () => {
       <Head>
         <title>UnDust.me - Your Easy To Use Solana Wallet Cleaner</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta property="og:image" content="/metaimage.png" />
+        <meta property="og:image" content="/earnsol.png" />
         <meta property="og:title" content="UnDust.me - Your Easy To Use Solana Wallet Cleaner" />
         <meta property="og:description" content="The easiest way to tidy up your wallet & earn SOL" />
         <meta property="og:url" content="https://undust.me" />
@@ -63,7 +63,11 @@ const Home: NextPage = () => {
 
         <div className='bgBlurReq z-0 pointer-events-none absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2' />
         {<div className="h-[280px]"></div>}
-        {<motion.img src="/machine-12.webp" alt="machine" className='w-[350px] h-[350px] object-cover md:w-[630px] md:h-[630px] absolute z-0 translate-y-28' />}
+        {<motion.img
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2, delay: 2.5 }}
+          src="/machine-12.webp" alt="machine" className='w-[350px] h-[350px] object-cover md:w-[630px] md:h-[630px] absolute z-0 translate-y-28' />}
         <div id="circle" className='text-undust-green blur-sm absolute ' style={{ position: 'absolute', zIndex: 1, width: '50px', height: '50px', borderRadius: '50%', pointerEvents: 'none', transition: '0.2s' }}></div>
       </div>
     </>
