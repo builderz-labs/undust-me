@@ -34,7 +34,7 @@ const Home: NextPage = () => {
       <Head>
         <title>UnDust.me - Your Easy To Use Solana Wallet Cleaner</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta property="og:image" content="https://drive.google.com/file/d/1BJ9mwRnFyBnv_SYSVec0lesVMVb4JYGf/view?usp=sharing" />
+        <meta property="og:image" content="/earnsol.png" />
         <meta property="og:title" content="UnDust.me - Your Easy To Use Solana Wallet Cleaner" />
         <meta property="og:description" content="The easiest way to tidy up your wallet & earn SOL" />
         <meta property="og:url" content="https://undust.me" />

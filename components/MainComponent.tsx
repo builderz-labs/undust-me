@@ -283,7 +283,7 @@ function MainComponent({
                 className={`relative z-10 w-full ${activeIndex === 1 ? "mt-0 md:mt-10 lg:mt-0" : ""
                     }`}
             >
-                <div className="w-full px-4">
+                <div className="w-full px-4 ">
                     {activeIndex === 0 ? (
                         <>
                             <motion.div
@@ -370,9 +370,9 @@ function MainComponent({
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ duration: 2, delay: 1 }}
-                                className="border border-undust-green border-opacity-20 rounded-lg min-h-[250px] max-w-2xl mx-auto w-full flex flex-col items-center justify-center gap-8 p-6 md:p-12 mt-6 md:mt-0 bg-black bg-opacity-60 backdrop-blur-xl "
+                                className="border border-undust-green mx-auto border-opacity-20 rounded-lg min-h-[250px] max-w-2xl w-full flex flex-col items-center justify-center gap-8 p-6 md:p-12 mt-6 md:mt-0 bg-black bg-opacity-60 backdrop-blur-xl "
                             >
-                                <div className="flex flex-row items-center justify-center gap-4 ">
+                                <div className="flex flex-row items-center justify-center gap-4 mx-auto">
 
                                     <div className="w-full flex flex-col items-center justify-between gap-4">
                                         <span className="text-undust-green text-3xl md:text-5xl font-bold">
@@ -452,7 +452,7 @@ function MainComponent({
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 2, delay: 1 }}
-                            className="border border-undust-green border-opacity-20 rounded-lg  max-w-2xl w-full flex flex-col items-center justify-center gap-8 p-12 backdrop-blur-xl my-10"
+                            className="border border-undust-green border-opacity-20 rounded-lg  max-w-2xl mx-auto w-full flex flex-col items-center justify-center gap-8 p-12 backdrop-blur-xl my-10"
                         >
                             <div className="flex flex-col items-center justify-center gap-2">
                                 {/* Add your content for step 2 here */}
