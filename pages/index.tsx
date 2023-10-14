@@ -17,7 +17,7 @@ require("@solana/wallet-adapter-react-ui/styles.css");
 const Home: NextPage = () => {
   const [loading, setLoading] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(2);
+  const [activeIndex, setActiveIndex] = useState(0);
   const wallet = useWallet();
   const [isSwapModalOpen, setIsSwapModalOpen] = useState(false);
   const [rentBack, setRentBack] = useState(0);
@@ -58,7 +58,8 @@ const Home: NextPage = () => {
           className={`relative z-20 mt-28  md:mt-18 `}
         >
           <h1 className='text-undust-green'>Undust.me</h1>
-          <span className='opacity-80 text-sm md:text-2xl px-4 md:px-0'>The easiest way to tidy up your wallet & earn SOL</span>
+          <span
+           className='opacity-80 text-sm md:text-2xl px-4 md:px-0'>The easiest way to tidy up your wallet & earn SOL</span>
         </motion.div>
 
         <MainComponent loading={loading} setLoading={setLoading} showConfetti={showConfetti} setShowConfetti={setShowConfetti} activeIndex={activeIndex} setActiveIndex={setActiveIndex} setIsSwapModalOpen={setIsSwapModalOpen} rentBack={rentBack} setRentBack={setRentBack} />
