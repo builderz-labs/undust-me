@@ -65,7 +65,7 @@ function MainComponent({
             0
         );
         const rentBackSol = rentBack / 1_000_000_000; // Convert lamports to SOL
-        console.log(emptyTokenAccounts);
+        // console.log(emptyTokenAccounts);
         setEmptyAccounts(emptyTokenAccounts.length);
         setEmptyAccountsData(emptyTokenAccounts);
         setRentBack(rentBackSol);
@@ -89,6 +89,9 @@ function MainComponent({
             score = 10;
             message = "Congrats, your wallet is as clean as a whistle. Looking sharp!";
             image = "https://media.giphy.com/media/CGQyU8OXBSCZswxOa7/giphy.gif";
+            setShowConfetti(true);
+            toast.success("Congrats, your wallet is as clean as a whistle. Looking sharp!");
+            setTimeout(() => setShowConfetti(false), 8000);
         } else if (emptyAccounts <= 10) {
             score = 9;
             message = 'Almost perfect, just a quick clean and you’re good to go.';

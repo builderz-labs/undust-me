@@ -40,7 +40,7 @@ const About: NextPage = () => {
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 2, delay: 1 }}
+                    transition={{ duration: 2, delay: 0 }}
                     className="w-full max-w-6xl mx-auto flex flex-col md:flex-row-reverse items-center justify-between relative z-50 gap-8">
                     <motion.img
                         initial={{ opacity: 0, y: 100 }}
