@@ -364,7 +364,7 @@ function MainComponent({
                                 )}
                             </motion.div>
                         </>
-                    ) : activeIndex === 1 && wallet.connected ? (
+                    ) : activeIndex === 1 ? (
                         <>
                             <motion.div
                                 initial={{ opacity: 0 }}
