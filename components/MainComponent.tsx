@@ -171,7 +171,7 @@ function MainComponent({
             setShowConfetti(true);
             toast.success("Success! Your wallet is now dust free!");
             setActiveIndex(2);
-            setTimeout(() => setShowConfetti(false), 3000);
+            setTimeout(() => setShowConfetti(false), 8000);
 
             // Add this code after the previous line
             // fetch('http://localhost:3000/leaderboard', {
@@ -364,7 +364,7 @@ function MainComponent({
                                 )}
                             </motion.div>
                         </>
-                    ) : activeIndex === 1 ? (
+                    ) : activeIndex === 1 && wallet.connected ? (
                         <>
                             <motion.div
                                 initial={{ opacity: 0 }}
@@ -510,7 +510,8 @@ function MainComponent({
                                         onClick={() => {
                                             swapSOLtoMSOL(rentBack); // TODO: Set rentBack in lamports
                                         }}
-                                        className="mt-8 myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white p-4 rounded-[120px]  w-16"
+                                        data-tip={"Swap SOL to mSOL and help the environment"}
+                                        className="mt-8 tooltip myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white p-4 rounded-[120px]  w-16"
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"

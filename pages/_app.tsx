@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <AppBar isDark={isDark} setIsDark={setIsDark} />
         <Component {...pageProps} />
         {/* Change Notification settings here */}
-        <Toaster position='bottom-right' />
+        <Toaster position='bottom-right' theme='dark' />
         <Footer />
       </WalletModalProvider>
     </ContextProvider>
