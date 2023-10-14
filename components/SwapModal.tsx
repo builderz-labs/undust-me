@@ -108,6 +108,7 @@ function SwapModal({ isSwapModalOpen, setIsSwapModalOpen, rentBack }: any) {
 
       console.log(`https://solscan.io/tx/${txid}`);
       toast.success("Swap successful!");
+      setLoading(false);
     } catch (error) {
       console.log(error);
       toast.error("Swap failed");
