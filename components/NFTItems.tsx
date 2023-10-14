@@ -1,7 +1,7 @@
 import React from 'react'
 import NFT from '../types/NFTs'
 
-function NFTItem({ nfts }: any) {
+function NFTItems({ nfts }: any) {
     return (
         <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-4">
             {nfts.map((nft: NFT) => (
@@ -21,4 +21,4 @@ function NFTItem({ nfts }: any) {
     )
 }
 
-export default NFTItem
+export default NFTItems
