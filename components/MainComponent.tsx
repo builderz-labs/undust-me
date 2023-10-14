@@ -28,6 +28,9 @@ function MainComponent({
     setShowConfetti,
     activeIndex,
     setActiveIndex,
+    setIsSwapModalOpen,
+    rentBack,
+    setRentBack
 }: {
     loading: boolean;
     setLoading: any;
@@ -35,10 +38,12 @@ function MainComponent({
     setShowConfetti: any;
     activeIndex: number;
     setActiveIndex: any;
+    setIsSwapModalOpen: any;
+    rentBack: number;
+    setRentBack: any;
 }) {
     const wallet = useWallet();
     const [emptyAccounts, setEmptyAccounts] = useState(0);
-    const [rentBack, setRentBack] = useState(0);
     type AccountType = {
         pubkey: PublicKey;
         account: AccountInfo<ParsedAccountData>;
@@ -203,83 +208,6 @@ function MainComponent({
         transition: "transform 2s",
     };
 
-    // SWAP - Docs HERE: https://station.jup.ag/docs/v6-beta/swap-api
-    async function swapSOLtoMSOL(amount: number) {
-        if (!wallet.publicKey) {
-            toast.error("Please connect your wallet");
-        }
-        try {
-            const quoteResponse = await (
-                await fetch(`https://quote-api.jup.ag/v6/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So&amount=${amount}&slippageBps=50`)
-            ).json();
-
-            console.log(quoteResponse);
-
-
-            // get serialized transactions for the swap
-            const { swapTransaction } = await (
-                await fetch("https://quote-api.jup.ag/v6/swap", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        // quoteResponse from /quote api
-                        quoteResponse,
-                        // user public key to be used for the swap
-                        userPublicKey: wallet.publicKey?.toString(),
-                        // auto wrap and unwrap SOL. default is true
-                        wrapAndUnwrapSol: true,
-                        // feeAccount is optional. Use if you want to charge a fee.  feeBps must have been passed in /quote API.
-                        // feeAccount: "fee_account_public_key"
-                    }),
-                })
-            ).json();
-
-            console.log(swapTransaction);
-
-            // deserialize the transaction
-            const swapTransactionBuf = Buffer.from(swapTransaction, "base64");
-            var transaction = VersionedTransaction.deserialize(swapTransactionBuf);
-            console.log(transaction);
-
-            // sign the transaction
-            const signedTx = await wallet.signTransaction!(transaction);
-
-            // Execute the transaction
-            const rawTransaction = transaction.serialize();
-            const txid = await connection.sendRawTransaction(rawTransaction, {
-                skipPreflight: true,
-                maxRetries: 2,
-            });
-            await connection.confirmTransaction(txid);
-            console.log(`https://solscan.io/tx/${txid}`);
-        } catch (error) {
-            console.log(error);
-        }
-
-        // const response = await fetch("https://station.jup.ag/swap", {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        //   body: JSON.stringify({
-        //     fromToken: "SOL",
-        //     toToken: "mSOL",
-        //     amount,
-        //     slippage: 0.5,
-        //     walletAddress: wallet.publicKey && wallet.publicKey.toBase58(),
-        //   }),
-        // });
-
-        // const data = await response.json();
-
-        // if (data.success) {
-        //   toast.success("Swap successful!");
-        // } else {
-        //   toast.error("Swap failed: " + data.error);
-        // }
-    }
 
     return (
         <>
@@ -453,89 +381,92 @@ function MainComponent({
                             </div>
                         </>
                     ) : (
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 2, delay: 1 }}
-                            className="border border-undust-green border-opacity-20 rounded-lg  max-w-2xl mx-auto w-full flex flex-col items-center justify-center gap-8 p-12 backdrop-blur-xl my-10"
-                        >
-                            <div className="flex flex-col items-center justify-center gap-2">
-                                {/* Add your content for step 2 here */}
-                                <span className="text-undust-green text-3xl md:text-5xl">
-                                    {rentBack.toLocaleString()} <span>SOL</span>{" "}
-                                </span>
-                                <span>Congrats, your wallet is now Dust Free!</span>
-                                <div className="flex flex-row items-center justify-center gap-2">
-                                    <button
-                                        onClick={() => {
-                                            setActiveIndex(0);
-                                        }}
-                                        data-tip="Go back to the start"
-                                        className="mt-8 tooltip myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white p-4 rounded-[120px]  w-16"
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth={1.5}
-                                            stroke="currentColor"
-                                            className="w-6 h-6"
+                        <div className="w-full flex justify-center items-center">
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 2, delay: 1 }}
+                                className="border border-undust-green border-opacity-20 rounded-lg  max-w-2xl mx-auto w-full flex flex-col items-center justify-center gap-8 p-12 backdrop-blur-xl my-10"
+                            >
+                                <div className="flex flex-col items-center justify-center gap-2">
+                                    {/* Add your content for step 2 here */}
+                                    <span className="text-undust-green text-3xl md:text-5xl">
+                                        {rentBack.toLocaleString()} <span>SOL</span>{" "}
+                                    </span>
+                                    <span>Congrats, your wallet is now Dust Free!</span>
+                                    <div className="flex flex-row items-center justify-center gap-2">
+                                        <button
+                                            onClick={() => {
+                                                setActiveIndex(0);
+                                            }}
+                                            data-tip="Go back to the start"
+                                            className="mt-8 tooltip myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white p-4 rounded-[120px]  w-16"
                                         >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"
-                                            />
-                                        </svg>
-                                    </button>
-                                    <button
-                                        className="mt-8 myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white  py-[18px] px-[36px] rounded-[120px]  w-full"
-                                        onClick={() => {
-                                            let tweetText = "";
-                                            if (emptyAccounts === 0) {
-                                                tweetText =
-                                                    "I just scored a perfect 10/10 on my wallet. How clean is your wallet? Find out and earn SOL by using Undust.me " + memeImage;
-                                            } else {
-                                                tweetText =
-                                                    "I just cleaned my wallet with UnDust.me and recovered " +
-                                                    rentBack.toLocaleString() +
-                                                    " SOL! My score is " +
-                                                    dustScore +
-                                                    "/10. Can you beat me? https://undust.me/";
-                                            }
-                                            const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-                                                tweetText
-                                            )}`;
-                                            window.open(url, "_blank");
-                                        }}
-                                    >
-                                        Share on Twitter!
-                                    </button>
-                                    <button
-                                        onClick={() => {
-                                            swapSOLtoMSOL(rentBack); // TODO: Set rentBack in lamports
-                                        }}
-                                        data-tip={"Swap SOL to mSOL and help the environment"}
-                                        className="mt-8 tooltip myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white p-4 rounded-[120px]  w-16"
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth={1.5}
-                                            stroke="currentColor"
-                                            className="w-6 h-6"
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                strokeWidth={1.5}
+                                                stroke="currentColor"
+                                                className="w-6 h-6"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"
+                                                />
+                                            </svg>
+                                        </button>
+                                        <button
+                                            className="mt-8 myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white  py-[18px] px-[36px] rounded-[120px]  w-full"
+                                            onClick={() => {
+                                                let tweetText = "";
+                                                if (emptyAccounts === 0) {
+                                                    tweetText =
+                                                        "I just scored a perfect 10/10 on my wallet. How clean is your wallet? Find out and earn SOL by using Undust.me " + memeImage;
+                                                } else {
+                                                    tweetText =
+                                                        "I just cleaned my wallet with UnDust.me and recovered " +
+                                                        rentBack.toLocaleString() +
+                                                        " SOL! My score is " +
+                                                        dustScore +
+                                                        "/10. Can you beat me? https://undust.me/";
+                                                }
+                                                const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                                                    tweetText
+                                                )}`;
+                                                window.open(url, "_blank");
+                                            }}
                                         >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M6.115 5.19l.319 1.913A6 6 0 008.11 10.36L9.75 12l-.387.775c-.217.433-.132.956.21 1.298l1.348 1.348c.21.21.329.497.329.795v1.089c0 .426.24.815.622 1.006l.153.076c.433.217.956.132 1.298-.21l.723-.723a8.7 8.7 0 002.288-4.042 1.087 1.087 0 00-.358-1.099l-1.33-1.108c-.251-.21-.582-.299-.905-.245l-1.17.195a1.125 1.125 0 01-.98-.314l-.295-.295a1.125 1.125 0 010-1.591l.13-.132a1.125 1.125 0 011.3-.21l.603.302a.809.809 0 001.086-1.086L14.25 7.5l1.256-.837a4.5 4.5 0 001.528-1.732l.146-.292M6.115 5.19A9 9 0 1017.18 4.64M6.115 5.19A8.965 8.965 0 0112 3c1.929 0 3.716.607 5.18 1.64"
-                                            />
-                                        </svg>
-                                    </button>
+                                            Share on Twitter!
+                                        </button>
+                                        <button
+                                            onClick={() => {
+                                                setIsSwapModalOpen((prev: any) => !prev);
+                                                // swapSOLtoMSOL(rentBack); // TODO: Set rentBack in lamports
+                                            }}
+                                            data-tip={"Swap SOL to mSOL and help the environment"}
+                                            className="mt-8 tooltip myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white p-4 rounded-[120px]  w-16"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                strokeWidth={1.5}
+                                                stroke="currentColor"
+                                                className="w-6 h-6"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    d="M6.115 5.19l.319 1.913A6 6 0 008.11 10.36L9.75 12l-.387.775c-.217.433-.132.956.21 1.298l1.348 1.348c.21.21.329.497.329.795v1.089c0 .426.24.815.622 1.006l.153.076c.433.217.956.132 1.298-.21l.723-.723a8.7 8.7 0 002.288-4.042 1.087 1.087 0 00-.358-1.099l-1.33-1.108c-.251-.21-.582-.299-.905-.245l-1.17.195a1.125 1.125 0 01-.98-.314l-.295-.295a1.125 1.125 0 010-1.591l.13-.132a1.125 1.125 0 011.3-.21l.603.302a.809.809 0 001.086-1.086L14.25 7.5l1.256-.837a4.5 4.5 0 001.528-1.732l.146-.292M6.115 5.19A9 9 0 1017.18 4.64M6.115 5.19A8.965 8.965 0 0112 3c1.929 0 3.716.607 5.18 1.64"
+                                                />
+                                            </svg>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        </motion.div>
+                            </motion.div>
+                        </div>
                     )}
                 </div>
             </div>
