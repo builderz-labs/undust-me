@@ -363,8 +363,7 @@ function MainComponent({
                       let tweetText = "";
                       if (emptyAccounts === 0) {
                         tweetText =
-                          "I just scored a perfect 10/10 on my wallet. How clean is your wallet? Find out and earn SOL by using Undust.me " +
-                          memeImage;
+                          "I just scored a perfect 10/10 on my wallet. How clean is your wallet? Find out and earn SOL by using Undust.me ";
                       } else {
                         tweetText =
                           "I just cleaned my wallet with UnDust.me and recovered " +
@@ -435,8 +434,7 @@ function MainComponent({
                         let tweetText = "";
                         if (emptyAccounts === 0) {
                           tweetText =
-                            "I just scored a perfect 10/10 on my wallet. How clean is your wallet? Find out and earn SOL by using Undust.me " +
-                            memeImage;
+                            "I just scored a perfect 10/10 on my wallet. How clean is your wallet? Find out and earn SOL by using Undust.me ";
                         } else {
                           tweetText =
                             "I just cleaned my wallet with Undust.me and recovered " +

@@ -69,28 +69,30 @@ const Home: NextPage = () => {
 
         {showConfetti && <Confetti />}
 
+        <div className="w-full relative flex flex-col items-center justify-center">
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2 }}
-          className={`relative z-20 mt-32  px-8`}
-        >
-          <h1 className='text-undust-green'>Undust.me</h1>
-          <span className='opacity-50 text-lg md:text-2xl '>The easiest way to tidy up your wallet & earn SOL</span>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 2 }}
+            className={`relative z-20 mt-40  px-8`}
+          >
+            <h1 className='text-undust-green'>Undust.me</h1>
+            <span className='opacity-50 text-lg md:text-2xl '>The easiest way to tidy up your wallet & earn SOL</span>
+          </motion.div>
 
-        <MainComponent loading={loading} setLoading={setLoading} showConfetti={showConfetti} setShowConfetti={setShowConfetti} activeIndex={activeIndex} setActiveIndex={setActiveIndex} setIsSwapModalOpen={setIsSwapModalOpen} rentBack={rentBack} setRentBack={setRentBack} />
+          <MainComponent loading={loading} setLoading={setLoading} showConfetti={showConfetti} setShowConfetti={setShowConfetti} activeIndex={activeIndex} setActiveIndex={setActiveIndex} setIsSwapModalOpen={setIsSwapModalOpen} rentBack={rentBack} setRentBack={setRentBack} />
 
 
-        <div className='bgBlurReq z-0 pointer-events-none absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2' />
-        {activeIndex >= 1 && <div className="h-[280px]"></div>}
-        {activeIndex >= 0 && <motion.img
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2, delay: 1.5 }}
-          src="/machine-12.webp" alt="machine" className={`w-[350px] h-[350px] object-cover lg:w-[450px] lg:h-[450px] 2xl:w-[630px] 2xl:h-[630px] absolute z-0   top-1/2 -translate-y-[40%]`} />}
-        <div id="circle" className='text-undust-green blur-sm absolute' style={{ position: 'absolute', zIndex: 1, width: '10px', height: '10px', borderRadius: '50%', pointerEvents: 'none', transition: '0.2s' }}></div>
+          <div className='bgBlurReq z-0 pointer-events-none absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2' />
+          {activeIndex >= 1 && <div className="h-[280px]"></div>}
+          {activeIndex >= 0 && <motion.img
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 2, delay: 1.5 }}
+            src="/machine-12.webp" alt="machine" className={`w-[350px] h-[350px] object-cover lg:w-[450px] lg:h-[450px] 2xl:w-[630px] 2xl:h-[630px] absolute z-0   top-1/2 -translate-y-[40%]`} />}
+          <div id="circle" className='text-undust-green blur-sm absolute' style={{ position: 'absolute', zIndex: 1, width: '10px', height: '10px', borderRadius: '50%', pointerEvents: 'none', transition: '0.2s' }}></div>
+        </div>
       </div>
       <SwapModal isSwapModalOpen={isSwapModalOpen} setIsSwapModalOpen={setIsSwapModalOpen} rentBack={rentBack} />
       <div className="w-full fixed -bottom-8">
