@@ -59,7 +59,9 @@ select {
 .myFreshButton {
     @apply !bg-undust-green !text-black hover:!text-white hover:!bg-black hover:!border hover:!border-undust-green   ;
 }
-
+html {
+    @apply !bg-black !text-white;
+}
 /* Body styles */
 body {
   @apply !bg-black !text-white;

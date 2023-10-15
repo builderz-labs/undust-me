@@ -20,7 +20,7 @@ const Home: NextPage = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const wallet = useWallet();
   const [isSwapModalOpen, setIsSwapModalOpen] = useState(false);
-  const [rentBack, setRentBack] = useState(0);
+  const [rentBack, setRentBack] = useState(3);
 
   useEffect(() => {
     const circle = document.getElementById('circle');
@@ -41,13 +41,13 @@ const Home: NextPage = () => {
         <meta property="og:title" content="It's sweep time; tidy your wallet & earn SOL" />
         <meta property="og:description" content="It's sweep time; tidy your wallet & earn SOL" />
         <meta property="og:url" content="https://undust.me" />
-        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@builderz__" />
         <meta name="twitter:creator" content="@builderz__" />
         <meta name="twitter:title" content="It's sweep time; tidy your wallet & earn SOL" />
       </Head>
 
-      <div className={`w-full flex md:h-screen flex-col items-start md:items-center justify-center gap-6 relative overflow-hidden`}>
+      <div className={`w-full h-screen md:h-full flex md:h-screen flex-col items-center md:items-center justify-center gap-6 relative overflow-hidden`}>
 
         {showConfetti && <Confetti />}
 
@@ -71,7 +71,7 @@ const Home: NextPage = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2, delay: 1.5 }}
-          src="/machine-12.webp" alt="machine" className='w-[350px] h-[350px] object-cover md:w-[630px] md:h-[630px] absolute z-0 translate-y-5 md:translate-y-28' />}
+          src="/machine-12.webp" alt="machine" className='w-[350px] h-[350px] object-cover md:w-[630px] md:h-[630px] absolute z-0 translate-y-0 md:translate-y-28' />}
         <div id="circle" className='text-undust-green blur-sm absolute ' style={{ position: 'absolute', zIndex: 1, width: '10px', height: '10px', borderRadius: '50%', pointerEvents: 'none', transition: '0.2s' }}></div>
       </div>
       <SwapModal isSwapModalOpen={isSwapModalOpen} setIsSwapModalOpen={setIsSwapModalOpen} rentBack={rentBack} />

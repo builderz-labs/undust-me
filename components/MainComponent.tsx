@@ -230,9 +230,8 @@ function MainComponent({
     <>
       {/* {activeIndex === 0 && <img src="/machine-12.webp" alt="machine" className='w-[250px] h-[250px] md:w-[50px] md:h-[850px] object-cover mx-auto -mt-24 -mb-8' />} */}
       <div
-        className={`relative z-10 w-full ${
-          activeIndex === 1 ? "mt-0 md:mt-10 lg:mt-0" : ""
-        }`}
+        className={`relative z-10 w-full ${activeIndex === 1 ? "mt-0 md:mt-10 lg:mt-0" : ""
+          }`}
       >
         <div className="w-full px-4 ">
           {activeIndex === 0 ? (
@@ -304,7 +303,7 @@ function MainComponent({
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ duration: 2, delay: 3.5 }}
-                      className="mt-14 md:mt-28 w-full flex items-center justify-center"
+                      className="mt-14 md:mt-28 w-full flex items-center justify-center max-w-md p-4"
                       style={rotateStyle}
                       onClick={() => setRotate(!rotate)}
                     >
@@ -323,7 +322,7 @@ function MainComponent({
                 transition={{ duration: 2, delay: 1 }}
                 className="border border-undust-green mx-auto border-opacity-20 rounded-lg min-h-[250px] max-w-2xl w-full flex flex-col items-center justify-center gap-8 p-6 md:p-12 mt-6 md:mt-0 bg-black bg-opacity-60 backdrop-blur-xl "
               >
-                <div className="flex flex-row items-center justify-center gap-4 mx-auto">
+                <div className="flex flex-col md:flex-row items-center justify-center gap-4 mx-auto">
                   <div className="w-full flex flex-col items-center justify-between gap-4">
                     <span className="text-undust-green text-3xl md:text-5xl font-bold">
                       {rentBack.toLocaleString()} <span>SOL</span>{" "}
@@ -343,7 +342,7 @@ function MainComponent({
                     alt=""
                     width={300}
                     height={250}
-                    className="object-cover w-full h-full md:w-1/2 md:h-1/2"
+                    className="object-cover w-full h-full md:w-1/2 md:h-1/2 rounded-sm"
                   />
                 </div>
               </motion.div>
@@ -417,7 +416,7 @@ function MainComponent({
                   <span className="text-undust-green text-3xl md:text-5xl">
                     {rentBack.toLocaleString()} <span>SOL</span>{" "}
                   </span>
-                  <span>Congrats, your wallet is now Dust Free!</span>
+                  <span>Oh boy, you made it. Your wallet is dust free 🧼</span>
                   <div className="flex flex-row items-center justify-center gap-2">
                     <button
                       onClick={() => {
