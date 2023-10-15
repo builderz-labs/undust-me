@@ -161,7 +161,7 @@ export default function SwipeableTemporaryDrawer() {
                 </div>
               </div>
             </div>
-            <div className="w-full">
+            <div className="w-full my-10">
               <MyMultiButton />
             </div>
           </SwipeableDrawer>
