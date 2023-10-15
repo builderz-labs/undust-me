@@ -42,7 +42,7 @@ export default function PrimarySearchAppBar({ setTheme, setIsDark, isDark }: any
           </Link>
         </div>
         <div className='pb-4 flex flex-row items-center justify-center gap-2 -pr-2 md:pr-0'>
-          {!wallet.publicKey && <div className="hidden md:flex">
+          {<div className="hidden md:flex">
             <MyMultiButton />
           </div>}
           <div className='flex md:hidden -mrl2'><Drawer /></div>
