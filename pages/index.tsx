@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { Spin } from "antd"
 import Confetti from 'react-confetti';
 import SwapModal from '../components/SwapModal';
+import Footer from '../components/Footer';
 
 // Default styles that can be overridden by your app
 require("@solana/wallet-adapter-react-ui/styles.css");
@@ -36,7 +37,7 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>Undust.me</title>
-        <link rel="icon" href="/favicon-16x16.png" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes='16x16' />
         <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
         <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
         <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
@@ -92,6 +93,9 @@ const Home: NextPage = () => {
         <div id="circle" className='text-undust-green blur-sm absolute' style={{ position: 'absolute', zIndex: 1, width: '10px', height: '10px', borderRadius: '50%', pointerEvents: 'none', transition: '0.2s' }}></div>
       </div>
       <SwapModal isSwapModalOpen={isSwapModalOpen} setIsSwapModalOpen={setIsSwapModalOpen} rentBack={rentBack} />
+      <div className="w-full absolute bottom-0">
+        <Footer />
+      </div>
     </>
   );
 };

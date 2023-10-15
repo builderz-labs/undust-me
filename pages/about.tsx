@@ -3,6 +3,7 @@ import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 import Confetti from 'react-confetti';
 import { NextPage } from 'next'
+import Footer from '../components/Footer';
 
 const About: NextPage = () => {
     const [loading, setLoading] = useState(false);
@@ -23,7 +24,7 @@ const About: NextPage = () => {
                 <title>About - UnDust.me</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div className={`w-full bg-black bg-opacity-60 border border-undust-green border-opacity-10 backdrop-blur-md flex h-screen flex-col items-center justify-start gap-6 relative overflow-hidden`}>
+            <div className={`w-full bg-black bg-opacity-60 border border-undust-green border-opacity-10 backdrop-blur-md flex flex-col items-center justify-start gap-6 relative overflow-hidden`}>
 
                 {showConfetti && <Confetti />}
 
@@ -61,6 +62,7 @@ const About: NextPage = () => {
                 {/* {<div className="h-[280px]"></div>} */}
                 {/* {<motion.img src="/machine-12.webp" alt="machine" className='w-[250px] h-[250px] object-cover md:w-[630px] md:h-[630px] absolute z-0' />} */}
                 <div id="circle" className='text-undust-green blur-sm absolute ' style={{ position: 'absolute', zIndex: 1, width: '50px', height: '50px', borderRadius: '50%', pointerEvents: 'none', transition: '0.2s' }}></div>
+                <Footer />
             </div>
         </>
     )

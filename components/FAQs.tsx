@@ -11,22 +11,22 @@ const faqs = [
     {
         question: "Where are you getting the SOL from?",
         answer:
-            "Undust.me is the easiest way to clean up empty token accounts in your wallet and earn and stake your recovered SOL. The project was developed during the Solana HyperDrive Hackathon.",
+            "Every Solana account incurs a minor storage fee for its creation. By burning a token, we can close the associated account and recover the storage fee. This is the SOL that we return to you.",
     },
     {
-        question: "What is undust.me?",
+        question: "How much SOL can I recover by burning tokens?",
         answer:
-            "Undust.me is the easiest way to clean up empty token accounts in your wallet and earn and stake your recovered SOL. The project was developed during the Solana HyperDrive Hackathon.",
+            "Most tokens will recover 0.002 SOL. Scam tokens also recover around 0.002 SOL.",
     },
     {
-        question: "What is undust.me?",
+        question: "What does the eco staking option do?",
         answer:
-            "Undust.me is the easiest way to clean up empty token accounts in your wallet and earn and stake your recovered SOL. The project was developed during the Solana HyperDrive Hackathon.",
+            "When you choose to stake your SOL, the SOL you recovered will be covered to MSOL and staked within your chosen wallet. You will then earn staking rewards on your MSOL.",
     },
     {
-        question: "What is undust.me?",
+        question: "How often should I use the undust.me?",
         answer:
-            "Undust.me is the easiest way to clean up empty token accounts in your wallet and earn and stake your recovered SOL. The project was developed during the Solana HyperDrive Hackathon.",
+            "It depends how often you use your wallet. If you’re frequently interacting with NFTs and tokens for example, we recommend once fortnightly.",
     },
 
 ]
@@ -64,7 +64,9 @@ export default function FAQs() {
                     </dl>
                 </div>
             </div>
-            <Footer />
+            <div className="my-10">
+                <Footer />
+            </div>
         </div>
     )
 }

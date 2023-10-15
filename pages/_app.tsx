@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
         {/* Change Notification settings here */}
         <Toaster position='bottom-right' theme='dark' />
-        <Footer />
+
       </WalletModalProvider>
     </ContextProvider>
 

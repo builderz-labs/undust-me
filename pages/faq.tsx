@@ -27,7 +27,7 @@ const FAQ: NextPage = () => {
                 <title>FAQ - Undust.me</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div className={`w-full flex h-screen flex-col items-center justify-start gap-6 relative overflow-hidden`}>
+            <div className={`w-full flex  flex-col items-center justify-start gap-6 relative overflow-hidden`}>
 
                 {showConfetti && <Confetti />}
 
@@ -41,7 +41,7 @@ const FAQ: NextPage = () => {
                     <span className='opacity-50 text-2xl '>The easiest way to tidy up your wallet & earn SOL</span>
                 </motion.div>
 
-                <div className='border-undust-green border-opacity-20 rounded-lg max-w-2xl w-full flex flex-col items-center justify-center gap-8  p-12 py-6  my-10 relative z-50 bg-black bg-opacity-20 backdrop-blur-md'>
+                <div className='border-undust-green border-opacity-20 rounded-lg max-w-2xl w-full flex flex-col items-center justify-center gap-8 p-4 md:p-12 py-6  my-10 relative z-50 bg-black bg-opacity-20 backdrop-blur-md'>
                     <FAQs />
                 </div>
 
