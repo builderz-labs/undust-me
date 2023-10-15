@@ -1,20 +1,16 @@
-# Builderz Solana dApp Scaffold (Nextjs13, Typescript, TailwindCSS, MaterialUI, web3.js)
+# Undust.me
 
-This is our open source [Next.js](https://nextjs.org/) , [Solana](https://github.com/solana-labs ) dApp Scaffold for the community and whole ecosystem - without much fluff and just the essentials. 💪
+This is our open source [Undust.me](https://undust.me) project for the community and whole ecosystem - without much fluff and just the essentials. 💪
 
-Feel free to use it as a starting point for your next Solana project - we will and already use it for our developments.
+Search your wallet for empty token accounts and close them. 
 
-Also feel free to send us feedback, open an issue or even PR and contribute by creating your own components, refactoring or other improvements.
 
-The Scaffold has Material-UI v5 theme activated, detecting your devices preferred color scheme and ready to set with a dark/light mode schwitch in the AppBar.tsx.
-
-We didn't want to include too much as from our experience we tend to delete most stuff we found in a scaffold.
 
 You can find a preview below:
 
 Responsive                     |  Desktop
 :-------------------------:|:-------------------------:
-![Builderz Scaffold Mobile](scaffold-mobile.png)  |  ![Builderz Scaffold Desktop](scaffold-desktop.png)
+![Undut.me Mobile](mobile.png)  |  ![Undust.me Desktop](desktop.png)
 
 ## Packages included and set up
 
