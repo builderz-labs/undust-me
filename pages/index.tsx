@@ -55,7 +55,7 @@ const Home: NextPage = () => {
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
         <meta name="theme-color" content="#ffffff" />
-        <meta property="og:image" content="https://cdn.discordapp.com/attachments/1158367321644081153/1162708672225480714/telegram-cloud-photo-size-2-5280632887542140878-y.jpg?ex=653cebd5&is=652a76d5&hm=0f68f364c6147541f8319fdc8e9430e46dfd0627b50567da329130f668818fe2&" />
+        <meta property="og:image" content="https://i.imgur.com/JzXGBrj.png" />
         <meta property="og:title" content="It's sweep time; tidy your wallet & earn SOL" />
         <meta property="og:description" content="It's sweep time; tidy your wallet & earn SOL" />
         <meta property="og:url" content="https://undust.me" />
@@ -75,7 +75,7 @@ const Home: NextPage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 2 }}
-            className={`relative z-20 mt-40  px-8`}
+            className={`relative z-20 mt-24  px-8`}
           >
             <h1 className='text-undust-green'>Undust.me</h1>
             <span className='opacity-50 text-lg md:text-2xl '>The easiest way to tidy up your wallet & earn SOL</span>

@@ -77,7 +77,7 @@ function NFTComponent() {
     try {
       let tx = transactionBuilder();
 
-      for (const nft of selectedNfts) {        
+      for (const nft of selectedNfts) {
 
         let collectionMetadata = null;
         const collection = nft.grouping?.length && nft.grouping[0].group_value;
@@ -85,7 +85,7 @@ function NFTComponent() {
         if (collection) {
           collectionMetadata = findMetadataPda(umi, { mint: publicKey(collection) })
         }
-        
+
         const tokenStandard =
           nft.interface === "ProgrammableNFT"
             ? TokenStandard.ProgrammableNonFungible
@@ -147,21 +147,21 @@ function NFTComponent() {
 
   return (
     <>
-      <div className="w-full flex flex-col items-center justify-center gap-4 container mx-auto mt-40 px-4">
+      <div className="w-full flex flex-col items-center justify-center gap-4 container mx-auto mt-24 px-4">
+        <h2>Your NFTs</h2>
         {wallet.publicKey ? (
           <>
             {loading ? (
               <CircularProgress /> // Show progress bar when loading
             ) : (
               <div className="w-full">
-                <h2>Your NFTs</h2>
-                {selectedNfts.length > 0 && (
+                {/* {selectedNfts.length > 0 && (
                   <>
                     <div className="w-full max-w-md mx-auto flex items-center justify-center p-4 px-8 rounded-lg bg-red-500 -bg-opacity-80 backdrop-blur-xl fixed top-20 z-50 left-1/2 -translate-x-1/2">
                       <span>Selected NFTs are marked to get burned!</span>
                     </div>
                   </>
-                )}
+                )} */}
                 <div className="w-full">
                   <NFTItems
                     nfts={nfts}
@@ -171,11 +171,12 @@ function NFTComponent() {
                 </div>
                 {selectedNfts.length > 0 && (
                   <>
-                    <div className="w-full max-w-md flex flex-col items-center justify-center p-4 px-8 rounded-lg bg-black bg-opacity-80  border border-undust-green border-opacity-20 backdrop-blur-xl fixed bottom-8 z-50 left-1/2 -translate-x-1/2">
+                    <div className="w-full max-w-md flex flex-col items-center justify-center p-4 px-8 rounded-lg bg-black bg-opacity-80  border border-undust-green border-opacity-20 backdrop-blur-xl fixed top-8 z-50 left-1/2 -translate-x-1/2">
                       <div className="w-full flex flex-col items-center justify-start gap-2">
                         <span className="text-red-500 text-xl">
                           You are about to burn {selectedNfts.length} NFTs
                         </span>
+
                         <div className="flex flex-row items-center justify-center gap-2">
                           <input
                             type="checkbox"

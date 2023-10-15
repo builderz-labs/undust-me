@@ -363,14 +363,14 @@ function MainComponent({
                       let tweetText = "";
                       if (emptyAccounts === 0) {
                         tweetText =
-                          "I just scored a perfect 10/10 on my wallet. How clean is your wallet? Find out and earn SOL by using Undust.me ";
+                          "I just scored a perfect 10/10 on my wallet. How clean is your wallet? Find out and earn SOL by using Undust.me - #cleanAf #solana  ";
                       } else {
                         tweetText =
                           "I just cleaned my wallet with UnDust.me and recovered " +
                           rentBack.toLocaleString() +
                           " SOL! My score is " +
                           dustScore +
-                          "/10. Can you beat me? https://undust.me/";
+                          "/10. Can you beat me? https://undust.me/ - #cleanAf #solana";
 
                       }
                       const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
@@ -434,14 +434,14 @@ function MainComponent({
                         let tweetText = "";
                         if (emptyAccounts === 0) {
                           tweetText =
-                            "I just scored a perfect 10/10 on my wallet. How clean is your wallet? Find out and earn SOL by using Undust.me ";
+                            "I just scored a perfect 10/10 on my wallet. How clean is your wallet? Find out and earn SOL by using Undust.me - #cleanAf #solana ";
                         } else {
                           tweetText =
                             "I just cleaned my wallet with Undust.me and recovered " +
                             rentBack.toLocaleString() +
                             " SOL! My score is " +
                             dustScore +
-                            "/10. Can you beat me? https://undust.me/";
+                            "/10. Can you beat me? https://undust.me/ - #cleanAf #solana";
                         }
                         const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
                           tweetText

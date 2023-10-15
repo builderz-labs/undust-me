@@ -18,7 +18,7 @@ function NFTItems({ nfts, handleSelectNft, selectedNfts }: any) {
 
   return (
     <>
-      <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-4 h-[70vh] overflow-y-scroll">
+      <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-4 justify-start h-[60vh] overflow-y-scroll">
         {nfts.map((nft: DAS.GetAssetResponse) => {
           const isSelected = selectedNfts.some(
             (selectedNft: { id: string }) => selectedNft.id === nft.id
