@@ -247,8 +247,8 @@ function MainComponent({
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      transition={{ duration: 2, delay: 2.5 }}
-                      exit={{ opacity: 0, transition: { duration: 2 } }}
+                      transition={{ duration: 2, delay: 0 }}
+                      exit={{ opacity: 0, transition: { duration: 0 } }}
                       className="flex flex-col items-center justify-center gap-4 w-full text-center bg-black bg-opacity-60 backdrop-blur-xl p-4 py-4 md:py-8 -mt-4 md:-mt-10 rounded-lg shadow-lg "
                     >
                       <span className="text-xl max-w-lg mx-auto text-undust-green font-bold">
@@ -450,7 +450,7 @@ function MainComponent({
                             memeImage;
                         } else {
                           tweetText =
-                            "I just cleaned my wallet with UnDust.me and recovered " +
+                            "I just cleaned my wallet with Undust.me and recovered " +
                             rentBack.toLocaleString() +
                             " SOL! My score is " +
                             dustScore +

@@ -24,7 +24,7 @@ const FAQ: NextPage = () => {
     return (
         <>
             <Head>
-                <title>FAQ - UnDust.me</title>
+                <title>FAQ - Undust.me</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div className={`w-full flex h-screen flex-col items-center justify-start gap-6 relative overflow-hidden`}>
