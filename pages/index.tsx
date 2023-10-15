@@ -47,7 +47,7 @@ const Home: NextPage = () => {
         <meta name="twitter:title" content="It's sweep time; tidy your wallet & earn SOL" />
       </Head>
 
-      <div className={`w-full h-screen md:h-full flex md:h-screen flex-col items-center md:items-center justify-center gap-6 relative overflow-hidden`}>
+      <div className={`w-full h-screen  flex md:h-full flex-col items-center md:items-center justify-center gap-6 relative overflow-hidden`}>
 
         {showConfetti && <Confetti />}
 
