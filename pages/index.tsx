@@ -85,6 +85,7 @@ const Home: NextPage = () => {
 
 
           <div className='bgBlurReq z-0 pointer-events-none absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2' />
+
           {activeIndex >= 1 && <div className="h-[280px]"></div>}
           {!wallet.connected && <motion.img
             initial={{ opacity: 0 }}

@@ -79,7 +79,7 @@ body {
 
 /* Heading styles */
 h1 {
-  font-size: calc(42px + (86 - 42) * ((100vw - 320px) / (1280 - 320)));
+  font-size: calc(32px + (86 - 32) * ((100vw - 320px) / (1280 - 320)));
 font-family: 'Outfit', sans-serif;
   font-style: normal;
   font-weight: 900;
@@ -106,7 +106,7 @@ font-family: 'Outfit', sans-serif;
 /* Scrollbar styles */
 /* width */
 body::-webkit-scrollbar {
-  width: 8px;
+  width: 0px;
   background-color: var(--chakra-colors-transparent);
 }
 
@@ -305,4 +305,19 @@ background: rgba(2, 8, 18, 0.40);
 
 .ant-spin-dot {
   @apply !text-black
+}
+
+.ant-steps-item-title {
+  @apply !text-undust-green
+}
+.ant-steps-item-icon {
+  @apply !bg-undust-green opacity-50
+}
+.ant-steps-item-icon:active {
+  @apply !opacity-100
+}
+
+
+.ant-steps-icon {
+  @apply  !font-bold !text-black font-bold
 }

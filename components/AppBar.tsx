@@ -23,7 +23,7 @@ export default function PrimarySearchAppBar({ setTheme, setIsDark, isDark }: any
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, delay: 2.5 }}
       className='absolute top-0 left-0 w-full flex flex-col items-center justify-center gap-2 z-50'>
-      <nav className='w-full flex flex-row items-center justify-between gap-2 container mx-auto my-6 md:my-10 mb-0 px-2 md:px-4'>
+      <nav className='w-full flex flex-row items-center justify-between gap-2 container mx-auto my-6 md:my-10 mb-0 mt-2 px-0 md:px-4'>
         <Link
           href='/'
           className='pl-4 md:pl-0 pb-4 flex flex-row items-center justify-center gap-2 text-undust-green text-lg md:text-3xl font-bold'>
