@@ -13,6 +13,7 @@ import { IconButton, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from '@mui/icons-material/Home';
 import { Logo } from './Logo';
+import MyMultiButton from './MyMultiButton';
 
 type Anchor = "top" | "left" | "bottom" | "right";
 
@@ -159,6 +160,9 @@ export default function SwipeableTemporaryDrawer() {
                   </a>
                 </div>
               </div>
+            </div>
+            <div className="w-full">
+              <MyMultiButton />
             </div>
           </SwipeableDrawer>
         </React.Fragment>

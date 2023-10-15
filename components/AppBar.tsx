@@ -8,9 +8,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import Drawer from './Drawer';
+import { useWallet } from '@solana/wallet-adapter-react';
 
 export default function PrimarySearchAppBar({ setTheme, setIsDark, isDark }: any) {
-
+  const wallet = useWallet();
   const router = useRouter();
 
   const isActive = (route: string) => router.pathname === route;
@@ -25,7 +26,7 @@ export default function PrimarySearchAppBar({ setTheme, setIsDark, isDark }: any
       <nav className='w-full flex flex-row items-center justify-between gap-2 container mx-auto my-6 md:my-10 px-2 md:px-4'>
         <Link
           href='/'
-          className='pl-4 md:pl-0 pb-4 flex flex-row items-center justify-center gap-2 text-undust-green text-md md:text-3xl font-bold'>
+          className='pl-4 md:pl-0 pb-4 flex flex-row items-center justify-center gap-2 text-undust-green text-lg md:text-3xl font-bold'>
           {/* <Logo /> */}
           Undust.me
         </Link>
@@ -41,7 +42,7 @@ export default function PrimarySearchAppBar({ setTheme, setIsDark, isDark }: any
           </Link>
         </div>
         <div className='pb-4 flex flex-row items-center justify-center gap-2 -pr-2 md:pr-0'>
-          <MyMultiButton />
+          {wallet.publicKey && <MyMultiButton />}
           <div className='flex md:hidden -mrl2'><Drawer /></div>
         </div>
       </nav>
