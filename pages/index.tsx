@@ -86,7 +86,7 @@ const Home: NextPage = () => {
 
           <div className='bgBlurReq z-0 pointer-events-none absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2' />
           {activeIndex >= 1 && <div className="h-[280px]"></div>}
-          {activeIndex >= 0 && <motion.img
+          {!wallet.connected && <motion.img
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 2, delay: 1.5 }}
@@ -95,7 +95,7 @@ const Home: NextPage = () => {
         </div>
       </div>
       <SwapModal isSwapModalOpen={isSwapModalOpen} setIsSwapModalOpen={setIsSwapModalOpen} rentBack={rentBack} />
-      <div className="w-full fixed -bottom-8">
+      <div className="w-full relative md:fixed -bottom-8">
         <Footer />
       </div>
     </>
