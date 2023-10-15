@@ -34,7 +34,7 @@ const faqs = [
 export default function FAQs() {
     return (
         <div className="w-full">
-            <div className="mx-auto w-full max-w-7xl px-6 text-white">
+            <div className="mx-auto w-full container px-6 text-white">
                 <div className="mx-auto w-full divide-y divide-gray-900/10">
                     <h2 className="text-2xl w-full font-bold leading-10 tracking-tight text-gray-100">Frequently asked questions</h2>
                     <dl className="mt-10 space-y-6 divide-y divide-gray-900/10">

@@ -89,7 +89,7 @@ const Home: NextPage = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2, delay: 1.5 }}
-          src="/machine-12.webp" alt="machine" className={`w-[350px] h-[350px] object-cover md:w-[630px] md:h-[630px] absolute z-0 translate-y-0  md:translate-y-28`} />}
+          src="/machine-12.webp" alt="machine" className={`w-[350px] h-[350px] object-cover md:w-[630px] md:h-[630px] absolute z-0 translate-y-0  md:translate-y-14`} />}
         <div id="circle" className='text-undust-green blur-sm absolute' style={{ position: 'absolute', zIndex: 1, width: '10px', height: '10px', borderRadius: '50%', pointerEvents: 'none', transition: '0.2s' }}></div>
       </div>
       <SwapModal isSwapModalOpen={isSwapModalOpen} setIsSwapModalOpen={setIsSwapModalOpen} rentBack={rentBack} />
