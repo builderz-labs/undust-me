@@ -64,7 +64,7 @@ export default function SwipeableTemporaryDrawer() {
       <List>
         {["Home", "About", "FAQ"].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton href="/">
+            <ListItemButton href={text === "Home" ? "/" : `/${text.toLowerCase()}`}>
               <ListItemIcon>
                 {index % 2 === 0 ? <HomeIcon /> : (index % 3 === 0 ? <HomeIcon /> : <InfoIcon />)}
               </ListItemIcon>
