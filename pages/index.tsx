@@ -41,7 +41,7 @@ const Home: NextPage = () => {
         <meta property="og:title" content="It's sweep time; tidy your wallet & earn SOL" />
         <meta property="og:description" content="It's sweep time; tidy your wallet & earn SOL" />
         <meta property="og:url" content="https://undust.me" />
-        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@builderz__" />
         <meta name="twitter:creator" content="@builderz__" />
         <meta name="twitter:title" content="It's sweep time; tidy your wallet & earn SOL" />
