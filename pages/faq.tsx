@@ -35,13 +35,13 @@ const FAQ: NextPage = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 2 }}
-                    className={`relative z-20 mt-32`}
+                    className={`relative z-20 mt-32  px-8`}
                 >
                     <h1 className='text-undust-green'>Undust.me</h1>
-                    <span className='opacity-50 text-2xl '>The easiest way to tidy up your wallet & earn SOL</span>
+                    <span className='opacity-50 text-lg md:text-2xl '>The easiest way to tidy up your wallet & earn SOL</span>
                 </motion.div>
 
-                <div className='border-undust-green border-opacity-20 rounded-lg max-w-2xl w-full flex flex-col items-center justify-center gap-8 p-4 md:p-12 py-6  my-10 relative z-50 bg-black bg-opacity-20 backdrop-blur-md'>
+                <div className='border-undust-green border-opacity-20 rounded-lg w-full flex flex-col items-center justify-center gap-8 p-4 md:p-12 py-6  my-10 relative z-50 bg-black bg-opacity-20 backdrop-blur-md'>
                     <FAQs />
                 </div>
 

@@ -50,8 +50,7 @@ function SwapModal({ isSwapModalOpen, setIsSwapModalOpen, rentBack }: any) {
 
       const quoteResponse = await (
         await fetch(
-          `https://quote-api.jup.ag/v6/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So&amount=${
-            amount * LAMPORTS_PER_SOL
+          `https://quote-api.jup.ag/v6/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So&amount=${amount * LAMPORTS_PER_SOL
           }&slippageBps=50`
         )
       ).json();
@@ -173,12 +172,11 @@ function SwapModal({ isSwapModalOpen, setIsSwapModalOpen, rentBack }: any) {
                         multiplier === "x1" ? 1 : parseInt(multiplier.slice(1))
                       )
                     }
-                    className={`w-12 font-bold h-12 flex bg-undust-green ${
-                      selectedMultiplier ===
-                      (multiplier === "x1" ? 1 : parseInt(multiplier.slice(1)))
+                    className={`w-12 font-bold h-12 flex bg-undust-green ${selectedMultiplier ===
+                        (multiplier === "x1" ? 1 : parseInt(multiplier.slice(1)))
                         ? "bg-opacity-80"
                         : "bg-opacity-10"
-                    } border border-white border-opacity-20 text-white items-center justify-center rounded-lg cursor-pointer hover:bg-opacity-60`}
+                      } border border-white border-opacity-20 text-white items-center justify-center rounded-lg cursor-pointer hover:bg-opacity-60`}
                   >
                     {multiplier}
                   </div>
@@ -188,7 +186,7 @@ function SwapModal({ isSwapModalOpen, setIsSwapModalOpen, rentBack }: any) {
               {selectedMultiplier && (
                 <button
                   onClick={swapSOLtoMSOL}
-                  className="mt-8 tooltip myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white p-4 rounded-[120px]  w-full"
+                  className="mt-8 tooltip myFreshButton text-sm break-keep font-bold  flex items-center justify-center gap-4  text-white p-4 rounded-[120px]  w-full"
                 >
                   {loading && <Spin />} Swap Now for{" "}
                   {(rentBack * selectedMultiplier).toFixed(2)}

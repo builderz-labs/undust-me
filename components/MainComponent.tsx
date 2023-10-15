@@ -91,14 +91,8 @@ function MainComponent({
 
     if (emptyAccounts === 0) {
       score = 10;
-      message =
-        "Congrats, your wallet is as clean as a whistle. Looking sharp!";
+      message = "Congrats, your wallet is as clean as a whistle. Looking sharp!";
       image = "https://media.giphy.com/media/CGQyU8OXBSCZswxOa7/giphy.gif";
-      // if (!showConfetti) {
-      //     setShowConfetti(true);
-      //     toast.success("Congrats, your wallet is as clean as a whistle. Looking sharp!");
-      //     setTimeout(() => setShowConfetti(false), 8000);
-      // }
     } else if (emptyAccounts <= 10) {
       score = 9;
       message = "Almost perfect, just a quick clean and you’re good to go.";
@@ -110,7 +104,7 @@ function MainComponent({
     } else if (emptyAccounts <= 30) {
       score = 7;
       message = "Damn, you’re good! Your wallet is looking fresh.";
-      image = "https://media.giphy.com/media/3DnDRfZe2ubQc/giphy.gif";
+      image = "https://media.giphy.com/media/gL9RxsJoFyou8aS2qd/giphy.gif";
     } else if (emptyAccounts <= 40) {
       score = 6;
       message = "Your wallet has seen better days; time to clean up.";
@@ -126,26 +120,24 @@ function MainComponent({
     } else if (emptyAccounts <= 70) {
       score = 3;
       message = "This place hasn’t been cleaned in years! Time to change that.";
-      image = "https://media.giphy.com/media/3DnDRfZe2ubQc/giphy.gif";
+      image = "https://media.giphy.com/media/Y3Siwjzlvciv6/giphy.gif";
     } else if (emptyAccounts <= 80) {
       score = 2;
-      message =
-        "Woah! It‘s looking a bit messy around here. Let’s fix that for you.";
+      message = "Woah! It‘s looking a bit messy around here. Let’s fix that for you.";
       image = "https://media.giphy.com/media/3DnDRfZe2ubQc/giphy.gif";
     } else if (emptyAccounts <= 90) {
       score = 1;
-      message =
-        "You’ve really let your wallet go. Undust.me is here to save you.";
+      message = "You’ve really let your wallet go. Undust.me is here to save you.";
       image = "https://media.giphy.com/media/3DnDRfZe2ubQc/giphy.gif";
     } else if (emptyAccounts >= 100) {
       score = 0;
-      message =
-        "You’ve really let your wallet go. Undust.me is here to save you.";
-      image = "https://media.giphy.com/media/3DnDRfZe2ubQc/giphy.gif";
+      message = "You’ve really let your wallet go. Undust.me is here to save you.";
+      image = "https://media.giphy.com/media/hqb9YEyhdFZ6KFI61F/giphy.gif";
     }
 
     return [score, message, image];
   }
+
   const closeEmptyAccounts = async () => {
     const umi = createUmi(process.env.NEXT_PUBLIC_HELIUS_URL!);
     setLoading(true);
@@ -230,7 +222,7 @@ function MainComponent({
     <>
       {/* {activeIndex === 0 && <img src="/machine-12.webp" alt="machine" className='w-[250px] h-[250px] md:w-[50px] md:h-[850px] object-cover mx-auto -mt-24 -mb-8' />} */}
       <div
-        className={`relative z-10 w-full ${activeIndex === 1 ? "mt-0 md:mt-10 lg:mt-0" : ""
+        className={`relative z-10 w-full mb-[320px] ${activeIndex === 1 ? "mt-0 md:mt-10 " : ""
           }`}
       >
         <div className="w-full px-4 ">
@@ -303,7 +295,7 @@ function MainComponent({
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ duration: 2, delay: 3.5 }}
-                      className="mt-14 md:mt-28 w-full flex items-center justify-center max-w-md p-4"
+                      className="mt-14  w-full flex items-center justify-center max-w-md p-4"
                       style={rotateStyle}
                       onClick={() => setRotate(!rotate)}
                     >
@@ -384,6 +376,7 @@ function MainComponent({
                           " SOL! My score is " +
                           dustScore +
                           "/10. Can you beat me? https://undust.me/";
+
                       }
                       const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
                         tweetText

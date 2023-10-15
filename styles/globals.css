@@ -79,7 +79,7 @@ body {
 
 /* Heading styles */
 h1 {
-  font-size: calc(42px + (96 - 42) * ((100vw - 320px) / (1280 - 320)));
+  font-size: calc(42px + (86 - 42) * ((100vw - 320px) / (1280 - 320)));
 font-family: 'Outfit', sans-serif;
   font-style: normal;
   font-weight: 900;
@@ -300,4 +300,9 @@ background: rgba(2, 8, 18, 0.40);
 }
 .css-i4bv87-MuiSvgIcon-root {
   @apply !text-white;
+}
+
+
+.ant-spin-dot {
+  @apply !text-black
 }

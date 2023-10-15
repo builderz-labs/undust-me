@@ -24,7 +24,7 @@ const About: NextPage = () => {
                 <title>About - UnDust.me</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div className={`w-full bg-black bg-opacity-60 border border-undust-green border-opacity-10 backdrop-blur-md flex flex-col items-center justify-start gap-6 relative overflow-hidden`}>
+            <div className={`w-full h-full bg-black bg-opacity-60 border border-undust-green border-opacity-10 backdrop-blur-md flex flex-col items-center justify-start gap-6 relative overflow-hidden`}>
 
                 {showConfetti && <Confetti />}
 
@@ -32,10 +32,10 @@ const About: NextPage = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 2 }}
-                    className={`relative z-20 mt-32 `}
+                    className={`relative z-20 mt-32  px-8`}
                 >
                     <h1 className='text-undust-green'>Undust.me</h1>
-                    <span className='opacity-50 text-2xl '>The easiest way to tidy up your wallet & earn SOL</span>
+                    <span className='opacity-50 text-lg md:text-2xl '>The easiest way to tidy up your wallet & earn SOL</span>
                 </motion.div>
 
                 <motion.div
@@ -54,7 +54,7 @@ const About: NextPage = () => {
 
                         <p>But there was a hidden twist. Unbeknownst to everyone, Sam&apos;s laundromat was not on Earth, but on Solana, the fastest blockchain in the universe. Instead of washing clothes, it cleaned wallets, erasing the stains of outdated tokens. It even returned SOL to customers who paid a visit. Samuel had unknowingly ventured into the world of crypto and found a unique niche.</p>
 
-                        <p>People flocked to “Undust.me to give their wallets a fresh start, and Samuel had found a new passion, combining his love for cleanliness with the exciting world of decentralisation, The unassuming laundromat owner had become a crypto-custodian, and his story became a legend in the world of digital assets.</p>
+                        <p>People flocked to “Undust.me to give their wallets a fresh start, and Samuel had found a new passion, combining his love for cleanliness with the exciting world of decentralization, The unassuming laundromat owner had become a crypto-custodian, and his story became a legend in the world of digital assets.</p>
                     </div>
                 </motion.div>
 
