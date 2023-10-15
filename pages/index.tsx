@@ -65,7 +65,7 @@ const Home: NextPage = () => {
         <meta name="twitter:title" content="It's sweep time; tidy your wallet & earn SOL" />
       </Head>
 
-      <div className={`w-full flex lg:h-screen flex-col items-center md:items-center justify-center gap-6 relative overflow-hidden pt-0 md:-mt-20 `}>
+      <div className={`w-full flex lg:h-screen flex-col items-center justify-start gap-6 relative overflow-hidden pt-0  `}>
 
         {showConfetti && <Confetti />}
 
@@ -89,11 +89,11 @@ const Home: NextPage = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2, delay: 1.5 }}
-          src="/machine-12.webp" alt="machine" className={`w-[350px] h-[350px] object-cover lg:w-[450px] lg:h-[450px] 2xl:w-[630px] 2xl:h-[630px] absolute z-0 translate-y-0  md:translate-y-14`} />}
+          src="/machine-12.webp" alt="machine" className={`w-[350px] h-[350px] object-cover lg:w-[450px] lg:h-[450px] 2xl:w-[630px] 2xl:h-[630px] absolute z-0 translate-y-0  bottom-20`} />}
         <div id="circle" className='text-undust-green blur-sm absolute' style={{ position: 'absolute', zIndex: 1, width: '10px', height: '10px', borderRadius: '50%', pointerEvents: 'none', transition: '0.2s' }}></div>
       </div>
       <SwapModal isSwapModalOpen={isSwapModalOpen} setIsSwapModalOpen={setIsSwapModalOpen} rentBack={rentBack} />
-      <div className="w-full relative md:fixed bottom-0">
+      <div className="w-full fixed -bottom-8">
         <Footer />
       </div>
     </>

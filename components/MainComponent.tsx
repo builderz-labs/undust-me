@@ -16,15 +16,11 @@ import { walletAdapterIdentity } from "@metaplex-foundation/umi-signer-wallet-ad
 import { Spin } from "antd";
 import MyMultiButton2 from "./MyMultiButton2";
 import { toast } from "sonner";
-import { Keypair, VersionedTransaction } from "@solana/web3.js";
-import fetch from "cross-fetch";
-import bs58 from "bs58";
 import Image from "next/image";
 
 function MainComponent({
   loading,
   setLoading,
-  showConfetti,
   setShowConfetti,
   activeIndex,
   setActiveIndex,
@@ -222,7 +218,7 @@ function MainComponent({
     <>
       {/* {activeIndex === 0 && <img src="/machine-12.webp" alt="machine" className='w-[250px] h-[250px] md:w-[50px] md:h-[850px] object-cover mx-auto -mt-24 -mb-8' />} */}
       <div
-        className={`relative z-10 w-full mb-[320px] ${activeIndex === 1 ? "mt-0 md:mt-10 " : ""
+        className={`relative z-10 w-full mb-[240px] ${activeIndex === 1 ? "mt-0 " : ""
           }`}
       >
         <div className="w-full px-4 ">
