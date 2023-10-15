@@ -308,7 +308,7 @@ function MainComponent({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 2, delay: 1 }}
-                className="border border-undust-green mx-auto border-opacity-20 rounded-lg min-h-[250px] max-w-2xl w-full flex flex-col items-start md:items-center justify-center gap-8 p-6 md:p-12 mt-6 md:mt-0 bg-black bg-opacity-60 backdrop-blur-xl "
+                className="border border-undust-green mx-auto border-opacity-20 rounded-lg min-h-[250px] max-w-2xl w-full flex flex-col items-start md:items-center justify-center gap-8 p-6 md:p-12 mt-8 bg-black bg-opacity-60 backdrop-blur-xl "
               >
                 <div className="flex flex-col md:flex-row items-center justify-center gap-4 mx-auto">
                   <div className="w-full flex flex-col items-center justify-between gap-4">
@@ -392,7 +392,7 @@ function MainComponent({
               </div>
             </>
           ) : (
-            <div className="w-full flex justify-center items-start md:items-center mt-4">
+            <div className="w-full flex justify-center items-start md:items-center mt-10">
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
