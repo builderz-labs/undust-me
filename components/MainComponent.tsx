@@ -131,7 +131,7 @@ function MainComponent({
       image = "https://media.giphy.com/media/3DnDRfZe2ubQc/giphy.gif";
     } else if (emptyAccounts >= 100) {
       score = 0;
-      message = "You’ve really let your wallet go. Undust.me is here to save you.";
+      message = "Your wallet is a true masterpiece of mess!";
       image = "https://media.giphy.com/media/hqb9YEyhdFZ6KFI61F/giphy.gif";
     }
 
