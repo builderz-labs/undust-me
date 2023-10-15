@@ -1,13 +1,34 @@
 import { Disclosure } from '@headlessui/react'
 import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/react/24/outline'
+import Footer from './Footer'
 
 const faqs = [
     {
-        question: "What's the best thing about Switzerland?",
+        question: "What is undust.me?",
         answer:
-            "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat. ",
+            "Undust.me is the easiest way to clean up empty token accounts in your wallet and earn and stake your recovered SOL. The project was developed during the Solana HyperDrive Hackathon.",
     },
-    // More questions...
+    {
+        question: "Where are you getting the SOL from?",
+        answer:
+            "Undust.me is the easiest way to clean up empty token accounts in your wallet and earn and stake your recovered SOL. The project was developed during the Solana HyperDrive Hackathon.",
+    },
+    {
+        question: "What is undust.me?",
+        answer:
+            "Undust.me is the easiest way to clean up empty token accounts in your wallet and earn and stake your recovered SOL. The project was developed during the Solana HyperDrive Hackathon.",
+    },
+    {
+        question: "What is undust.me?",
+        answer:
+            "Undust.me is the easiest way to clean up empty token accounts in your wallet and earn and stake your recovered SOL. The project was developed during the Solana HyperDrive Hackathon.",
+    },
+    {
+        question: "What is undust.me?",
+        answer:
+            "Undust.me is the easiest way to clean up empty token accounts in your wallet and earn and stake your recovered SOL. The project was developed during the Solana HyperDrive Hackathon.",
+    },
+
 ]
 
 export default function FAQs() {
@@ -43,6 +64,7 @@ export default function FAQs() {
                     </dl>
                 </div>
             </div>
+            <Footer />
         </div>
     )
 }
