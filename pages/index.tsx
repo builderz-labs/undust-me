@@ -36,7 +36,7 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>Undust.me</title>
-        <link rel="icon" href="/favicon-16x16.png" />
+        <link rel="icon" href="/favicon-16x16.png" type="image/x-icon" />
         <meta property="og:image" content="https://cdn.discordapp.com/attachments/1158367321644081153/1162708672225480714/telegram-cloud-photo-size-2-5280632887542140878-y.jpg?ex=653cebd5&is=652a76d5&hm=0f68f364c6147541f8319fdc8e9430e46dfd0627b50567da329130f668818fe2&" />
         <meta property="og:title" content="It's sweep time; tidy your wallet & earn SOL" />
         <meta property="og:description" content="It's sweep time; tidy your wallet & earn SOL" />
