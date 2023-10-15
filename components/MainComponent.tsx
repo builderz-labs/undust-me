@@ -404,7 +404,7 @@ function MainComponent({
               </div>
             </>
           ) : (
-            <div className="w-full flex justify-center items-center">
+            <div className="w-full flex justify-center items-start md:items-center mt-4">
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
