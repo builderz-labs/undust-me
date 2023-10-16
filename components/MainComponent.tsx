@@ -218,7 +218,7 @@ function MainComponent({
     <>
       {/* {activeIndex === 0 && <img src="/machine-12.webp" alt="machine" className='w-[250px] h-[250px] md:w-[50px] md:h-[850px] object-cover mx-auto -mt-24 -mb-8' />} */}
       <div
-        className={`relative z-10 w-full mb-0 md:mb-[240px] ${activeIndex === 1 ? "mt-0 " : ""
+        className={`relative z-50 w-full mb-0 md:mb-[240px] ${activeIndex === 1 ? "mt-0 " : ""
           }`}
       >
         <div className="w-full px-4 mt-10">

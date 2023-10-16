@@ -66,11 +66,11 @@ const Home: NextPage = () => {
         <meta name="twitter:title" content="It's sweep time; tidy your wallet & earn SOL" />
       </Head>
 
-      <div className={`w-full flex h-screen flex-col items-center justify-start gap-6 relative overflow-hidden pt-0  `}>
+      <div className={`w-full flex h-full md:h-screen flex-col items-center justify-start gap-6 relative overflow-hidden pt-0  `}>
 
         {showConfetti && <Confetti />}
 
-        <div className="w-full relative flex flex-col items-center justify-center">
+        <div className="w-full relative flex flex-col items-center justify-center z-50">
 
           <motion.div
             initial={{ opacity: 0 }}
