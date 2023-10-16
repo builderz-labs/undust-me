@@ -37,7 +37,7 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>Undust.me</title>
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes='16x16' />
+        <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
         <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
         <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
@@ -56,6 +56,7 @@ const Home: NextPage = () => {
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
         <meta name="theme-color" content="#ffffff" />
         <meta property="og:image" content="https://i.imgur.com/JzXGBrj.png" />
+        <meta property="twitter:image" content="https://i.imgur.com/JzXGBrj.png" />
         <meta property="og:title" content="It's sweep time; tidy your wallet & earn SOL" />
         <meta property="og:description" content="It's sweep time; tidy your wallet & earn SOL" />
         <meta property="og:url" content="https://undust.me" />
