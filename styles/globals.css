@@ -87,7 +87,7 @@ font-family: 'Outfit', sans-serif;
   line-height: calc(36px + (110 - 36) * ((100vw - 320px) / (1280 - 320)));
 }
 h2 {
-  font-size: calc(20px + (24 - 20) * ((100vw - 320px) / (1280 - 320)));
+  font-size: calc(18px + (24 - 18) * ((100vw - 320px) / (1280 - 320)));
   font-style: normal;
 font-family: 'Outfit', sans-serif;
   font-weight: 800;
@@ -320,4 +320,13 @@ background: rgba(2, 8, 18, 0.40);
 
 .ant-steps-icon {
   @apply  !font-bold !text-black font-bold
+}
+
+
+.myDivider {
+  background: radial-gradient(50% 50% at 50% 50%, #00FFD1 0%, rgba(0, 255, 209, 0.00) 100%);
+}
+
+.ant-steps {
+  @apply !flex-row scale-75 md:scale-100
 }

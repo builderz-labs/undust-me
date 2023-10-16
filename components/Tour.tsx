@@ -50,7 +50,7 @@ const Stepper: React.FC = () => {
             exit={{ opacity: 0 }}
             className='w-full !text-undust-green container mx-auto' >
             <div className="px-6 mt-10 md:mt-20">
-                <div className="scale-75 -mt-8 -mb-4 -ml-12 md:scale-100 md:mt-0 md:mb-0 md:ml-0">
+                <div className="scale-75  -mt-8 -mb-4 -ml-16 md:scale-100 md:mt-0 md:mb-0 md:ml-0 flex items-center justify-center">
                     <Steps current={current} items={items} className='!text-undust-green' />
                 </div>
                 <div style={contentStyle} className='border border-dotted border-opacity-20 p-2 border-undust-green'>{steps[current].content}</div>
