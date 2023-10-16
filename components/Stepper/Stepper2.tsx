@@ -1,8 +1,11 @@
 import React from 'react'
+import NFTComponent from '../NFTComponent'
 
 function Stepper2() {
     return (
-        <div>Stepper2</div>
+        <div>
+            <NFTComponent />
+        </div>
     )
 }
 
