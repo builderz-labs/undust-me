@@ -330,3 +330,7 @@ background: rgba(2, 8, 18, 0.40);
 .ant-steps {
   @apply !flex-row scale-75 md:scale-100
 }
+
+.ant-steps-item-title::after {
+  @apply !bg-undust-green
+}
