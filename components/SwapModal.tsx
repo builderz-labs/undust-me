@@ -161,7 +161,7 @@ function SwapModal({ isSwapModalOpen, setIsSwapModalOpen, rentBack }: any) {
               </div>
               <h3 className="text-undust-green">Eco Stake Multiplier</h3>
 
-              <p>You decide which multiplier you want to take</p>
+              <p>You decide which multiplier you want to stake with by swapping to mSOL</p>
 
               <div className="w-full my-4 px-4 flex items-center justify-center mt-10 gap-4">
                 {["x1", "x2", "x5", "x10"].map((multiplier, index) => (
@@ -173,9 +173,9 @@ function SwapModal({ isSwapModalOpen, setIsSwapModalOpen, rentBack }: any) {
                       )
                     }
                     className={`w-12 font-bold h-12 flex bg-undust-green ${selectedMultiplier ===
-                        (multiplier === "x1" ? 1 : parseInt(multiplier.slice(1)))
-                        ? "bg-opacity-80"
-                        : "bg-opacity-10"
+                      (multiplier === "x1" ? 1 : parseInt(multiplier.slice(1)))
+                      ? "bg-opacity-80"
+                      : "bg-opacity-10"
                       } border border-white border-opacity-20 text-white items-center justify-center rounded-lg cursor-pointer hover:bg-opacity-60`}
                   >
                     {multiplier}
