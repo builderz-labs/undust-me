@@ -40,6 +40,7 @@ export default function PrimarySearchAppBar({ setTheme, setIsDark, isDark }: any
           <Link href='/faq' className={`border-b border-b-transparent pb-4 hover:border-b-undust-green transition-all duration-300 ease-in-out hover:text-undust-green ${isActive('/faq') ? 'active-link' : ''}`}>
             FAQs
           </Link>
+
         </div>
         <div className='pb-4 flex flex-row items-center justify-center gap-2 -pr-2 md:pr-0'>
           {<div className="hidden md:flex">

@@ -20,72 +20,17 @@ import { printExplorerLink } from '../utils/explorer';
 
 
 function SwapModal({ isSwapModalOpen, setIsSwapModalOpen, rentBack }: any) {
-  const wallet = useWallet();
-  const { connection } = useConnection();
-  const { client } = useSunrise();
-  const [amount, setAmount] = useState(0);
-  const [maxAmount, setMaxAmount] = useState(0);
-  const [valid, setValid] = useState(false);
-  const [selectedMultiplier, setSelectedMultiplier] = useState<number | null>(
-    null
-  );
+  const [selectedMultiplier, setSelectedMultiplier] = useState<number>();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error>();
 
-  useEffect(() => {
-    setValid(amount > 0 && amount <= maxAmount);
-  }, [maxAmount, amount]);
-
-  // calculate the max by looking up the user's SOL balance
-  // useEffect(() => {
-  //   const getBalance = async () => {
-  //     if (!wallet.publicKey) {
-  //       return;
-  //     }
-
-  //     const balance = await connection.getBalance(wallet.publicKey);
-  //     setMaxAmount(balance / LAMPORTS_PER_SOL);
-  //   };
-
-  //   getBalance();
-  // }, [wallet.publicKey?.toBase58()]);
-
-  const handleDeposit = async () => {
-    if (!client) {
-      alert('Sunrise client not found');
-      return;
-    }
-    if (!wallet.connected) {
-      alert('Connect wallet first');
-      return;
-    }
-
-    // Multiply the amount by the selectedMultiplier and rentBack
-    const multipliedAmount = amount * selectedMultiplier! * rentBack;
-    const amountLamports = new BN(multipliedAmount * LAMPORTS_PER_SOL);
-
-    if (amountLamports.gt(new BN(maxAmount * LAMPORTS_PER_SOL))) {
-      alert('You do not have enough SOL to deposit this amount');
-      return;
-    }
-
-    try {
-      const tx = await client.deposit(amountLamports);
-      const sig = await wallet.sendTransaction(tx, connection);
-      printExplorerLink('Deposit sent', sig, connection);
-      return;
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const { details, client } = useSunrise();
+  const wallet = useAnchorWallet();
+  const { connection } = useConnection();
 
   const handleMultiplierClick = (multiplier: number) => {
-    if (selectedMultiplier === multiplier) {
-      setSelectedMultiplier(null);
-    } else {
-      setSelectedMultiplier(multiplier);
-    }
+    setSelectedMultiplier(multiplier);
   };
-
 
 
 

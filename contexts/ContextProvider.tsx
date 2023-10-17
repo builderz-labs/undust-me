@@ -1,37 +1,46 @@
-import { WalletAdapterNetwork, WalletError } from "@solana/wallet-adapter-base";
+import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
+import {
+  ConnectionProvider,
+  WalletProvider,
+} from '@solana/wallet-adapter-react';
+import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import {
   PhantomWalletAdapter,
   SolflareWalletAdapter,
-} from "@solana/wallet-adapter-wallets";
-import {
-  WalletProvider
-} from "@solana/wallet-adapter-react";
-import { FC, ReactNode, useCallback, useMemo } from "react";
+  TorusWalletAdapter,
+} from '@solana/wallet-adapter-wallets';
+import { clusterApiUrl } from '@solana/web3.js';
+import { FC, ReactNode, useMemo } from 'react';
 
-import { WalletModalProvider as ReactUIWalletModalProvider } from "@solana/wallet-adapter-react-ui";
+export const network =
+  (process.env.NEXT_PUBLIC_NETWORK as WalletAdapterNetwork) ||
+  WalletAdapterNetwork.Devnet;
 
-export const WalletContextProvider: FC<{ children: ReactNode }> = ({
-  children
-}) => {
-  const onError = useCallback((error: WalletError) => {
-    console.error(error);
-  }, []);
+interface IContextProviderProps {
+  children: ReactNode;
+}
 
-  const network =
-    "mainnet-beta";
+const ContextProvider: FC<IContextProviderProps> = ({ children }) => {
+  const endpoint = useMemo(
+    () => process.env.NEXT_PUBLIC_HELIUS_URL || clusterApiUrl(network),
+    [network],
+  );
   const wallets = useMemo(
     () => [
       new PhantomWalletAdapter(),
       new SolflareWalletAdapter(),
+      new TorusWalletAdapter(),
     ],
-    [network]
+    [],
   );
 
   return (
-    <WalletProvider wallets={wallets} onError={onError} autoConnect={false}>
-      <ReactUIWalletModalProvider>{children}</ReactUIWalletModalProvider>
-    </WalletProvider>
+    <ConnectionProvider endpoint={endpoint}>
+      <WalletProvider wallets={wallets}>
+        <WalletModalProvider>{children}</WalletModalProvider>
+      </WalletProvider>
+    </ConnectionProvider>
   );
 };
 
-export default WalletContextProvider;
+export { ContextProvider };

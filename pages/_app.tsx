@@ -4,7 +4,6 @@ import 'react-toastify/dist/ReactToastify.css'
 
 import AppBar from "../components/AppBar";
 import type { AppProps } from "next/app";
-import ContextProvider from "../contexts/ContextProvider";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ToastContainer } from 'react-toastify';
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
@@ -13,6 +12,7 @@ import Footer from '../components/Footer';
 import { Toaster } from 'sonner';
 import { SunriseClientProvider } from '../contexts/SunriseClientContext';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
+import { ContextProvider } from '../contexts/ContextProvider';
 
 require("@solana/wallet-adapter-react-ui/styles.css");
 
