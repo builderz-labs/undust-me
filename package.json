@@ -30,6 +30,7 @@
     "@solana/wallet-adapter-react-ui": "^0.9.31",
     "@solana/wallet-adapter-wallets": "^0.19.23",
     "@solana/web3.js": "^1.87.1",
+    "@sunrisestake/client": "^0.1.16",
     "@tailwindcss/forms": "^0.5.3",
     "antd": "^5.10.0",
     "base58": "^2.0.1",
@@ -39,6 +40,7 @@
     "daisyui": "^2.42.0",
     "express": "^4.18.2",
     "framer-motion": "^10.16.4",
+    "fs": "^0.0.1-security",
     "helius-sdk": "^1.0.16",
     "mongoose": "^7.6.1",
     "next": "^13",
@@ -63,5 +65,8 @@
     "postcss": "^8.4.19",
     "tailwindcss": "^3.2.4",
     "typescript": "^4.9.3"
+  },
+  "browser": {
+    "fs": false
   }
 }

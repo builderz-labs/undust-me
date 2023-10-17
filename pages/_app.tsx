@@ -11,6 +11,8 @@ import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { useState } from 'react';
 import Footer from '../components/Footer';
 import { Toaster } from 'sonner';
+import { SunriseClientProvider } from '../contexts/SunriseClientContext';
+import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 
 require("@solana/wallet-adapter-react-ui/styles.css");
 
@@ -18,16 +20,20 @@ function MyApp({ Component, pageProps }: AppProps) {
   // Get OS-level preference for dark mode
   const [isDark, setIsDark] = useState(true);
 
+  const network = WalletAdapterNetwork.Mainnet;
+
   return (
     <ContextProvider>
-      <CssBaseline enableColorScheme />
-      <WalletModalProvider>
-        <AppBar isDark={isDark} setIsDark={setIsDark} />
-        <Component {...pageProps} />
-        {/* Change Notification settings here */}
-        <Toaster position='bottom-right' theme='dark' />
+      <SunriseClientProvider network={network} >
+        <CssBaseline enableColorScheme />
+        <WalletModalProvider>
+          <AppBar isDark={isDark} setIsDark={setIsDark} />
+          <Component {...pageProps} />
+          {/* Change Notification settings here */}
+          <Toaster position='bottom-right' theme='dark' />
 
-      </WalletModalProvider>
+        </WalletModalProvider>
+      </SunriseClientProvider >
     </ContextProvider>
 
   );
