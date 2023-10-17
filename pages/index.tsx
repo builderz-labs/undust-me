@@ -79,7 +79,7 @@ const Home: NextPage = () => {
             className={`relative z-20 mt-24  px-8`}
           >
             <h1 className='text-undust-green'>Undust.me</h1>
-            <span className='opacity-50 text-lg md:text-2xl '>The easiest way to tidy up your wallet & earn SOL!</span>
+            <span className='opacity-50 text-lg md:text-2xl '>The easiest way to tidy up your wallet & earn SOL</span>
           </motion.div>
 
           <MainComponent loading={loading} setLoading={setLoading} showConfetti={showConfetti} setShowConfetti={setShowConfetti} activeIndex={activeIndex} setActiveIndex={setActiveIndex} setIsSwapModalOpen={setIsSwapModalOpen} rentBack={rentBack} setRentBack={setRentBack} />

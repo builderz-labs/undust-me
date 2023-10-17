@@ -334,3 +334,7 @@ background: rgba(2, 8, 18, 0.40);
 .ant-steps-item-title::after {
   @apply !bg-undust-green
 }
+
+.MuiSvgIcon-root {
+  @apply !text-black hover:!text-white
+}
