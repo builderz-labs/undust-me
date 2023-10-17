@@ -17,7 +17,7 @@ export default function PrimarySearchAppBar({ setTheme, setIsDark, isDark }: any
             initial={{ opacity: 0, y: -100 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 2.5 }}
-            className='relative  bottom-0 z-10 left-0 w-full flex flex-col items-center justify-center gap-2 h-40'>
+            className='relative  bottom-0 z-[99] left-0 w-full flex flex-col items-center justify-center gap-2 h-40'>
             <nav className='w-full flex flex-row-reverse items-center justify-between gap-2 container mx-auto px-8 md:px-8'>
                 <div className='pb-4 flex flex-row items-center justify-center gap-2'>
                     <Link href="https://twitter.com/builderz__">
