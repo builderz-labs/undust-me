@@ -46,11 +46,15 @@ function SwapModal({ isSwapModalOpen, setIsSwapModalOpen, rentBack }: any) {
         return;
       }
 
+      console.log(amount * LAMPORTS_PER_SOL / 1000000000, "testAmount")
+
+      const totalCost = amount * LAMPORTS_PER_SOL
+
       // const testAmount = 1 * LAMPORTS_PER_SOL * (selectedMultiplier || 1);
 
       const quoteResponse = await (
         await fetch(
-          `https://quote-api.jup.ag/v6/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=gso1xA56hacfgTHTF4F7wN5r4jbnJsKh99vR595uybA&amount=${amount * LAMPORTS_PER_SOL
+          `https://quote-api.jup.ag/v6/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=gso1xA56hacfgTHTF4F7wN5r4jbnJsKh99vR595uybA&amount=${totalCost
           }&slippageBps=50`
         )
       ).json();
@@ -188,8 +192,7 @@ function SwapModal({ isSwapModalOpen, setIsSwapModalOpen, rentBack }: any) {
                   onClick={swapSOLtoMSOL}
                   className="mt-8 tooltip myFreshButton text-sm break-keep font-bold  flex items-center justify-center gap-4  text-white p-4 rounded-[120px]  w-full"
                 >
-                  {loading && <Spin />} Swap Now for{" "}
-                  {(rentBack * selectedMultiplier).toFixed(2)}
+                  {loading && <Spin />} Swap Now
                 </button>
               )}
             </div>
