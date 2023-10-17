@@ -39,22 +39,18 @@ function SwapModal({ isSwapModalOpen, setIsSwapModalOpen, rentBack }: any) {
 
     try {
       const amount = rentBack * (selectedMultiplier || 1); // Multiply rentBack by the selected multiplier or 1 if it's null
-      console.log(amount, "amount");
+      console.log(amount);
 
       if (amount <= 0) {
         toast.error("Amount must be greater than 0");
         return;
       }
 
-      console.log(amount * LAMPORTS_PER_SOL / 1000000000, "testAmount")
-
-      const totalCost = amount * LAMPORTS_PER_SOL
-
       // const testAmount = 1 * LAMPORTS_PER_SOL * (selectedMultiplier || 1);
 
       const quoteResponse = await (
         await fetch(
-          `https://quote-api.jup.ag/v6/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=gso1xA56hacfgTHTF4F7wN5r4jbnJsKh99vR595uybA&amount=${totalCost
+          `https://quote-api.jup.ag/v6/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So&amount=${amount * LAMPORTS_PER_SOL
           }&slippageBps=50`
         )
       ).json();
@@ -122,7 +118,7 @@ function SwapModal({ isSwapModalOpen, setIsSwapModalOpen, rentBack }: any) {
   return (
     <>
       {isSwapModalOpen && (
-        <div className="w-full h-screen absolute inset-0 z-[90] bg-black bg-opacity-20 backdrop-blur-sm flex items-center justify-center">
+        <div className="w-full h-screen absolute inset-0 z-40 bg-black bg-opacity-20 backdrop-blur-sm flex items-center justify-center">
           <div className="max-w-lg w-full h-[40vh] rounded-lg shadow-lg border border-undust-green border-opacity-40 bg-black bg-opacity-90 backdrop-blur-2xl p-4">
             <div className="w-full flex flex-row items-center justify-end">
               <div
@@ -165,7 +161,7 @@ function SwapModal({ isSwapModalOpen, setIsSwapModalOpen, rentBack }: any) {
               </div>
               <h3 className="text-undust-green">Eco Stake Multiplier</h3>
 
-              <p>You decide which multiplier you want to liquid stake with by swapping to gSOL</p>
+              <p>You decide which multiplier you want to stake with by swapping to mSOL</p>
 
               <div className="w-full my-4 px-4 flex items-center justify-center mt-10 gap-4">
                 {["x1", "x2", "x5", "x10"].map((multiplier, index) => (
@@ -192,7 +188,8 @@ function SwapModal({ isSwapModalOpen, setIsSwapModalOpen, rentBack }: any) {
                   onClick={swapSOLtoMSOL}
                   className="mt-8 tooltip myFreshButton text-sm break-keep font-bold  flex items-center justify-center gap-4  text-white p-4 rounded-[120px]  w-full"
                 >
-                  {loading && <Spin />} Swap Now
+                  {loading && <Spin />} Swap Now for{" "}
+                  {(rentBack * selectedMultiplier).toFixed(2)}
                 </button>
               )}
             </div>
