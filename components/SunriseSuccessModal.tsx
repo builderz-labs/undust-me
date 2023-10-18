@@ -10,9 +10,7 @@ interface ISunriseDepositProps {
 const SunriseSuccessModal: React.FC<ISunriseDepositProps> = ({ setSunriseSuccessModalOpen }) => {
     return (
         <>
-            {sunriseSuccessModalOpen && <>
-                Sunrise
-            </>}
+
         </>
     )
 }

@@ -103,7 +103,7 @@ function SwapModal({ isSwapModalOpen, setIsSwapModalOpen, rentBack }: any) {
                 ))}
               </div>
 
-              {selectedMultiplier && (
+              {/* {selectedMultiplier && (
                 <button
                   onClick={handleDeposit}
                   className="mt-8 tooltip myFreshButton text-sm break-keep font-bold  flex items-center justify-center gap-4  text-white p-4 rounded-[120px]  w-full"
@@ -111,7 +111,7 @@ function SwapModal({ isSwapModalOpen, setIsSwapModalOpen, rentBack }: any) {
                   {loading && <Spin />} Stake Now for{" "}
                   {(rentBack * selectedMultiplier).toFixed(2)}
                 </button>
-              )}
+              )} */}
             </div>
           </div>
         </div>
