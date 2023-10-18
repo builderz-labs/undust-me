@@ -30,10 +30,11 @@ export const SunriseDetails: FC = () => {
               as="p"
               display="flex"
               fontWeight="bold"
-              justifyContent="start"
+              justifyContent="center"
               textAlign="left"
+              width={'100%'}
             >
-              Your gSOL Balance: {formattedAmount}{' '}
+              <h3 className=''>Your gSOL Balance: {formattedAmount}{' '}</h3>
               <Image
                 alt="GSOL icon"
                 height={4}

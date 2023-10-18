@@ -7,13 +7,14 @@ import { useSunrise } from '../../contexts/SunriseClientContext';
 import { printExplorerLink } from '../../utils/explorer';
 import { toast } from 'sonner';
 
-interface SunriseDepositProps {
+interface ISunriseDepositProps {
   setShowConfetti: (value: boolean) => void;
   amount: number;
   setAmount: (value: number) => void; // Add this line
+  setSunriseSuccessModalOpen: (value: boolean) => void;
 }
 
-const SunriseDeposit: React.FC<SunriseDepositProps> = ({ setShowConfetti, amount, setAmount }) => {
+const SunriseDeposit: React.FC<ISunriseDepositProps> = ({ setShowConfetti, amount, setAmount, setSunriseSuccessModalOpen }) => {
   const wallet = useWallet();
   const { connection } = useConnection();
   const { client } = useSunrise();
@@ -69,6 +70,7 @@ const SunriseDeposit: React.FC<SunriseDepositProps> = ({ setShowConfetti, amount
       printExplorerLink('Deposit sent', sig, connection);
       toast.success('Deposit sent');
       setShowConfetti(true);
+      setSunriseSuccessModalOpen(true);
       // timeout confetti after 5 seconds
       setTimeout(() => {
         setShowConfetti(false);

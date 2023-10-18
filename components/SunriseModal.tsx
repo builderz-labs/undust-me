@@ -1,40 +1,23 @@
-import { useWallet } from "@solana/wallet-adapter-react";
-import { Spin } from "antd";
-import React, { useEffect, useState } from "react";
-import { toast } from "sonner";
-import { SunriseStakeClient } from '@sunrisestake/client';
-import { AnchorProvider } from "@coral-xyz/anchor";
+import React, { FC, useState } from "react";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
-import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
-import BN from 'bn.js';
-import { LAMPORTS_PER_SOL } from '@solana/web3.js';
-import { useSunrise } from "../contexts/SunriseClientContext";
-import { Details } from '@sunrisestake/client';
-import {
-  createContext,
-  FC,
-  PropsWithChildren,
-  useContext,
-} from 'react';
-import { printExplorerLink } from '../utils/explorer';
-import { SunriseDetails } from './Sunrise/SunriseDetails';
-import { WhatNextBox } from './Sunrise/WhatNextBox';
-import SunriseDeposit from './Sunrise/SunriseDeposit';
 import { motion } from 'framer-motion';
+import { useSunrise } from "../contexts/SunriseClientContext";
+import { SunriseDetails } from './Sunrise/SunriseDetails';
+import SunriseDeposit from './Sunrise/SunriseDeposit';
 
+interface SunriseModalProps {
+  isSwapModalOpen: boolean;
+  setIsSwapModalOpen: (isOpen: boolean) => void;
+  rentBack: number;
+  setShowConfetti: (show: boolean) => void;
+  showConfetti: boolean;
+}
 
-function SunriseModal({ isSwapModalOpen, setIsSwapModalOpen, rentBack, setShowConfetti, showConfetti }: any) {
+const SunriseModal: FC<SunriseModalProps> = ({ isSwapModalOpen, setIsSwapModalOpen, rentBack, setShowConfetti, showConfetti }) => {
   const [selectedMultiplier, setSelectedMultiplier] = useState<number>();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error>();
-
-  const { details, client } = useSunrise();
-  const wallet = useAnchorWallet();
-  const { connection } = useConnection();
-
-  const [amount, setAmount] = useState(0);
   const [stakeMultiplierActive, setStakeMultiplierActive] = useState(false);
-
+  const [amount, setAmount] = useState(0);
+  const [sunriseSuccessModalOpen, setSunriseSuccessModalOpen] = useState(false);
 
   const handleMultiplierClick = (multiplier: number) => {
     if (selectedMultiplier === multiplier) {
@@ -45,8 +28,6 @@ function SunriseModal({ isSwapModalOpen, setIsSwapModalOpen, rentBack, setShowCo
       setAmount(multiplier * rentBack); // Set amount based on multiplier
     }
   };
-
-  console.log("Amount", amount)
 
   return (
     <>
@@ -75,13 +56,18 @@ function SunriseModal({ isSwapModalOpen, setIsSwapModalOpen, rentBack, setShowCo
               </div>
             </div>
 
-            <div className="w-full text-start px-4 flex items-start justify-start flex-col gap-4">
+            <div className="w-full text-start px-4 flex items-center justify-center flex-col gap-4">
+              <SunriseDetails />
+              <SunriseDeposit setShowConfetti={setShowConfetti} amount={amount} setAmount={setAmount} setSunriseSuccessModalOpen={setSunriseSuccessModalOpen} />
 
-
-              {/* <WhatNextBox /> */}
-              <h3 className="text-undust-green cursor-pointer"
+              <h2 className="text-undust-green cursor-pointer flex flex-row items-center justify-center gap-2"
                 onClick={() => setStakeMultiplierActive(!stakeMultiplierActive)}
-              >Eco Stake Multiplier</h3>
+              >
+                Eco Stake Multiplier
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`w-5 h-5 ${stakeMultiplierActive ? "rotate-0" : "transform rotate-180"} `}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                </svg>
+              </h2>
 
               {stakeMultiplierActive &&
                 <motion.div
@@ -91,7 +77,7 @@ function SunriseModal({ isSwapModalOpen, setIsSwapModalOpen, rentBack, setShowCo
                   className={`relative z-20  rounded-lg bg-black bg-opacity-20 `}
                 >
                   <p className='text-xs mb-4'>You decide which multiplier you want to stake to gSOL with:</p>
-                  <div className="w-full my-1 mb-8 flex items-center justify-start  gap-4">
+                  <div className="w-full my-1 mb-8 flex items-center justify-center  gap-4">
                     {["x1", "x2", "x5", "x10"].map((multiplier, index) => (
                       <div
                         key={index}
@@ -113,8 +99,14 @@ function SunriseModal({ isSwapModalOpen, setIsSwapModalOpen, rentBack, setShowCo
                 </motion.div>
               }
 
-              <SunriseDetails />
-              <SunriseDeposit setShowConfetti={setShowConfetti} amount={amount} setAmount={setAmount} />
+
+
+              {sunriseSuccessModalOpen && <>
+                <div className="w-full text-xs top-0 bg-green-400 text-black rounded-lg p-4">
+                  Congrats, you successfully deposited & staked {amount.toFixed(2)} SOL! Your gSOL is now available.
+                </div>
+              </>}
+
             </div>
           </div>
         </div>
