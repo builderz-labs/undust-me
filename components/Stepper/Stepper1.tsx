@@ -13,7 +13,7 @@ import { toast } from 'sonner';
 import Image from 'next/image';
 import MyMultiButton2 from '../MyMultiButton2';
 
-function Stepper1() {
+function Stepper1({ stepOneComplete, setStepOneComplete }: any) {
     const [activeIndex, setActiveIndex] = React.useState(0);
     const [loading, setLoading] = React.useState(false);
     const wallet = useWallet();
@@ -169,6 +169,7 @@ function Stepper1() {
             toast.success("Success! Your wallet is now dust free!");
             setActiveIndex(2);
             setTimeout(() => setShowConfetti(false), 8000);
+            setStepOneComplete(true);
 
             // Add this code after the previous line
             // fetch('http://localhost:3000/leaderboard', {
@@ -196,91 +197,75 @@ function Stepper1() {
     };
 
     return (
-        <div className='w-full h-full flex flex-col items-center justify-center p-4'>
+        <div className='w-full h-full min-h-[40vh] flex flex-col items-center justify-center p-4'>
             {!wallet.connected && <h2 className='text-white text-center opacity-80 '>Scan your wallet for empty token Accounts and close them with one click.</h2>}
             <div className="myDivider w-full h-0.5 mt-4"></div>
             <div className="w-full mt-2  text-white">
-                <div className="w-full  flex flex-col max-w-md mx-auto items-center justify-center gap-4">
+                <div className="w-full  flex flex-col max-w-2xl mx-auto items-center justify-center gap-4">
                     {!wallet.connected ? <MyMultiButton /> : null}
-                    <div className="w-full px-4 mt-10">
+                    <div className="w-full px-4 -mt-10">
                         {activeIndex === 0 ? (
                             <>
                                 <motion.div
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
-                                    transition={{ duration: 2, delay: 2.5 }}
-                                    className=" border-undust-green border-opacity-20 rounded-lg  max-w-2xl mx-auto w-full flex flex-col items-center justify-center gap-8 p-2   "
+                                    transition={{ duration: 1, delay: 0.5 }}
+                                    className=" border-undust-green border-opacity-20 rounded-lg  max-w-3xl mx-auto w-full flex flex-col items-center justify-center gap-8 p-2   "
                                 >
-                                    {wallet.connected ? (
-                                        <>
-                                            <motion.div
-                                                initial={{ opacity: 0 }}
-                                                animate={{ opacity: 1 }}
-                                                transition={{ duration: 2, delay: 0 }}
-                                                exit={{ opacity: 0, transition: { duration: 0 } }}
-                                                className="flex flex-col items-center justify-center gap-4 w-full text-center bg-black border border-undust-green border-opacity-40  bg-opacity-60 backdrop-blur-xl p-6 py-4 md:py-8 -mt-4 md:-mt-20 rounded-lg shadow-lg "
-                                            >
-                                                <span className="text-xl max-w-lg mx-auto text-undust-green font-bold">
-                                                    Before you give us a spin:
-                                                </span>
-                                                <motion.ol className="text-left flex flex-col items-start justify-center gap-4 text-white opacity-80">
-                                                    <motion.li
-                                                        className="opacity-30 list-disc list-inside"
-                                                        initial={{ opacity: 0 }}
-                                                        animate={{ opacity: 1 }}
-                                                        transition={{ duration: 1, delay: 1 }}
-                                                    >
-                                                        Undust.me safely scans your wallet for open, empty
-                                                        token accounts
-                                                    </motion.li>
-                                                    <motion.li
-                                                        className="opacity-30 list-disc list-inside"
-                                                        initial={{ opacity: 0 }}
-                                                        animate={{ opacity: 1 }}
-                                                        transition={{ duration: 1, delay: 2 }}
-                                                    >
-                                                        Identifies SOL stored for rent in the accounts
-                                                    </motion.li>
-                                                    <motion.li
-                                                        className="opacity-30 list-disc list-inside"
-                                                        initial={{ opacity: 0 }}
-                                                        animate={{ opacity: 1 }}
-                                                        transition={{ duration: 1, delay: 3 }}
-                                                    >
-                                                        Closes accounts, returning stored SOL to your wallet
-                                                    </motion.li>
-                                                </motion.ol>
-                                            </motion.div>
-                                            <motion.button
-                                                initial={{ opacity: 0 }}
-                                                animate={{ opacity: 1 }}
-                                                transition={{ duration: 2, delay: 4 }}
-                                                exit={{ opacity: 0, transition: { duration: 3 } }}
-                                                data-tip="Spin it!"
-                                                className="myFreshButton text-sm break-keep  flex items-center gap-4 justify-center font-bold text-white hover:border hover:border-undust-green  py-[18px] px-[36px] rounded-[120px]  w-full"
-                                                onClick={() => {
-                                                    fetchTokenAccounts(wallet);
-                                                }}
-                                            >
-                                                {" "}
-                                                {loading && <Spin />} UnDust Me!
-                                            </motion.button>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <motion.div
-                                                initial={{ opacity: 0 }}
-                                                animate={{ opacity: 1 }}
-                                                transition={{ duration: 2, delay: 3.5 }}
-                                                className="mt-14  w-full flex items-center justify-center max-w-md p-4"
-                                                style={rotateStyle}
-                                                onClick={() => setRotate(!rotate)}
-                                            >
-                                                {" "}
-                                                <MyMultiButton2 />
-                                            </motion.div>
-                                        </>
-                                    )}
+                                    <>
+                                        <motion.div
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{ duration: 1, delay: 0 }}
+                                            exit={{ opacity: 0, transition: { duration: 0 } }}
+                                            className="flex flex-col items-center justify-center gap-4 w-full text-center bg-black border border-undust-green border-opacity-40  bg-opacity-60 backdrop-blur-xl p-6 py-4 md:py-8 -mt-4 rounded-lg shadow-lg "
+                                        >
+                                            <span className="text-xl max-w-2xl mx-auto text-undust-green font-bold">
+                                                Before you give us a spin:
+                                            </span>
+                                            <motion.ol className="text-left flex flex-col items-start justify-center gap-4 text-white opacity-80">
+                                                <motion.li
+                                                    className="opacity-30 list-disc list-inside"
+                                                    initial={{ opacity: 0 }}
+                                                    animate={{ opacity: 1 }}
+                                                    transition={{ duration: 1, delay: 1 }}
+                                                >
+                                                    Undust.me safely scans your wallet for open, empty
+                                                    token accounts
+                                                </motion.li>
+                                                <motion.li
+                                                    className="opacity-30 list-disc list-inside"
+                                                    initial={{ opacity: 0 }}
+                                                    animate={{ opacity: 1 }}
+                                                    transition={{ duration: 1, delay: 2 }}
+                                                >
+                                                    Identifies SOL stored for rent in the accounts
+                                                </motion.li>
+                                                <motion.li
+                                                    className="opacity-30 list-disc list-inside"
+                                                    initial={{ opacity: 0 }}
+                                                    animate={{ opacity: 1 }}
+                                                    transition={{ duration: 1, delay: 3 }}
+                                                >
+                                                    Closes accounts, returning stored SOL to your wallet
+                                                </motion.li>
+                                            </motion.ol>
+                                        </motion.div>
+                                        <motion.button
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{ duration: 2, delay: 4 }}
+                                            exit={{ opacity: 0, transition: { duration: 3 } }}
+                                            data-tip="Spin it!"
+                                            className="myFreshButton text-sm break-keep  flex items-center gap-4 justify-center font-bold text-white hover:border hover:border-undust-green  py-[18px] px-[36px] rounded-[120px]  w-full"
+                                            onClick={() => {
+                                                fetchTokenAccounts(wallet);
+                                            }}
+                                        >
+                                            {" "}
+                                            {loading && <Spin />} UnDust Me!
+                                        </motion.button>
+                                    </>
                                 </motion.div>
                             </>
                         ) : activeIndex === 1 ? (
@@ -289,7 +274,7 @@ function Stepper1() {
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     transition={{ duration: 2, delay: 1 }}
-                                    className="border border-undust-green mx-auto border-opacity-20 rounded-lg -mt-20 max-w-2xl w-full flex flex-col items-start md:items-center justify-center gap-8 p-6 md:p-12  bg-black bg-opacity-60 backdrop-blur-xl "
+                                    className="border border-undust-green mx-auto border-opacity-20 rounded-lg -mt-4 max-w-2xl w-full flex flex-col items-start md:items-center justify-center gap-8 p-6 md:p-12  bg-black bg-opacity-60 backdrop-blur-xl"
                                 >
                                     <div className="flex flex-col  items-center justify-center gap-4 mx-auto">
                                         <div className="w-full flex flex-col items-center justify-between gap-4">
@@ -319,6 +304,7 @@ function Stepper1() {
                                     <button
                                         onClick={() => {
                                             setActiveIndex(0);
+                                            setStepOneComplete(true);
                                         }}
                                         data-tip="Go back to the start"
                                         className="mt-8 tooltip myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white p-4 rounded-[120px]  w-16"
@@ -361,6 +347,7 @@ function Stepper1() {
                                             } else {
                                                 closeEmptyAccounts();
                                             }
+                                            setStepOneComplete(true);
                                         }}
                                         disabled={loading}
                                         className="mt-8 myFreshButton text-sm break-keep font-bold flex items-center justify-center disabled:!bg-opacity-40 disabled:cursor-not-allowed hover:border hover:border-undust-green text-white  py-[18px] px-[36px] rounded-[120px]  w-full"
@@ -435,6 +422,7 @@ function Stepper1() {
                                             <button
                                                 onClick={() => {
                                                     setIsSwapModalOpen((prev: any) => !prev);
+                                                    setStepOneComplete(true);
                                                 }}
                                                 data-tip={"Swap SOL to mSOL and help the environment"}
                                                 className="mt-8 tooltip myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white p-4 rounded-[120px]  w-16"

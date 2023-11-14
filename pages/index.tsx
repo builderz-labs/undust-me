@@ -87,6 +87,10 @@ const Home: NextPage = () => {
           <MainComponent loading={loading} setLoading={setLoading} showConfetti={showConfetti} setShowConfetti={setShowConfetti} activeIndex={activeIndex} setActiveIndex={setActiveIndex} setIsSwapModalOpen={setIsSwapModalOpen} rentBack={rentBack} setRentBack={setRentBack} />
 
           <div className='bgBlurReq z-0 pointer-events-none absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2' />
+          {/* 
+          <div onClick={() => { }} className="fixed right-8 top-1/2 translate-y-1/2 p-4 py-12 bg-green-500 text-black font-bold">
+            Staking
+          </div> */}
 
           {activeIndex >= 1 && <div className="h-[280px]"></div>}
           {!wallet.connected && <motion.img
@@ -103,7 +107,8 @@ const Home: NextPage = () => {
         rentBack={rentBack}
         setShowConfetti={setShowConfetti}
         showConfetti={showConfetti}
-      />      <div className="w-full relative md:fixed -bottom-8">
+      />
+      <div className="w-full relative md:fixed -bottom-8">
         <Footer />
       </div>
     </>

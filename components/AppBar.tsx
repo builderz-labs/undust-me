@@ -10,7 +10,7 @@ import { motion } from 'framer-motion';
 import Drawer from './Drawer';
 import { useWallet } from '@solana/wallet-adapter-react';
 
-export default function PrimarySearchAppBar({ setTheme, setIsDark, isDark }: any) {
+export default function PrimarySearchAppBar({ setTheme, setIsDark, isDark, isSwapModalOpen }: any) {
   const wallet = useWallet();
   const router = useRouter();
 
@@ -42,7 +42,7 @@ export default function PrimarySearchAppBar({ setTheme, setIsDark, isDark }: any
           </Link>
 
         </div>
-        <div className='pb-4 flex flex-row items-center justify-center gap-2 -pr-2 md:pr-0'>
+        <div onClick={() => { isSwapModalOpen }} className='pb-4 flex flex-row items-center justify-center gap-2 -pr-2 md:pr-0'>
           {<div className="hidden md:flex">
             <MyMultiButton />
           </div>}
