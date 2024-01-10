@@ -1,7 +1,5 @@
 import React, { FC, useState } from "react";
-import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import { motion } from 'framer-motion';
-import { useSunrise } from "../contexts/SunriseClientContext";
 import { SunriseDetails } from './Sunrise/SunriseDetails';
 import SunriseDeposit from './Sunrise/SunriseDeposit';
 

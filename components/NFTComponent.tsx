@@ -1,3 +1,4 @@
+'use client'
 import { CircularProgress } from "@mui/material";
 import { useWallet } from "@solana/wallet-adapter-react";
 import React, { useState, useEffect } from "react";

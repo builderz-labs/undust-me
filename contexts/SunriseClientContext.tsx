@@ -1,3 +1,4 @@
+'use client'
 import { Details, SunriseStakeClient } from '@sunrisestake/client';
 import {
     createContext,
@@ -10,6 +11,12 @@ import {
 import { useAnchorWallet, useConnection } from '@solana/wallet-adapter-react';
 import { AnchorProvider } from '@coral-xyz/anchor';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
+
+let SunriseStakeClientLocal;
+
+if (typeof window !== 'undefined') {
+    SunriseStakeClientLocal = require('@sunrisestake/client').SunriseStakeClient;
+}
 
 type Props = { network: WalletAdapterNetwork } & PropsWithChildren;
 

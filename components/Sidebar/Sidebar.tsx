@@ -8,10 +8,10 @@ import Image from 'next/image'
 function Sidebar() {
   return (
     <div className="w-[14%] h-screen  p-4 pr-0 flex flex-col items-center justify-start">
-      <div className="w-full h-full flex flex-col items-center pt-4 justify-start border-r border-r-gray-500 pr-4">
-        <div className="mb-10 btn btn-ghost"><Logo /></div>
+      <div className="w-full h-full flex flex-col items-center pt-4 justify-start border-r border-r-gray-500 border-opacity-50 pr-4">
+        <div className="mb-10 btn btn-ghost pb-2 "><Logo /></div>
 
-        <div className="h-full flex flex-col items-center justify-center">
+        <div className="h-full flex flex-col items-center justify-center border-t border-t-gray-500 border-opacity-50 pt-8">
           <div className="text-start h-auto flex flex-col items-center">
             <div className="text-white text-sm font-bold mb-4 btn w-full btn-ghost">Wallet Cleaner</div>
             <div className="text-white text-sm font-bold mb-4 btn w-full btn-ghost">NFT Burner</div>
