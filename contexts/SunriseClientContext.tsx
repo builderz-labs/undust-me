@@ -1,4 +1,5 @@
 'use client'
+
 import { Details, SunriseStakeClient } from '@sunrisestake/client';
 import {
     createContext,
