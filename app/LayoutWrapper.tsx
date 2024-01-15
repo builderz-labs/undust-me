@@ -27,11 +27,11 @@ const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children }) => {
 
   return (
     <ContextProvider>
-      <WalletModalProvider>
-        <SunriseClientProvider network={network} >
-          {children}
-        </SunriseClientProvider >
-      </WalletModalProvider>
+      {/* <WalletModalProvider> */}
+      <SunriseClientProvider network={network} >
+        {children}
+      </SunriseClientProvider >
+      {/* </WalletModalProvider> */}
     </ContextProvider>
 
   );

@@ -12,6 +12,7 @@ import {
 import { Logo } from '../Logo'
 import Link from 'next/link'
 import Image from 'next/image'
+import GradientLine from '../GradientLine';
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: HomeIcon, current: true },
@@ -56,8 +57,8 @@ export default function Example() {
   ]
 
   return (
-    <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-r-white border-opacity-50 px-6 w-[15%] h-screen">
-      <div className="flex h-16 shrink-0 items-center">
+    <div className="hidden md:flex grow flex-col gap-y-5 overflow-y-auto border-r border-r-white border-opacity-50 px-6 sm:max-w-xs w-full  h-screen">
+      <div className="flex h-16 shrink-0 items-center w-full">
         <Logo />
       </div>
       <nav className="flex flex-1 flex-col">
@@ -69,15 +70,15 @@ export default function Example() {
                   <a
                     href={item.href}
                     className={classNames(
-                      item.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800',
-                      'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                      item.current ? 'border-b-[0.5px] border-b-undust-hover text-white' : 'text-gray-400 hover:text-white hover:border-b-[0.5px] border-b-undust-hover',
+                      'group flex gap-x-3 p-2 text-sm leading-6 font-semibold'
                     )}
                   >
                     <item.icon className="h-6 w-6 shrink-0" aria-hidden="true" />
                     {item.name}
                     {item.count ? (
                       <span
-                        className="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-gray-900 px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-white ring-1 ring-inset ring-gray-700"
+                        className="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-white bg-opacity-10 px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-white ring-1 ring-inset ring-gray-700"
                         aria-hidden="true"
                       >
                         {item.count}
@@ -88,7 +89,7 @@ export default function Example() {
               ))}
             </ul>
           </li>
-          <li>
+          {/* <li>
             <div className="text-xs font-semibold leading-6 text-gray-400">Your tour</div>
             <ul role="list" className="-mx-2 mt-2 space-y-1">
               {teams.map((team) => (
@@ -108,10 +109,11 @@ export default function Example() {
                 </li>
               ))}
             </ul>
-          </li>
-          <li className="mt-auto w-[80%] mx-auto pt-4 border-t border-t-white border-opacity-50">
+          </li> */}
 
-            <div className="socials flex flex-row w-full justify-around items-center mt-auto mb-2">
+          <li className="mt-auto w-[80%] mx-auto ">
+            <GradientLine />
+            <div className="socials flex flex-row w-full justify-around items-center mt-auto mb-2 pt-4">
               <Link href='https://builderz.dev' target='_blank' className="tooltip  flex items-center justify-center hover:scale-110 duration-300 transition-all ease-in-out" data-tip="Website">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />

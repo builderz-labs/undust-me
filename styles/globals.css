@@ -274,8 +274,8 @@ body::-webkit-scrollbar-thumb {
   opacity: 0.2;
 background: var(--Main, #00FFD1);
 filter: blur(200px);
-width: 35.5625rem;
-height: 35.5625rem;
+width: 55.5625rem;
+height: 55.5625rem;
 flex-shrink: 0;
 }
 /* Custom Wallet Button */
@@ -337,4 +337,8 @@ background: rgba(2, 8, 18, 0.40);
 
 .MuiSvgIcon-root {
   @apply !text-black hover:!text-white
+}
+
+.slideDivide {
+    background: radial-gradient(5749358.98% 43200% at 50% 50.26%, #EDEBEB 0%, rgba(237, 235, 235, 0.00) 57.5%);
 }
