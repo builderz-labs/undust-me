@@ -57,7 +57,7 @@ function NFTStepperItems({ nfts, handleSelectNft, selectedNfts }: any) {
                 )}
                 <div className="flex flex-col items-start justify-between w-full p-4 gap-8">
                   <div className="w-full h-full object-cover">
-                    <img
+                    <Image
                       src={nft.content?.files?.length && nft.content?.files[0].uri || "public/machine-1.webp"}
                       alt={nft.content?.metadata.name && nft.content?.metadata.name || "NFT Image"}
                       width={500}

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { DAS } from "helius-sdk";
 import Image from "next/image"
+import { Pagination, List, Card, Switch } from 'antd';
 
 function NFTItems({ nfts, handleSelectNft, selectedNfts }: any) {
+  const [isGridView, setIsGridView] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
 
@@ -18,7 +20,22 @@ function NFTItems({ nfts, handleSelectNft, selectedNfts }: any) {
 
   return (
     <>
-      <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-4 justify-start h-[60vh] overflow-y-scroll">
+      <div className="flex items-center justify-end gap-4">
+        <Switch
+          checkedChildren="Grid"
+          unCheckedChildren="List"
+          defaultChecked
+          onChange={() => setIsGridView(!isGridView)}
+        />
+        <Pagination
+          defaultCurrent={1}
+          total={nfts.length}
+          pageSize={40}
+          onChange={handlePageChange}
+        />
+      </div>
+
+      <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-4 justify-start h-[73vh] overflow-y-scroll">
         {nfts.map((nft: DAS.GetAssetResponse) => {
           const isSelected = selectedNfts.some(
             (selectedNft: { id: string }) => selectedNft.id === nft.id
@@ -29,10 +46,10 @@ function NFTItems({ nfts, handleSelectNft, selectedNfts }: any) {
               <div
                 onClick={() => handleSelectNft(nft, !isSelected)}
                 key={nft.id}
-                className={`relative flex flex-col items-center justify-center w-full h-full border border-undust-green border-opacity-20 rounded-lg ${isSelected ? "!text-red-500" : "text-white"
+                className={`relative flex flex-col cursor-pointer items-center justify-center w-full h-full border hover:border-opacity-60 hover:border-red-500  border-opacity-20 rounded-sm ${isSelected ? "!text-red-500 !border-red-400 shadow-lg shadow-red-500" : "text-white border-undust-green"
                   }`}
               >
-                {isSelected && (
+                {/* {isSelected && (
                   <div className="absolute h-[70vh] top-8 right-8 z-20">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -54,10 +71,33 @@ function NFTItems({ nfts, handleSelectNft, selectedNfts }: any) {
                       />
                     </svg>
                   </div>
-                )}
+                )} */}
+                {
+                  isSelected ? <div className="absolute inset-0 z-10 bg-red-500 bg-opacity-30 flex items-center justify-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-24 h-24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z"
+                      />
+                    </svg>
+                  </div> : null
+                }
                 <div className="flex flex-col items-start justify-between w-full p-4 gap-8">
                   <div className="w-full h-full object-cover">
-                    <img
+                    <Image
                       src={nft.content?.files?.length && nft.content?.files[0].uri || "public/machine-1.webp"}
                       alt={nft.content?.metadata.name && nft.content?.metadata.name || "NFT Image"}
                       width={500}

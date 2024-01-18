@@ -13,6 +13,7 @@ import { Logo } from '../Logo'
 import Link from 'next/link'
 import Image from 'next/image'
 import GradientLine from '../GradientLine';
+import MyMultiButton from '../MyMultiButton';
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: HomeIcon, current: true },
@@ -70,10 +71,11 @@ export default function Example() {
                   <a
                     href={item.href}
                     className={classNames(
-                      item.current ? 'border-b-[0.5px] border-b-undust-hover text-white' : 'text-gray-400 hover:text-white hover:border-b-[0.5px] border-b-undust-hover',
-                      'group flex gap-x-3 p-2 text-sm leading-6 font-semibold'
+                      item.current ? ' text-white' : 'text-gray-400 hover:text-white hover:border-b-[0.5px] hover:border-b-white',
+                      'group flex gap-x-3 p-2 text-sm leading-6 font-semibold '
                     )}
                   >
+
                     <item.icon className="h-6 w-6 shrink-0" aria-hidden="true" />
                     {item.name}
                     {item.count ? (
@@ -84,7 +86,11 @@ export default function Example() {
                         {item.count}
                       </span>
                     ) : null}
+
                   </a>
+                  {
+                    item.current ? <GradientLine /> : null
+                  }
                 </li>
               ))}
             </ul>
@@ -112,6 +118,7 @@ export default function Example() {
           </li> */}
 
           <li className="mt-auto w-[80%] mx-auto ">
+            <MyMultiButton />
             <GradientLine />
             <div className="socials flex flex-row w-full justify-around items-center mt-auto mb-2 pt-4">
               <Link href='https://builderz.dev' target='_blank' className="tooltip  flex items-center justify-center hover:scale-110 duration-300 transition-all ease-in-out" data-tip="Website">

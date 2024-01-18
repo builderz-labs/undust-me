@@ -19,6 +19,8 @@ import {
 import { DAS } from "helius-sdk";
 import { toast } from "sonner";
 import { Spin } from "antd";
+import Draggable from 'react-draggable';
+import GradientLine from './GradientLine';
 
 function NFTComponent() {
   const wallet = useWallet();
@@ -148,8 +150,21 @@ function NFTComponent() {
 
   return (
     <>
-      <div className="w-full flex flex-col items-center justify-center gap-4 container mx-auto mt-24 px-4">
-        <h2>Your NFTs</h2>
+      <div className="w-full flex flex-col items-center justify-center gap-4 container mx-auto mt-4 px-4">
+
+        <div className="flex items-center justify-between w-full">
+          <div className="min-w-0 flex-1">
+            <h2 className="text-2xl font-bold leading-7 text-gray-100 sm:truncate sm:text-3xl sm:tracking-tight">
+              Burn NFTs
+            </h2>
+            <p className='opacity-30 pb-10'>
+              Burn your unwanted NFTs. You can burn multiple NFTs at once.
+            </p>
+            <GradientLine />
+          </div>
+
+        </div>
+
         {wallet.publicKey ? (
           <>
             {loading ? (
@@ -172,35 +187,37 @@ function NFTComponent() {
                 </div>
                 {selectedNfts.length > 0 && (
                   <>
-                    <div className="w-full max-w-md flex flex-col items-center justify-center p-4 px-8 rounded-lg bg-black bg-opacity-80  border border-undust-green border-opacity-20 backdrop-blur-xl fixed top-8 z-50 left-1/2 -translate-x-1/2">
-                      <div className="w-full flex flex-col items-center justify-start gap-2">
-                        <span className="text-red-500 text-xl">
-                          You are about to burn {selectedNfts.length} NFTs
-                        </span>
-
-                        <div className="flex flex-row items-center justify-center gap-2">
-                          <input
-                            type="checkbox"
-                            name="confirm"
-                            id=""
-                            onChange={(e) =>
-                              setIsCheckboxChecked(e.target.checked)
-                            } // Update checkbox status when it changes
-                          />
-                          <span className="text-white text-[10px]">
-                            I understand that this action is irreversible
+                    <Draggable>
+                      <div className="w-full shadow-xl cursor-move max-w-md flex flex-col items-center justify-center p-4 px-8 rounded-lg bg-black bg-opacity-80  border border-undust-green border-opacity-20 backdrop-blur-xl fixed bottom-8 z-50 left-1/2 -translate-x-1/2">
+                        <div className="w-full flex flex-col items-center justify-start gap-2">
+                          <span className="text-red-500 text-xl uppercase">
+                            You are about to burn {selectedNfts.length} NFTs!
                           </span>
+
+                          <div className="flex flex-row items-center justify-center gap-2">
+                            <input
+                              type="checkbox"
+                              name="confirm"
+                              id=""
+                              onChange={(e) =>
+                                setIsCheckboxChecked(e.target.checked)
+                              } // Update checkbox status when it changes
+                            />
+                            <span className="text-white text-[10px] uppercase">
+                              I understand that this action is irreversible
+                            </span>
+                          </div>
                         </div>
+                        <button
+                          onClick={handleBurn}
+                          className="brandBtn my-4 w-full uppercase"
+                          disabled={!isCheckboxChecked} // Disable button when checkbox is not checked
+                        >
+                          {buttonLoading && <Spin />} Burn selected (
+                          {selectedNfts.length}) NFTs
+                        </button>
                       </div>
-                      <button
-                        onClick={handleBurn}
-                        className="tooltip myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white p-4 rounded-[120px] mt-8 w-full disabled:opacity-50 disabled:cursor-not-allowed"
-                        disabled={!isCheckboxChecked} // Disable button when checkbox is not checked
-                      >
-                        {buttonLoading && <Spin />} Burn selected (
-                        {selectedNfts.length}) NFTs
-                      </button>
-                    </div>
+                    </Draggable>
                   </>
                 )}
               </div>

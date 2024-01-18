@@ -48,7 +48,7 @@ select {
 
 /* Custom Wallet Button */
 .mymultibutton {
-  @apply bg-black text-white hover:text-black hover:bg-builderz-blue !important;
+  @apply bg-black text-white hover:text-black hover:bg-builderz-blue !border !border-white !border-opacity-20;
   border: 1px solid black !important;
 }
 .mymultibutton2 {
@@ -341,4 +341,8 @@ background: rgba(2, 8, 18, 0.40);
 
 .slideDivide {
     background: radial-gradient(5749358.98% 43200% at 50% 50.26%, #EDEBEB 0%, rgba(237, 235, 235, 0.00) 57.5%);
+}
+
+.brandBtn {
+  @apply btn btn-primary !bg-undust-green border-undust-green !text-black hover:!text-white hover:!bg-black hover:!border hover:!border-undust-green disabled:!bg-gray-800 disabled:!cursor-not-allowed;
 }

@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['media.giphy.com', 'storage.googleapis.com', 'arweave.net'],
+    domains: ['media.giphy.com', 'storage.googleapis.com', 'arweave.net', 'shdw-drive.genesysgo.net', 'www.arweave.net'],
   },
   webpack: (config, { isServer }) => {
   if (!isServer) {
