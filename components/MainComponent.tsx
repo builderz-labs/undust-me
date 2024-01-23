@@ -14,7 +14,6 @@ import { TransactionBuilder, publicKey } from "@metaplex-foundation/umi";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { walletAdapterIdentity } from "@metaplex-foundation/umi-signer-wallet-adapters";
 import { Spin } from "antd";
-import MyMultiButton2 from "./MyMultiButton2";
 import { toast } from "sonner";
 import Image from "next/image";
 import YardIcon from '@mui/icons-material/Yard';
@@ -277,7 +276,7 @@ function MainComponent({
                       transition={{ duration: 2, delay: 4 }}
                       exit={{ opacity: 0, transition: { duration: 3 } }}
                       data-tip="Spin it!"
-                      className="myFreshButton text-sm break-keep  flex items-center gap-4 justify-center font-bold text-white hover:border hover:border-undust-green  py-[18px] px-[36px] rounded-[120px]  w-full"
+                      className="brandBtn text-sm break-keep  flex items-center gap-4 justify-center font-bold text-white hover:border hover:border-undust-green  py-[18px] px-[36px] rounded-[120px]  w-full"
                       onClick={() => {
                         fetchTokenAccounts(wallet);
                       }}
@@ -297,7 +296,7 @@ function MainComponent({
                       onClick={() => setRotate(!rotate)}
                     >
                       {" "}
-                      <MyMultiButton2 />
+                      <MyMultiButton />
                     </motion.div>
                   </>
                 )}
@@ -341,7 +340,7 @@ function MainComponent({
                     setActiveIndex(0);
                   }}
                   data-tip="Go back to the start"
-                  className="mt-8 tooltip myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white p-4 rounded-[120px]  w-16"
+                  className="mt-8 tooltip brandBtn text-sm break-keep font-bold  flex items-center justify-center  text-white p-4 rounded-[120px]  w-16"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -383,7 +382,7 @@ function MainComponent({
                     }
                   }}
                   disabled={loading}
-                  className="mt-8 myFreshButton text-sm break-keep font-bold flex items-center justify-center disabled:!bg-opacity-40 disabled:cursor-not-allowed hover:border hover:border-undust-green text-white  py-[18px] px-[36px] rounded-[120px]  w-full"
+                  className="mt-8 brandBtn text-sm break-keep font-bold flex items-center justify-center disabled:!bg-opacity-40 disabled:cursor-not-allowed hover:border hover:border-undust-green text-white  py-[18px] px-[36px] rounded-[120px]  w-full"
                 >
                   {loading && <Spin />}{" "}
                   {emptyAccounts === 0
@@ -412,7 +411,7 @@ function MainComponent({
                         setActiveIndex(0);
                       }}
                       data-tip="Go back to the start"
-                      className="mt-8 tooltip myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white p-4 rounded-[120px]  w-16"
+                      className="mt-8 tooltip brandBtn text-sm break-keep font-bold  flex items-center justify-center  text-white p-4 rounded-[120px]  w-16"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -430,7 +429,7 @@ function MainComponent({
                       </svg>
                     </button>
                     <button
-                      className="mt-8 myFreshButton text-sm break-keep font-bold  flex items-center justify-center  text-white  py-[18px] px-[36px] rounded-[120px]  w-full"
+                      className="mt-8 brandBtn text-sm break-keep font-bold  flex items-center justify-center  text-white  py-[18px] px-[36px] rounded-[120px]  w-full"
                       onClick={() => {
                         let tweetText = "";
                         if (emptyAccounts === 0) {
@@ -457,7 +456,7 @@ function MainComponent({
                         setIsSwapModalOpen((prev: any) => !prev);
                       }}
                       data-tip={"Swap SOL to gSOL and help the environment"}
-                      className="mt-8 tooltip myFreshButton text-sm break-keep font-bold  flex items-center justify-center  !text-black p-4 rounded-[120px]  w-16"
+                      className="mt-8 tooltip brandBtn text-sm break-keep font-bold  flex items-center justify-center  !text-black p-4 rounded-[120px]  w-16"
                     >
                       <YardIcon className='text-black' />
                     </button>

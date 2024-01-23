@@ -5,6 +5,7 @@ import ContextProvider from '../contexts/ContextProvider';
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import LayoutWrapper from './LayoutWrapper';
 import AppBar from '../components/Sidebar/AppBar';
+import LoginModal from '../components/LoginModal';
 
 
 require("@solana/wallet-adapter-react-ui/styles.css");
@@ -18,13 +19,17 @@ export default async function RootLayout({ children }: any) {
 
   return (
     <LayoutWrapper>
-      <html lang="en" className='w-full min-h-screen'>
-        <body className='relative w-full h-full flex flex-row items-start justify-start min-h-screen overflow-hidden'>
-          <div className='bgBlurReq z-0 pointer-events-none absolute right-0 translate-x-[30%] bottom-0' />
+      <html lang="en" className=''>
+        <body className='relative w-full h-full flex flex-col md:flex-row items-start justify-start  overflow-hidden bg-backgroundBg'>
+          <LoginModal />
+          {/* <div className='bgBlurReq z-0 pointer-events-none absolute right-0 translate-x-[30%] bottom-0' /> */}
+          {/* <div className='bgBlurReq z-0 pointer-events-none absolute -left-20 translate-x-[-30%] -bottom-[400px]' /> */}
           {/* <div id="circle" className='text-undust-green blur-sm absolute' style={{ position: 'absolute', zIndex: 1, width: '10px', height: '10px', borderRadius: '50%', pointerEvents: 'none', transition: '0.2s' }}></div> */}
-          <AppBar />
-          <NewSidebar />
-          <main className={`w-auto lg:w-[90%] h-screen`}>
+          <>
+            <AppBar />
+            <NewSidebar />
+          </>
+          <main className={`w-full flex flex-col lg:w-[90%] px-2 lg:px-0`}>
             {children}
           </main>
           <Toaster position="bottom-right" />

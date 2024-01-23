@@ -18,7 +18,7 @@ import {
 } from "@metaplex-foundation/mpl-token-metadata";
 import { DAS } from "helius-sdk";
 import { toast } from "sonner";
-import { Spin } from "antd";
+import { Spin, List } from "antd";
 import Draggable from 'react-draggable';
 import GradientLine from './GradientLine';
 

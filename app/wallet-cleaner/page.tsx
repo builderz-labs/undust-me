@@ -1,4 +1,5 @@
-import "react-toastify/dist/ReactToastify.css";
+'use client'
+
 import Head from "next/head";
 import type { NextPage } from "next";
 import { motion } from 'framer-motion';
@@ -7,9 +8,9 @@ import { useEffect, useState } from 'react';
 import Confetti from 'react-confetti';
 import MainComponent from '../../components/MainComponent';
 import SunriseModal from '../../components/SunriseModal';
+import BreadCrumbs from '../../components/BreadCrumbs';
+import LoginModal from '../../components/LoginModal';
 
-// Default styles that can be overridden by your app
-require("@solana/wallet-adapter-react-ui/styles.css");
 
 const Home: NextPage = () => {
   const [loading, setLoading] = useState(false);
@@ -31,6 +32,7 @@ const Home: NextPage = () => {
 
   return (
     <>
+      <BreadCrumbs pages={[{ name: 'Wallet Cleaner', href: '/wallet-cleaner', current: true }]} />
       <div className={`w-full flex h-full md:h-screen flex-col items-center justify-start gap-6 relative overflow-hidden pt-0  `}>
 
         {showConfetti && <Confetti />}

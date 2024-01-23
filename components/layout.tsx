@@ -6,7 +6,7 @@ export default function Layout({
 }) {
   return (
     <div className="flex w-full">
-      <main className="w-full ">{children}</main>
+      <main className="w-full">{children}</main>
     </div>
   );
 }

@@ -1,7 +1,8 @@
+'use client'
+
 import React, { useState } from 'react';
 import { Button, message, Steps, theme } from 'antd';
 import { motion } from 'framer-motion';
-import MainComponent from './MainComponent';
 import Stepper1 from './Stepper/Stepper1';
 import Stepper2 from './Stepper/Stepper2';
 import Stepper3 from './Stepper/Stepper3';

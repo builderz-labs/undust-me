@@ -15,10 +15,7 @@
 }
 
 /* Next.js container */
-#__next {
-  width: 100%;
-  min-height: 100vh;
-}
+
 
 /* Inherit fonts for inputs and buttons */
 input,
@@ -79,7 +76,7 @@ body {
 
 /* Heading styles */
 h1 {
-  font-size: calc(32px + (86 - 32) * ((100vw - 320px) / (1280 - 320)));
+  font-size: calc(28px + (86 - 28) * ((100vw - 320px) / (1280 - 320)));
 font-family: 'Outfit', sans-serif;
   font-style: normal;
   font-weight: 900;
@@ -344,9 +341,14 @@ background: rgba(2, 8, 18, 0.40);
 }
 
 .brandBtn {
-  @apply btn btn-primary !bg-undust-green border-undust-green !text-black hover:!text-white hover:!bg-black hover:!border hover:!border-undust-green disabled:!bg-gray-800 disabled:!cursor-not-allowed;
+  @apply !btn btn-primary !bg-undust-green !border-undust-green !text-black hover:!text-white hover:!bg-black hover:!border hover:!border-undust-green disabled:!bg-gray-800 disabled:!cursor-not-allowed;
 }
 
 .myCheckbox {
   @apply !bg-undust-green !border-undust-green !text-black hover:!text-white hover:!bg-black hover:!border hover:!border-undust-green rounded-full p-3;
+}
+
+.ant-table-cell,
+.ant-table {
+  @apply !bg-transparent !text-white;
 }

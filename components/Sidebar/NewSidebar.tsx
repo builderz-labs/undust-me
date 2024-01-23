@@ -1,4 +1,4 @@
-
+'use client'
 import {
   CalendarIcon,
   ChartPieIcon,
@@ -14,25 +14,39 @@ import Link from 'next/link'
 import Image from 'next/image'
 import GradientLine from '../GradientLine';
 import MyMultiButton from '../MyMultiButton';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import HorizontalLine from '../HorizontalLine'
 
-const navigation = [
-  { name: 'Dashboard', href: '/', icon: HomeIcon, current: true },
-  { name: 'Wallet Cleaner', href: '/', icon: SparklesIcon, current: false },
-  { name: 'NFT Burn', href: '/nfts', icon: FireIcon, count: '12', current: false },
-  { name: 'Token Burn', href: '#', icon: FireIcon, count: '20+', current: false },
-  { name: 'Wallet Cleaner Tour', href: '#', icon: ChartPieIcon, current: false },
-]
+
+
 const teams = [
   { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
   { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
   { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
+  // { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false, count: 5 },
 ]
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function Sidebar() {
+  const router = useRouter();
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
+  const navigation = [
+    { name: 'Dashboard', href: '/', icon: HomeIcon },
+    { name: 'Wallet Cleaner', href: '/wallet-cleaner', icon: SparklesIcon },
+    { name: 'NFT Burn', href: '/nft-burn', icon: FireIcon },
+    { name: 'Token Burn', href: '/token-burn', icon: FireIcon },
+    { name: 'Wallet Cleaner Tour', href: '/wallet-cleaner-tour', icon: ChartPieIcon },
+    // { name: 'Wallet Cleaner Tour', href: '#', icon: ChartPieIcon, count: 6 },
+  ].map(item => ({
+    ...item,
+    current: item.href === pathname,
+  }))
 
   const socials = [
     {
@@ -57,8 +71,11 @@ export default function Example() {
     },
   ]
 
+
+
+
   return (
-    <div className="hidden md:flex grow flex-col gap-y-5 overflow-y-auto border-r border-r-white border-opacity-50 px-6 sm:max-w-xs w-full  h-screen">
+    <div className="hidden md:flex grow flex-col gap-y-5 overflow-y-auto  px-6 sm:max-w-xs w-full  h-screen relative">
       <div className="flex h-16 shrink-0 items-center w-full">
         <Logo />
       </div>
@@ -71,26 +88,26 @@ export default function Example() {
                   <a
                     href={item.href}
                     className={classNames(
-                      item.current ? ' text-white' : 'text-gray-400 hover:text-white hover:border-b-[0.5px] hover:border-b-white',
+                      item.current ? ' text-white' : 'text-gray-400 hover:text-white',
                       'group flex gap-x-3 p-2 text-sm leading-6 font-semibold '
                     )}
-                  >
 
+                  >
                     <item.icon className="h-6 w-6 shrink-0" aria-hidden="true" />
                     {item.name}
-                    {item.count ? (
+                    {/* {item.count ? (
                       <span
                         className="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-white bg-opacity-10 px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-white ring-1 ring-inset ring-gray-700"
                         aria-hidden="true"
                       >
                         {item.count}
                       </span>
-                    ) : null}
-
+                    ) : null} */}
                   </a>
                   {
                     item.current ? <GradientLine /> : null
                   }
+
                 </li>
               ))}
             </ul>
@@ -134,7 +151,7 @@ export default function Example() {
               <Link href='https://www.linkedin.com/company/86956078/admin/feed/posts/' target='_blank' className="tooltip flex items-center justify-center hover:scale-110 duration-300 transition-all ease-in-out" data-tip="LinkedIn">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30px" height="30px" className='fill-slate-50'>    <path d="M24,4H6C4.895,4,4,4.895,4,6v18c0,1.105,0.895,2,2,2h18c1.105,0,2-0.895,2-2V6C26,4.895,25.105,4,24,4z M10.954,22h-2.95 v-9.492h2.95V22z M9.449,11.151c-0.951,0-1.72-0.771-1.72-1.72c0-0.949,0.77-1.719,1.72-1.719c0.948,0,1.719,0.771,1.719,1.719 C11.168,10.38,10.397,11.151,9.449,11.151z M22.004,22h-2.948v-4.616c0-1.101-0.02-2.517-1.533-2.517 c-1.535,0-1.771,1.199-1.771,2.437V22h-2.948v-9.492h2.83v1.297h0.04c0.394-0.746,1.356-1.533,2.791-1.533 c2.987,0,3.539,1.966,3.539,4.522V22z" /></svg>            </Link>
               <Link href='https://github.com/builderz-labs' target='_blank' className="tooltip  flex items-center justify-center hover:scale-110 duration-300 transition-all ease-in-out" data-tip="Github">
-                <svg viewBox="0 0 24 24" aria-hidden="true" className="h-6 w-6 fill-slate-50"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.463 2 11.97c0 4.404 2.865 8.14 6.839 9.458.5.092.682-.216.682-.48 0-.236-.008-.864-.013-1.695-2.782.602-3.369-1.337-3.369-1.337-.454-1.151-1.11-1.458-1.11-1.458-.908-.618.069-.606.069-.606 1.003.07 1.531 1.027 1.531 1.027.892 1.524 2.341 1.084 2.91.828.092-.643.35-1.083.636-1.332-2.22-.251-4.555-1.107-4.555-4.927 0-1.088.39-1.979 1.029-2.675-.103-.252-.446-1.266.098-2.638 0 0 .84-.268 2.75 1.022A9.607 9.607 0 0 1 12 6.82c.85.004 1.705.114 2.504.336 1.909-1.29 2.747-1.022 2.747-1.022.546 1.372.202 2.386.1 2.638.64.696 1.028 1.587 1.028 2.675 0 3.83-2.339 4.673-4.566 4.92.359.307.678.915.678 1.846 0 1.332-.012 2.407-.012 2.734 0 .267.18.577.688.48 3.97-1.32 6.833-5.054 6.833-9.458C22 6.463 17.522 2 12 2Z"></path></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true" className="h-6 w-6 fill-slate-50"><path fill-rule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.463 2 11.97c0 4.404 2.865 8.14 6.839 9.458.5.092.682-.216.682-.48 0-.236-.008-.864-.013-1.695-2.782.602-3.369-1.337-3.369-1.337-.454-1.151-1.11-1.458-1.11-1.458-.908-.618.069-.606.069-.606 1.003.07 1.531 1.027 1.531 1.027.892 1.524 2.341 1.084 2.91.828.092-.643.35-1.083.636-1.332-2.22-.251-4.555-1.107-4.555-4.927 0-1.088.39-1.979 1.029-2.675-.103-.252-.446-1.266.098-2.638 0 0 .84-.268 2.75 1.022A9.607 9.607 0 0 1 12 6.82c.85.004 1.705.114 2.504.336 1.909-1.29 2.747-1.022 2.747-1.022.546 1.372.202 2.386.1 2.638.64.696 1.028 1.587 1.028 2.675 0 3.83-2.339 4.673-4.566 4.92.359.307.678.915.678 1.846 0 1.332-.012 2.407-.012 2.734 0 .267.18.577.688.48 3.97-1.32 6.833-5.054 6.833-9.458C22 6.463 17.522 2 12 2Z"></path></svg>
               </Link>
             </div>
             <p className='my-2 text-[10px] mb-4 opacity-30'>powered by builderz.dev</p>

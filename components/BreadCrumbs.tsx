@@ -1,12 +1,10 @@
-import { HomeIcon } from '@heroicons/react/20/solid'
-
-
+import { HomeIcon } from '@heroicons/react/20/solid';
 
 export default function BreadCrumbs({ pages }: any) {
   return (
-    <div className="p-4">
+    <div className="p-4 px-0">
       <nav className="flex" aria-label="Breadcrumb">
-        <ol role="list" className="flex space-x-4 rounded-md  px-6 shadow">
+        <ol role="list" className="flex space-x-4 rounded-md  px-3 shadow">
           <li className="flex">
             <div className="flex items-center">
               <a href="#" className="text-gray-400 hover:text-gray-100">

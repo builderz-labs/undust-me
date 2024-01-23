@@ -21,6 +21,7 @@ module.exports = {
       },
       backgroundImage: {
         'borderBg': 'radial-gradient(circle at 50% 50%, #EDEBEB 0%, rgba(237, 235, 235, 0) 57.5%)',
+        'backgroundBg': 'radial-gradient(50% 50% at 50% 50%, #001814 0%, #000303 100%);'
       },
       screens: {
  
