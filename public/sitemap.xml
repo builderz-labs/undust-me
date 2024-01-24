@@ -5,28 +5,3 @@
       xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
       xmlns:xhtml="http://www.w3.org/1999/xhtml">
       
-	<url>
-		<loc>https://undust.me/about</loc>
-		<lastmod>2023-10-15</lastmod>
-	</url>
-
-	<url>
-		<loc>https://undust.me/api/leaderboard</loc>
-		<lastmod>2023-10-15</lastmod>
-	</url>
-
-	<url>
-		<loc>https://undust.me/basics</loc>
-		<lastmod>2023-10-15</lastmod>
-	</url>
-
-	<url>
-		<loc>https://undust.me/faq</loc>
-		<lastmod>2023-10-15</lastmod>
-	</url>
-
-	<url>
-		<loc>https://undust.me/index</loc>
-		<lastmod>2023-10-15</lastmod>
-	</url>
-</urlset>
