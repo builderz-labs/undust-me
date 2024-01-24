@@ -6,14 +6,14 @@ import Cookies from 'js-cookie';
 
 
 function LoginModal() {
-  const [loginModalOpen, setLoginModalOpen] = useState(true);
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [stepper, setStepper] = useState(0);
 
   useEffect(() => {
     const agreed = Cookies.get('agreedToTerms');
-    if (agreed) {
-      setLoginModalOpen(false);
+    if (!agreed) {
+      setLoginModalOpen(true);
     }
   }, []);
 

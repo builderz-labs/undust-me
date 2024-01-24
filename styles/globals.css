@@ -352,3 +352,25 @@ background: rgba(2, 8, 18, 0.40);
 .ant-table {
   @apply !bg-transparent !text-white;
 }
+
+.ant-list,
+.ant-list-item,
+.ant-list-item-meta-title {
+  @apply !bg-transparent !text-white border border-[0.5px] border-white border-opacity-10;
+}
+
+.ant-list-item-meta-content {
+  @apply flex flex-row-reverse items-center justify-between;
+}
+
+.ant-card-meta-title {
+  @apply !text-white
+}
+
+.ant-card-meta-detail {
+  @apply flex flex-col items-start justify-start gap-2
+}
+
+.ant-card-meta-description {
+  @apply !text-white
+}

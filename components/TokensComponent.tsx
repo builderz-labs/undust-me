@@ -3,6 +3,7 @@ import { CircularProgress } from '@mui/material';
 import { useWallet } from '@solana/wallet-adapter-react';
 import React, { useEffect, useState } from 'react'
 import TokenItems from './TokenItems';
+import { Spin } from 'antd';
 
 function TokensComponent() {
     const wallet = useWallet();
@@ -53,7 +54,9 @@ function TokensComponent() {
         <div className='w-full flex flex-col items-center justify-center gap-4 container mx-auto mt-40 px-4'>
             <h2>Your Tokens</h2>
             {loading ? (
-                <CircularProgress /> // Show progress bar when loading
+                <div className="w-full flex items-center justify-center h-[20vh]">
+                    <Spin />
+                </div>
             ) : (
                 <div className="w-full">
                     <TokenItems tokens={tokens} />

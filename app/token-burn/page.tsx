@@ -1,5 +1,6 @@
 import BreadCrumbs from '../../components/BreadCrumbs';
 import LoginModal from '../../components/LoginModal';
+import NftTokenComponent from '../../components/NftTokenComponent';
 import ToolsGrid from '../../components/ToolsGrid';
 import Tour from '../../components/Tour';
 
@@ -11,7 +12,7 @@ const Index: React.FC = async () => {
       <BreadCrumbs pages={[{ name: 'Token Burn', href: '/token-burn', current: true }]} />
       <div className='relative w-full h-full'>
         <div className='w-full h-full flex flex-col justify-start items-center mt-4'>
-
+          <NftTokenComponent />
         </div>
       </div>
     </>
