@@ -44,10 +44,10 @@ const Index: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 2 }}
-              className={`relative z-20 mt-24  px-8`}
+              className={`relative z-20 mt-12 md:mt-24  px-8`}
             >
               <h1 className='text-undust-green'>Undust.me</h1>
-              <span className='opacity-50 text-lg md:text-2xl '>The easiest way to tidy up your wallet & earn SOL</span>
+              <span className='opacity-50 text-md md:text-2xl '>The easiest way to tidy up your wallet & earn SOL</span>
             </motion.div>
 
             <MainComponent loading={loading} setLoading={setLoading} showConfetti={showConfetti} setShowConfetti={setShowConfetti} activeIndex={activeIndex} setActiveIndex={setActiveIndex} setIsSwapModalOpen={setIsSwapModalOpen} rentBack={rentBack} setRentBack={setRentBack} />

@@ -334,7 +334,7 @@ function MainComponent({
                   />
                 </div>
               </motion.div>
-              <div className="w-full flex flex-row items-center justify-center gap-2 max-w-md mx-auto">
+              <div className="w-full flex flex-col-reverse md:flex-row items-center justify-center gap-2 max-w-md mx-auto">
                 <button
                   onClick={() => {
                     setActiveIndex(0);

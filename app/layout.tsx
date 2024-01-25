@@ -29,7 +29,7 @@ export default async function RootLayout({ children }: any) {
             <AppBar />
             <NewSidebar />
           </>
-          <main className={`w-full flex flex-col lg:w-[90%] px-2 lg:px-0`}>
+          <main className={`w-full flex flex-col lg:w-[90%] px-2 lg:px-0 mt-16`}>
             {children}
           </main>
           <Toaster position="bottom-right" />
