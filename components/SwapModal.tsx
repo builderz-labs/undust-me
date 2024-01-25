@@ -2,14 +2,14 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { Spin } from "antd";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { SunriseStakeClient } from '@sunrisestake/client';
+// import { SunriseStakeClient } from '@sunrisestake/client';
 import { AnchorProvider } from "@coral-xyz/anchor";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import BN from 'bn.js';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
-import { useSunrise } from "../contexts/SunriseClientContext";
-import { Details } from '@sunrisestake/client';
+// import { useSunrise } from "../contexts/SunriseClientContext";
+// import { Details } from '@sunrisestake/client';
 import {
   createContext,
   FC,
@@ -24,7 +24,7 @@ function SwapModal({ isSwapModalOpen, setIsSwapModalOpen, rentBack }: any) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error>();
 
-  const { details, client } = useSunrise();
+  // const { details, client } = useSunrise();
   const wallet = useAnchorWallet();
   const { connection } = useConnection();
 

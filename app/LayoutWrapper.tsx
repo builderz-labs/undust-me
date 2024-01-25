@@ -7,9 +7,8 @@ import '../styles/globals.css';
 
 // TODO: Change to other toast provider
 import ContextProvider from '../contexts/ContextProvider';
-import { SunriseClientProvider } from '../contexts/SunriseClientContext';
+// import { SunriseClientProvider } from '../contexts/SunriseClientContext';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
-import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 
 // Providers
 
@@ -27,11 +26,9 @@ const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children }) => {
 
   return (
     <ContextProvider>
-      {/* <WalletModalProvider> */}
-      <SunriseClientProvider network={network} >
-        {children}
-      </SunriseClientProvider >
-      {/* </WalletModalProvider> */}
+      {/* <SunriseClientProvider network={network} > */}
+      {children}
+      {/* </SunriseClientProvider > */}
     </ContextProvider>
 
   );

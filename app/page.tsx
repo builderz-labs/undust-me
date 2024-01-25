@@ -2,7 +2,7 @@ import BreadCrumbs from '../components/BreadCrumbs';
 import LoginModal from '../components/LoginModal';
 import ToolsGrid from '../components/ToolsGrid';
 
-const Index: React.FC = async () => {
+const Index: React.FC = () => {
 
   return (
     <>

@@ -34,7 +34,7 @@ function classNames(...classes: string[]) {
 export default function Sidebar() {
   const router = useRouter();
   const pathname = usePathname()
-  const searchParams = useSearchParams()
+  // const searchParams = useSearchParams()
 
   const navigation = [
     { name: 'Dashboard', href: '/', icon: HomeIcon },

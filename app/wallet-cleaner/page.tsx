@@ -7,12 +7,12 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import { Suspense, useEffect, useState } from 'react';
 import Confetti from 'react-confetti';
 import MainComponent from '../../components/MainComponent';
-import SunriseModal from '../../components/SunriseModal';
+// import SunriseModal from '../../components/SunriseModal';
 import BreadCrumbs from '../../components/BreadCrumbs';
 import LoginModal from '../../components/LoginModal';
 
 
-const Home: NextPage = () => {
+const Index: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -67,16 +67,16 @@ const Home: NextPage = () => {
             <div id="circle" className='text-undust-green blur-sm absolute' style={{ position: 'absolute', zIndex: 1, width: '10px', height: '10px', borderRadius: '50%', pointerEvents: 'none', transition: '0.2s' }}></div>
           </div>
         </div>
-        <SunriseModal
+        {/* <SunriseModal
           isSwapModalOpen={isSwapModalOpen}
           setIsSwapModalOpen={setIsSwapModalOpen}
           rentBack={rentBack}
           setShowConfetti={setShowConfetti}
           showConfetti={showConfetti}
-        />
+        /> */}
       </Suspense>
     </>
   );
 };
 
-export default Home;
+export default Index;
