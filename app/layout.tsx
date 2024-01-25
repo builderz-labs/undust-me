@@ -20,7 +20,7 @@ export default async function RootLayout({ children }: any) {
   return (
     <LayoutWrapper>
       <html lang="en" className=''>
-        <body className='relative w-full h-full flex flex-col md:flex-row items-start justify-start  overflow-hidden bg-backgroundBg'>
+        <body className='relative w-full h-full flex flex-col md:flex-row items-start justify-start   bg-backgroundBg'>
           <LoginModal />
           {/* <div className='bgBlurReq z-0 pointer-events-none absolute right-0 translate-x-[30%] bottom-0' /> */}
           {/* <div className='bgBlurReq z-0 pointer-events-none absolute -left-20 translate-x-[-30%] -bottom-[400px]' /> */}

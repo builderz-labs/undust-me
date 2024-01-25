@@ -32,8 +32,8 @@ export default function AppBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="lg:hidden w-full fixed top-0">
-      <nav className="mx-auto w-full flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+    <header className="lg:hidden w-full fixed z-[999] !bg-black top-0">
+      <nav className="mx-auto w-full flex max-w-7xl items-center justify-between p-6 lg:px-8 " aria-label="Global">
         <div className="flex lg:hidden">
           <Logo />
         </div>

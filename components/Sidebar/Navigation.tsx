@@ -58,7 +58,9 @@ function Navigation() {
                     ) : null} */}
                 </a>
                 {
-                  item.current ? <GradientLine /> : null
+                  item.current ? <div className="w-full overflow-hidden">
+                    <GradientLine />
+                  </div> : null
                 }
 
               </li>
@@ -89,7 +91,9 @@ function Navigation() {
 
         <li className="mt-auto w-[80%] mx-auto ">
           <MyMultiButton />
-          <GradientLine />
+          <div className="w-full overflow-hidden">
+            <GradientLine />
+          </div>
           <Socials />
           <p className='my-2 text-[10px] mb-4 opacity-30'>powered by builderz.dev</p>
         </li>
