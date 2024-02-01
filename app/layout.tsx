@@ -6,6 +6,7 @@ import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import LayoutWrapper from './LayoutWrapper';
 import AppBar from '../components/Sidebar/AppBar';
 import LoginModal from '../components/LoginModal';
+import { theme } from 'antd';
 
 
 require("@solana/wallet-adapter-react-ui/styles.css");
@@ -32,7 +33,7 @@ export default async function RootLayout({ children }: any) {
           <main className={`w-full flex flex-col lg:w-[90%] px-2 lg:px-0 mt-16`}>
             {children}
           </main>
-          <Toaster position="bottom-right" />
+          <Toaster theme={'dark'} position="top-center" />
         </body>
       </html>
     </LayoutWrapper>

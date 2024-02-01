@@ -16,11 +16,15 @@ import {
   findMetadataPda,
   TokenStandard,
 } from "@metaplex-foundation/mpl-token-metadata";
+import { dasApi } from '@metaplex-foundation/digital-asset-standard-api';
 import { DAS } from "helius-sdk";
 import { toast } from "sonner";
 import { Spin, List } from "antd";
 import Draggable from 'react-draggable';
 import GradientLine from './GradientLine';
+import { getAssetWithProof, burn } from '@metaplex-foundation/mpl-bubblegum';
+import { PublicKey } from '@solana/web3.js'; // Ensure you import PublicKey from the correct package
+
 
 function NFTComponent() {
   const wallet = useWallet();
@@ -55,10 +59,7 @@ function NFTComponent() {
         .then((response) => response.json())
         .then((data) => {
           setNfts(
-            data.result.items.filter(
-              (nft: DAS.GetAssetResponse) =>
-                nft.compression?.compressed === false
-            )
+            data.result.items // No need to filter by compression status
           );
           setLoading(false);
         })
@@ -69,6 +70,7 @@ function NFTComponent() {
     }
   }, [wallet.connected]);
 
+
   const handleBurn = async () => {
     const umi = createUmi(process.env.NEXT_PUBLIC_HELIUS_URL!);
     umi.use(walletAdapterIdentity(wallet));
@@ -77,59 +79,85 @@ function NFTComponent() {
 
     setButtonLoading(true);
 
+
+
     try {
       let tx = transactionBuilder();
 
       for (const nft of selectedNfts) {
 
-        let collectionMetadata = null;
-        const collection = nft.grouping?.length && nft.grouping[0].group_value;
+        if (nft.compression?.compressed) {
+          // Convert string ID to PublicKey
+          // const assetPublicKey = new PublicKey(nft.id);
+          // Fetch the asset with its proof
+          // const assetWithProof = await getAssetWithProof(umi, assetPublicKey);
+          // Burn the cNFT
+          // tx = tx.add(
+          //   burn(umi, {
+          //     ...assetWithProof,
+          //     leafOwner: umi.identity.publicKey,
+          //   })
+          // );
+          console.log('coming soon')
+          toast.info("Compressed NFTs are not supported yet");
+        } else {
+          let collectionMetadata = null;
+          const collection = nft.grouping?.length && nft.grouping[0].group_value;
 
-        if (collection) {
-          collectionMetadata = findMetadataPda(umi, { mint: publicKey(collection) })
+          if (collection) {
+            collectionMetadata = findMetadataPda(umi, { mint: publicKey(collection) })
+          }
+
+          const tokenStandard =
+            nft.interface === "ProgrammableNFT"
+              ? TokenStandard.ProgrammableNonFungible
+              : TokenStandard.NonFungible;
+
+          tx = tx.add(
+            burnV1(umi, {
+              mint: publicKey(nft.id),
+              tokenStandard,
+              tokenOwner: umi.identity.publicKey,
+              collectionMetadata: collectionMetadata || undefined,
+            })
+          );
+
+
+          toast.success("NFTs burned successfully");
+          setButtonLoading(false);
+          const splitBuilders = tx.unsafeSplitByTransactionSize(umi);
+          let txs = await Promise.all(
+            splitBuilders.map((builder) => builder.buildWithLatestBlockhash(umi))
+          );
+          txs = await umi.identity.signAllTransactions(txs);
+
+          const res = await Promise.all(
+            txs.map((tx) => umi.rpc.sendTransaction(tx))
+          );
+
+          const blockhash = await umi.rpc.getLatestBlockhash();
+
+          await Promise.all(
+            res.map((res) =>
+              umi.rpc.confirmTransaction(res, {
+                strategy: {
+                  type: "blockhash",
+                  blockhash: blockhash.blockhash,
+                  lastValidBlockHeight: blockhash.lastValidBlockHeight,
+                },
+                commitment: "confirmed",
+              })
+            )
+          );
+          // TODO: put back outside after cNFT burn is supported
         }
 
-        const tokenStandard =
-          nft.interface === "ProgrammableNFT"
-            ? TokenStandard.ProgrammableNonFungible
-            : TokenStandard.NonFungible;
+        // Remove after todo above is done
+        setButtonLoading(false);
 
-        tx = tx.add(
-          burnV1(umi, {
-            mint: publicKey(nft.id),
-            tokenStandard,
-            tokenOwner: umi.identity.publicKey,
-            collectionMetadata: collectionMetadata || undefined,
-          })
-        );
       }
 
-      const splitBuilders = tx.unsafeSplitByTransactionSize(umi);
-      let txs = await Promise.all(
-        splitBuilders.map((builder) => builder.buildWithLatestBlockhash(umi))
-      );
-      txs = await umi.identity.signAllTransactions(txs);
 
-      const res = await Promise.all(
-        txs.map((tx) => umi.rpc.sendTransaction(tx))
-      );
-
-      const blockhash = await umi.rpc.getLatestBlockhash();
-
-      await Promise.all(
-        res.map((res) =>
-          umi.rpc.confirmTransaction(res, {
-            strategy: {
-              type: "blockhash",
-              blockhash: blockhash.blockhash,
-              lastValidBlockHeight: blockhash.lastValidBlockHeight,
-            },
-            commitment: "confirmed",
-          })
-        )
-      );
-      toast.success("NFTs burned successfully");
-      setButtonLoading(false);
     } catch (error) {
       console.log(error);
       setButtonLoading(false);
@@ -160,7 +188,7 @@ function NFTComponent() {
             <p className='opacity-30 pb-10'>
               Burn your unwanted NFTs. You can burn multiple NFTs at once.
             </p>
-            <GradientLine />
+            <div className="w-full overflow-hidden"><GradientLine /></div>
           </div>
 
         </div>
@@ -188,13 +216,28 @@ function NFTComponent() {
                 {selectedNfts.length > 0 && (
                   <>
                     <Draggable>
-                      <div className="w-full shadow-xl cursor-move max-w-md flex flex-col items-center justify-center p-4 px-8 rounded-lg bg-black bg-opacity-80  border border-undust-green border-opacity-20 backdrop-blur-xl fixed bottom-8 z-50 left-1/2 -translate-x-1/2">
+                      <div className="w-full shadow-xl cursor-move max-w-md flex flex-col items-center justify-center p-4 px-8 rounded-lg bg-black bg-opacity-80  border border-red-900 border-opacity-50 backdrop-blur-xl fixed bottom-8 z-50 left-1/2 -translate-x-1/2">
                         <div className="w-full flex flex-col items-center justify-start gap-2">
                           <span className="text-red-500 text-xl uppercase">
-                            You are about to burn {selectedNfts.length} NFTs!
+                            You are about to burn ({selectedNfts.length}) NFTs!
                           </span>
 
-                          <div className="flex flex-row items-center justify-center gap-2">
+                          <div className='w-full flex flex-col items-center justify-between gap-2'>
+                            <ul className='w-full h-[100px] overflow-y-scroll bg-red-900 bg-opacity-10 py-2 flex flex-col items-center justify-start gap-2'>
+                              {selectedNfts.map((nft) => (
+                                <li onClick={() => handleSelectNft(nft, false)} key={nft.id} className='w-full flex items-center justify-start gap-4 hover:bg-red-900 hover:bg-opacity-10 hover:cursor-not-allowed'>
+                                  <div className="">
+                                    <img src={nft.content?.links?.image} alt={nft.content?.metadata.name} width={50} height={50} className='rounded-sm' />
+                                  </div>
+                                  <span className="text-white text-[10px] uppercase text-start truncate">
+                                    {nft.content?.metadata.name}
+                                  </span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+
+                          <div className="flex flex-row items-center justify-center gap-2 pt-2">
                             <input
                               type="checkbox"
                               name="confirm"
@@ -210,7 +253,7 @@ function NFTComponent() {
                         </div>
                         <button
                           onClick={handleBurn}
-                          className="brandBtn my-4 w-full uppercase"
+                          className="brandBtnRed !bg-red-300 my-4 w-full uppercase"
                           disabled={!isCheckboxChecked} // Disable button when checkbox is not checked
                         >
                           {buttonLoading && <Spin />} Burn selected (

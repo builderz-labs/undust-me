@@ -90,7 +90,7 @@ function NftTokenComponent() {
 
   //     for (const token of selectedTokens) {
   //       const tokenStandard =
-  //         token.interface === "FungibleToken" 
+  //         token.interface === "FungibleToken"
   //           ? TokenStandard.FUNGIBLE
   //           : TokenStandard.NON_FUNGIBLE;
 
@@ -141,13 +141,30 @@ function NftTokenComponent() {
       {selectedTokens.length > 0 && (
         <>
           <Draggable>
-            <div className="w-full shadow-xl cursor-move max-w-md flex flex-col items-center justify-center p-4 px-8 rounded-lg bg-black bg-opacity-80  border border-undust-green border-opacity-20 backdrop-blur-xl fixed bottom-8 z-50 left-1/2 -translate-x-1/2">
+            <div className="w-full shadow-xl cursor-move max-w-md flex flex-col items-center justify-center p-4 px-8 rounded-lg bg-black bg-opacity-80  border border-red-900 border-opacity-50 backdrop-blur-xl fixed bottom-8 z-50 left-1/2 -translate-x-1/2">
               <div className="w-full flex flex-col items-center justify-start gap-2">
                 <span className="text-red-500 text-xl uppercase">
-                  You are about to burn {selectedTokens.length} NFTs!
+                  You are about to burn ({selectedTokens.length}) NFTs!
                 </span>
 
-                <div className="flex flex-row items-center justify-center gap-2">
+                <div className='w-full flex flex-col items-center justify-between gap-2'>
+                  <ul className='w-full h-[100px] overflow-y-scroll bg-red-900 bg-opacity-10 py-2 flex flex-col items-center justify-start gap-2'>
+                    {selectedTokens.map((nft) => (
+                      <li
+                        //  onClick={() => handleBurn(nft, false)} 
+                        key={nft.id} className='w-full flex items-center justify-start gap-4 hover:bg-red-900 hover:bg-opacity-10 hover:cursor-not-allowed'>
+                        <div className="">
+                          <img src={nft.content?.links?.image} alt={nft.content?.metadata.name} width={50} height={50} className='rounded-sm' />
+                        </div>
+                        <span className="text-white text-[10px] uppercase text-start truncate">
+                          {nft.content?.metadata.name}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="flex flex-row items-center justify-center gap-2 pt-2">
                   <input
                     type="checkbox"
                     name="confirm"
@@ -163,11 +180,11 @@ function NftTokenComponent() {
               </div>
               <button
                 // onClick={handleBurn}
-                className="brandBtn my-4 w-full uppercase"
+                className="brandBtnRed !bg-red-300 my-4 w-full uppercase"
                 disabled={!isCheckboxChecked} // Disable button when checkbox is not checked
               >
                 {buttonLoading && <Spin />} Burn selected (
-                {selectedTokens.length}) Tokens
+                {selectedTokens.length}) NFTs
               </button>
             </div>
           </Draggable>
@@ -181,7 +198,9 @@ function NftTokenComponent() {
           <p className='opacity-30 pb-10'>
             Burn your unwanted Tokens. You can burn multiple Tokens at once.
           </p>
-          <GradientLine />
+          <div className="w-full overflow-hidden">
+            <GradientLine />
+          </div>
         </div>
       </div>
       {
@@ -191,11 +210,12 @@ function NftTokenComponent() {
               <Spin />
             </div>
           ) : (
-            <Row gutter={16}
-              className='overflow-y-scroll h-[80vh] mt-4 '
+            <Row gutter={8}
+              className='overflow-y-scroll h-[76vh] mt-4 w-full '
             >
               {tokens.map(token => (
                 <Col span={4}
+                  className='w-full'
                   key={token.content.metadata.name}
                 >
                   <Card
@@ -207,21 +227,24 @@ function NftTokenComponent() {
                     style={{
                       border: selectedTokens.includes(token) ? '1px solid red' : 'none'
                     }}
-                    className='cursor-pointer !bg-transparent !text-white hover:bg-red-500 bg-opacity-10 '
+                    className='cursor-pointer !bg-transparent !text-white hover:bg-red-500 bg-opacity-10 bg-black border border-undust-green border-opacity-20 flex flex-row items-center justify-start '
                   >
-                    {/* <Card.Meta
-                      title={token.content.metadata.name}
+                    <Card.Meta
+                      className='w-full'
+                      // title={token.content.metadata.name}
                       description={
                         <>
-                          <img src={token.content.links.image} alt={token.content.metadata.name} height={48} width={48} className='w-full h-14 object-cover' />
-                          <p>Supply: {new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(token.token_info.supply / Math.pow(10, token.token_info.decimals))}</p>                        </>
+                          <div className="w-full mx-auto h-40 flex flex-col items-center justify-center">
+                            <img src={token.content.links.image} alt={token.content.metadata.name} height={100} width={100} className='w-full h-full object-cover' />
+                          </div>
+                          <div className="w-full bg-slate-900 p-1">
+                            <p className='w-[90%] overflow-hidden'>{token.content.metadata.name}</p>
+                            <p className='text-xs'>{new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(token.token_info.supply / Math.pow(10, token.token_info.decimals))}</p>
+                          </div>
+                        </>
                       }
-                    /> */}
-                    <div className="w-full h-10 flex items-center justify-center">
-                      <img src={token.content.links.image} alt={token.content.metadata.name} height={48} width={48} className='w-full h-full object-cover' />
-                    </div>
-                    <p>{token.content.metadata.name}</p>
-                    <p>Supply: {new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(token.token_info.supply / Math.pow(10, token.token_info.decimals))}</p>
+                    />
+
                   </Card>
                 </Col>
               ))}

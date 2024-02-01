@@ -53,7 +53,7 @@ function NFTItems({ nfts, handleSelectNft, selectedNfts }: any) {
 
   return (
     <>
-      <div className="flex items-center justify-end gap-4">
+      {/* <div className="flex items-center justify-end gap-4">
         <Switch
           checkedChildren="Grid"
           unCheckedChildren="List"
@@ -66,11 +66,11 @@ function NFTItems({ nfts, handleSelectNft, selectedNfts }: any) {
           pageSize={20}
           onChange={handlePageChange}
         />
-      </div>
+      </div> */}
 
       {
         isGridView ? <>
-          <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-4 justify-start h-[73vh] overflow-y-scroll">
+          <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-4 justify-start h-[62vh] overflow-y-scroll">
             {currentItems.map((nft: DAS.GetAssetResponse) => {
               const isSelected = selectedNfts.some(
                 (selectedNft: { id: string }) => selectedNft.id === nft.id
@@ -81,7 +81,7 @@ function NFTItems({ nfts, handleSelectNft, selectedNfts }: any) {
                   <div
                     onClick={() => handleSelectNft(nft, !isSelected)}
                     key={nft.id}
-                    className={`relative flex flex-col cursor-pointer items-center justify-center w-full h-full border hover:border-opacity-60 hover:border-red-500  border-opacity-20 rounded-sm ${isSelected ? "!text-red-500 !border-red-400 shadow-lg shadow-red-500" : "text-white border-undust-green"
+                    className={`relative flex flex-col cursor-pointer items-center justify-center w-full h-full border hover:border-opacity-60 hover:border-red-500  border-opacity-20 rounded-sm ${isSelected ? "!text-red-500 !border-red-400 shadow-lg shadow- shadow-red-900" : "text-white border-undust-green"
                       }`}
                   >
                     {/* {isSelected && (
@@ -132,17 +132,17 @@ function NFTItems({ nfts, handleSelectNft, selectedNfts }: any) {
                     }
                     <div className="flex flex-col items-start justify-between w-full p-4 gap-8">
                       <div className="w-full h-full object-cover">
-                        <Image
+                        <img
                           src={nft.content?.files?.length && nft.content?.files[0].uri || "public/machine-1.webp"}
                           alt={nft.content?.metadata.name && nft.content?.metadata.name || "NFT Image"}
                           width={500}
                           height={500}
-                          className="w-full h-[250px] object-cover"
+                          className="w-full h-[200px] object-cover"
                         />
                       </div>
                       <div className="flex flex-col justify-start items-start text-left w-full gap-2 font-bold">
                         <span
-                          className={`text-xl truncate w-[99%] ${isSelected ? "text-red-500" : "text-white"
+                          className={`text-lg truncate w-[99%] ${isSelected ? "text-red-500" : "text-white"
                             }`}
                         >
                           {nft.content?.metadata.name}
