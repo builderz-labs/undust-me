@@ -4,39 +4,27 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { Card, Col, Row, Spin } from 'antd';
 import MyMultiButton from './MyMultiButton';
 import GradientLine from './GradientLine';
-import Image from 'next/image';
 import Draggable from 'react-draggable';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import { walletAdapterIdentity } from '@metaplex-foundation/umi-signer-wallet-adapters';
-import { createSplAssociatedTokenProgram, createSplTokenProgram } from '@metaplex-foundation/mpl-toolbox';
+import { createSplAssociatedTokenProgram, createSplTokenProgram, burnTokenChecked, findAssociatedTokenPda, fetchToken } from '@metaplex-foundation/mpl-toolbox';
 import { publicKey, transactionBuilder } from '@metaplex-foundation/umi';
-import { burnV1, findMetadataPda } from '@metaplex-foundation/mpl-token-metadata';
 import { toast } from 'sonner';
-import { TokenStandard } from 'helius-sdk';
+import { DAS } from 'helius-sdk';
 
-interface Token {
-  id: string;
-  interface: string;
-  content: {
-    metadata: {
-      name: string;
-      image: string;
-    };
-    links: {
-      image: string;
-    }
-  };
+interface ExtendedGetAssetResponse extends DAS.GetAssetResponse {
   token_info: {
     supply: number;
     decimals: number;
-  }
+    balance: number
+  };
 }
 
 function NftTokenComponent() {
   const wallet = useWallet();
-  const [tokens, setTokens] = useState<Token[]>([]);
+  const [tokens, setTokens] = useState<ExtendedGetAssetResponse[]>([]);
   const [loading, setLoading] = useState(false);
-  const [selectedTokens, setSelectedTokens] = useState<Token[]>([]);
+  const [selectedTokens, setSelectedTokens] = useState<ExtendedGetAssetResponse[]>([]);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false); // State to hold checkbox status
   const [buttonLoading, setButtonLoading] = useState(false); // State to hold button loading status
 
@@ -63,7 +51,7 @@ function NftTokenComponent() {
       })
         .then((response) => response.json())
         .then((data) => {
-          const filteredTokens = data.result.items.filter((token: Token) => token.interface === 'FungibleToken');
+          const filteredTokens = data.result.items.filter((token: any) => token.interface === 'FungibleToken');
           setTokens(filteredTokens);
           setLoading(false);
         })
@@ -77,64 +65,69 @@ function NftTokenComponent() {
   console.log(tokens)
 
 
-  // const handleBurn = async () => {
-  //   const umi = createUmi(process.env.NEXT_PUBLIC_HELIUS_URL!);
-  //   umi.use(walletAdapterIdentity(wallet));
-  //   umi.programs.add(createSplAssociatedTokenProgram());
-  //   umi.programs.add(createSplTokenProgram());
+  const handleBurn = async () => {
+    const umi = createUmi(process.env.NEXT_PUBLIC_HELIUS_URL!);
+    umi.use(walletAdapterIdentity(wallet));
+    umi.programs.add(createSplAssociatedTokenProgram());
+    umi.programs.add(createSplTokenProgram());
 
-  //   setButtonLoading(true);
+    setButtonLoading(true);
 
-  //   try {
-  //     let tx = transactionBuilder();
+    try {
+      let tx = transactionBuilder();
 
-  //     for (const token of selectedTokens) {
-  //       const tokenStandard =
-  //         token.interface === "FungibleToken"
-  //           ? TokenStandard.FUNGIBLE
-  //           : TokenStandard.NON_FUNGIBLE;
+      for (const token of selectedTokens) {
+        console.log("TOKEN: ", token);
+        
+        const mintPubkey = publicKey(token.id);
 
-  //       tx = tx.add(
-  //         burnV1(umi, {
-  //           mint: publicKey(token.id),
-  //           tokenStandard,
-  //           tokenOwner: umi.identity.publicKey,
-  //         })
-  //       );
-  //     }
+        const ata = findAssociatedTokenPda(umi, {
+          mint: mintPubkey,
+          owner: umi.identity.publicKey,
+        })
+        
+        tx = tx.add(
+          burnTokenChecked(umi, {
+            account: ata,
+            mint: mintPubkey,
+            amount: token.token_info.balance,
+            decimals: token.token_info.decimals,
+          })
+        );
+      }
 
-  //     const splitBuilders = tx.unsafeSplitByTransactionSize(umi);
-  //     let txs = await Promise.all(
-  //       splitBuilders.map((builder) => builder.buildWithLatestBlockhash(umi))
-  //     );
-  //     txs = await umi.identity.signAllTransactions(txs);
+      const splitBuilders = tx.unsafeSplitByTransactionSize(umi);
+      let txs = await Promise.all(
+        splitBuilders.map((builder) => builder.buildWithLatestBlockhash(umi))
+      );
+      txs = await umi.identity.signAllTransactions(txs);
 
-  //     const res = await Promise.all(
-  //       txs.map((tx) => umi.rpc.sendTransaction(tx))
-  //     );
+      const res = await Promise.all(
+        txs.map((tx) => umi.rpc.sendTransaction(tx))
+      );
 
-  //     const blockhash = await umi.rpc.getLatestBlockhash();
+      const blockhash = await umi.rpc.getLatestBlockhash();
 
-  //     await Promise.all(
-  //       res.map((res) =>
-  //         umi.rpc.confirmTransaction(res, {
-  //           strategy: {
-  //             type: "blockhash",
-  //             blockhash: blockhash.blockhash,
-  //             lastValidBlockHeight: blockhash.lastValidBlockHeight,
-  //           },
-  //           commitment: "confirmed",
-  //         })
-  //       )
-  //     );
-  //     toast.success("Tokens burned successfully");
-  //     setButtonLoading(false);
-  //   } catch (error) {
-  //     console.log(error);
-  //     setButtonLoading(false);
-  //     toast.error("Something went wrong")
-  //   }
-  // };
+      await Promise.all(
+        res.map((res) =>
+          umi.rpc.confirmTransaction(res, {
+            strategy: {
+              type: "blockhash",
+              blockhash: blockhash.blockhash,
+              lastValidBlockHeight: blockhash.lastValidBlockHeight,
+            },
+            commitment: "confirmed",
+          })
+        )
+      );
+      toast.success("Tokens burned successfully");
+      setButtonLoading(false);
+    } catch (error) {
+      console.log(error);
+      setButtonLoading(false);
+      toast.error("Something went wrong")
+    }
+  };
 
   return (
     <>
@@ -179,7 +172,7 @@ function NftTokenComponent() {
                 </div>
               </div>
               <button
-                // onClick={handleBurn}
+                onClick={handleBurn}
                 className="brandBtnRed !bg-red-300 my-4 w-full uppercase"
                 disabled={!isCheckboxChecked} // Disable button when checkbox is not checked
               >
@@ -216,7 +209,7 @@ function NftTokenComponent() {
               {tokens.map(token => (
                 <Col span={4}
                   className='w-full'
-                  key={token.content.metadata.name}
+                  key={token.content?.metadata.name}
                 >
                   <Card
                     onClick={() => {
@@ -235,11 +228,11 @@ function NftTokenComponent() {
                       description={
                         <>
                           <div className="w-full mx-auto h-40 flex flex-col items-center justify-center">
-                            <img src={token.content.links.image} alt={token.content.metadata.name} height={100} width={100} className='w-full h-full object-cover' />
+                            <img src={token.content?.links?.image} alt={token.content?.metadata.name} height={100} width={100} className='w-full h-full object-cover' />
                           </div>
                           <div className="w-full bg-slate-900 p-1">
-                            <p className='w-[90%] overflow-hidden'>{token.content.metadata.name}</p>
-                            <p className='text-xs'>{new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(token.token_info.supply / Math.pow(10, token.token_info.decimals))}</p>
+                            <p className='w-[90%] overflow-hidden'>{token.content?.metadata.name}</p>
+                            <p className='text-xs'>{new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(token.token_info!.supply / Math.pow(10, token.token_info.decimals))}</p>
                           </div>
                         </>
                       }

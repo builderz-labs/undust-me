@@ -22,7 +22,7 @@ import { toast } from "sonner";
 import { Spin, List } from "antd";
 import Draggable from 'react-draggable';
 import GradientLine from './GradientLine';
-import { getAssetWithProof, burn } from '@metaplex-foundation/mpl-bubblegum';
+import { getAssetWithProof, burn, createMplBubblegumProgram, mplBubblegum } from '@metaplex-foundation/mpl-bubblegum';
 import { PublicKey } from '@solana/web3.js'; // Ensure you import PublicKey from the correct package
 
 
@@ -74,8 +74,10 @@ function NFTComponent() {
   const handleBurn = async () => {
     const umi = createUmi(process.env.NEXT_PUBLIC_HELIUS_URL!);
     umi.use(walletAdapterIdentity(wallet));
+    umi.use(mplBubblegum());
     umi.programs.add(createSplAssociatedTokenProgram());
     umi.programs.add(createSplTokenProgram());
+    umi.programs.add(createMplBubblegumProgram())
 
     setButtonLoading(true);
 
@@ -88,18 +90,16 @@ function NFTComponent() {
 
         if (nft.compression?.compressed) {
           // Convert string ID to PublicKey
-          // const assetPublicKey = new PublicKey(nft.id);
+          const assetPublicKey = publicKey(nft.id);
           // Fetch the asset with its proof
-          // const assetWithProof = await getAssetWithProof(umi, assetPublicKey);
+          const assetWithProof = await getAssetWithProof(umi, assetPublicKey);
           // Burn the cNFT
-          // tx = tx.add(
-          //   burn(umi, {
-          //     ...assetWithProof,
-          //     leafOwner: umi.identity.publicKey,
-          //   })
-          // );
-          console.log('coming soon')
-          toast.info("Compressed NFTs are not supported yet");
+          tx = tx.add(
+            burn(umi, {
+              ...assetWithProof,
+              leafOwner: umi.identity.publicKey,
+            })
+          );
         } else {
           let collectionMetadata = null;
           const collection = nft.grouping?.length && nft.grouping[0].group_value;
@@ -121,38 +121,34 @@ function NFTComponent() {
               collectionMetadata: collectionMetadata || undefined,
             })
           );
-
-
-          toast.success("NFTs burned successfully");
-          setButtonLoading(false);
-          const splitBuilders = tx.unsafeSplitByTransactionSize(umi);
-          let txs = await Promise.all(
-            splitBuilders.map((builder) => builder.buildWithLatestBlockhash(umi))
-          );
-          txs = await umi.identity.signAllTransactions(txs);
-
-          const res = await Promise.all(
-            txs.map((tx) => umi.rpc.sendTransaction(tx))
-          );
-
-          const blockhash = await umi.rpc.getLatestBlockhash();
-
-          await Promise.all(
-            res.map((res) =>
-              umi.rpc.confirmTransaction(res, {
-                strategy: {
-                  type: "blockhash",
-                  blockhash: blockhash.blockhash,
-                  lastValidBlockHeight: blockhash.lastValidBlockHeight,
-                },
-                commitment: "confirmed",
-              })
-            )
-          );
-          // TODO: put back outside after cNFT burn is supported
         }
 
-        // Remove after todo above is done
+        const splitBuilders = tx.unsafeSplitByTransactionSize(umi);
+        let txs = await Promise.all(
+          splitBuilders.map((builder) => builder.buildWithLatestBlockhash(umi))
+        );
+        txs = await umi.identity.signAllTransactions(txs);
+
+        const res = await Promise.all(
+          txs.map((tx) => umi.rpc.sendTransaction(tx))
+        );
+
+        const blockhash = await umi.rpc.getLatestBlockhash();
+
+        await Promise.all(
+          res.map((res) =>
+            umi.rpc.confirmTransaction(res, {
+              strategy: {
+                type: "blockhash",
+                blockhash: blockhash.blockhash,
+                lastValidBlockHeight: blockhash.lastValidBlockHeight,
+              },
+              commitment: "confirmed",
+            })
+          )
+        );
+
+        toast.success("NFTs burned successfully");
         setButtonLoading(false);
 
       }
