@@ -213,20 +213,22 @@ function NFTComponent() {
                   <>
                     <Draggable>
                       <div className="w-full shadow-xl cursor-move max-w-md flex flex-col items-center justify-center p-4 px-8 rounded-lg bg-black bg-opacity-80  border border-red-900 border-opacity-50 backdrop-blur-xl fixed bottom-8 z-50 left-1/2 -translate-x-1/2">
-                        <div className="w-full flex flex-col items-center justify-start gap-2">
-                          <span className="text-red-500 text-xl uppercase">
-                            You are about to burn ({selectedNfts.length}) NFTs!
+                        <div className="w-full flex flex-col items-center justify-start gap-4">
+                          <span className="text-red-500 text-xl uppercase animate-pulse">
+                            You are about to burn ({selectedNfts.length}) Tokens!
                           </span>
 
-                          <div className='w-full flex flex-col items-center justify-between gap-2'>
-                            <ul className='w-full h-[100px] overflow-y-scroll bg-red-900 bg-opacity-10 py-2 flex flex-col items-center justify-start gap-2'>
+                          <div className='w-full flex flex-col items-center justify-between gap-2 px-2'>
+                            <ul className='w-full h-[100px] overflow-y-scroll bg-red-900 bg-opacity-10 border border-red-500 border-opacity-10 py-2 flex flex-col items-center justify-start gap-2'>
                               {selectedNfts.map((nft) => (
-                                <li onClick={() => handleSelectNft(nft, false)} key={nft.id} className='w-full flex items-center justify-start gap-4 hover:bg-red-900 hover:bg-opacity-10 hover:cursor-not-allowed'>
-                                  <div className="">
+                                <li
+                                  //  onClick={() => handleBurn(nft, false)} 
+                                  key={nft.id} className='w-full flex items-center justify-start gap-4 hover:bg-red-900 hover:bg-opacity-10 hover:cursor-not-allowed'>
+                                  <div className="border border-red-900 rounded-sm">
                                     <img src={nft.content?.links?.image} alt={nft.content?.metadata.name} width={50} height={50} className='rounded-sm' />
                                   </div>
-                                  <span className="text-white text-[10px] uppercase text-start truncate">
-                                    {nft.content?.metadata.name}
+                                  <span className="text-white text-base uppercase text-start truncate">
+                                    {nft.content?.metadata.name} ({nft.content?.metadata.symbol})
                                   </span>
                                 </li>
                               ))}
@@ -248,12 +250,12 @@ function NFTComponent() {
                           </div>
                         </div>
                         <button
-                          onClick={handleBurn}
+                          // onClick={handleBurn}
                           className="brandBtnRed !bg-red-300 my-4 w-full uppercase"
                           disabled={!isCheckboxChecked} // Disable button when checkbox is not checked
                         >
                           {buttonLoading && <Spin />} Burn selected (
-                          {selectedNfts.length}) NFTs
+                          {selectedNfts.length}) Tokens
                         </button>
                       </div>
                     </Draggable>
