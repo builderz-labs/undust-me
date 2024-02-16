@@ -250,7 +250,7 @@ function NFTComponent() {
                           </div>
                         </div>
                         <button
-                          // onClick={handleBurn}
+                          onClick={handleBurn}
                           className="brandBtnRed !bg-red-300 my-4 w-full uppercase"
                           disabled={!isCheckboxChecked} // Disable button when checkbox is not checked
                         >
