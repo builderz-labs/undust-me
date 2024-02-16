@@ -107,6 +107,7 @@ function NFTItems({ nfts, handleSelectNft, selectedNfts }: any) {
                     </svg>
                   </div>
                 )} */}
+
                     {
                       isSelected ? <div className="absolute inset-0 z-10 bg-red-500 bg-opacity-30 flex items-center justify-center">
                         <svg
@@ -158,6 +159,7 @@ function NFTItems({ nfts, handleSelectNft, selectedNfts }: any) {
               );
             })}
           </div>
+          {/* Pagination */}
           <div className="pagination my-10 w-full flex items-center justify-center gap-4">
             <button
               onClick={() => handlePageChange(1)}
